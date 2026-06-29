@@ -11,7 +11,7 @@ function Navbar() {
       top: 0,
       zIndex: 10
     }}>
-      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
         <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
           <img src={logoImg} alt="Viyona Designs" style={{ height: '80px', objectFit: 'contain', margin: '-10px 0' }} />
         </Link>

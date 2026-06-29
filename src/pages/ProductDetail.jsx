@@ -27,10 +27,11 @@ function ProductDetail() {
       
       <div style={{ display: 'flex', gap: '4rem', flexWrap: 'wrap' }}>
         {/* Product Image Section */}
-        <div style={{ flex: '1 1 400px' }}>
+        <div style={{ flex: '1 1 300px' }}>
           <div style={{ 
             backgroundColor: product.imageColor, 
-            height: '500px', 
+            minHeight: '350px', 
+            aspectRatio: '1',
             borderRadius: 'var(--radius-lg)',
             display: 'flex',
             alignItems: 'center',
@@ -45,7 +46,7 @@ function ProductDetail() {
         </div>
 
         {/* Product Info Section */}
-        <div style={{ flex: '1 1 400px', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+        <div style={{ flex: '1 1 300px', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
           <div>
             <h1 style={{ fontSize: '2.5rem', fontWeight: '700', lineHeight: 1.2, marginBottom: '0.5rem' }}>{product.name}</h1>
             <p style={{ fontSize: '1.25rem', color: 'var(--color-text-muted)' }}>{product.shortDesc}</p>

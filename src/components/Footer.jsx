@@ -8,7 +8,7 @@ function Footer() {
       marginTop: 'auto',
       borderTop: '1px solid #eaeaea'
     }}>
-      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem' }}>
         <div>
           <img src={logoImg} alt="Viyona Designs" style={{ height: '70px', marginBottom: '1rem' }} />
           <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>Thoughtfully Designed. Perfectly Made.</p>

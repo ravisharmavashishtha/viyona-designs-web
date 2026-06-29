@@ -19,7 +19,7 @@ function About() {
       </section>
 
       <section style={{ padding: '5rem 0' }}>
-        <div className="container" style={{ maxWidth: '800px' }}>
+        <div className="container" style={{ maxWidth: '1000px' }}>
           <div style={{ marginBottom: '4rem' }}>
             <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem', fontWeight: '600' }}>Our Vision</h2>
             <p style={{ fontSize: '1.1rem', lineHeight: '1.7', color: 'var(--color-text-muted)', fontStyle: 'italic', borderLeft: '4px solid var(--color-accent)', paddingLeft: '1rem' }}>
@@ -46,9 +46,9 @@ function About() {
               <img 
                 src={founderImg} 
                 alt="Meenu Sharma, CEO" 
-                style={{ width: '250px', height: '250px', borderRadius: '50%', objectFit: 'cover', border: '4px solid white', boxShadow: 'var(--shadow-md)' }} 
+                style={{ width: '250px', height: '250px', borderRadius: '50%', objectFit: 'cover', border: '4px solid white', boxShadow: 'var(--shadow-md)', margin: '0 auto' }} 
               />
-              <div style={{ flex: '1 1 300px' }}>
+              <div style={{ flex: '1 1 250px' }}>
                 <h2 style={{ fontSize: '2rem', marginBottom: '0.5rem', fontWeight: '600' }}>Meet the Founder</h2>
                 <h3 style={{ fontSize: '1.25rem', color: 'var(--color-accent)', marginBottom: '1.5rem', fontWeight: '500' }}>Meenu Sharma, CEO</h3>
                 <p style={{ fontSize: '1.1rem', lineHeight: '1.7', color: 'var(--color-text-muted)', marginBottom: '1rem' }}>
