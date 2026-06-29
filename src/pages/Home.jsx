@@ -11,9 +11,12 @@ function Home() {
         backgroundColor: 'var(--color-bg-secondary)'
       }}>
         <div className="container">
-          <h1 style={{ fontSize: '3.5rem', fontWeight: '700', marginBottom: '1rem', letterSpacing: '-1px' }}>
-            Thoughtfully Designed.<br/>Perfectly Made.
+          <h1 style={{ fontSize: 'clamp(3rem, 8vw, 5rem)', fontWeight: '800', marginBottom: '0.5rem', letterSpacing: '-2px', color: 'var(--color-accent)' }}>
+            Viyona Designs
           </h1>
+          <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: '500', marginBottom: '1.5rem', letterSpacing: '-0.5px', color: 'var(--color-text-main)' }}>
+            Thoughtfully Designed. Perfectly Made.
+          </h2>
           <p style={{ fontSize: '1.25rem', color: 'var(--color-text-muted)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
             Elevating everyday Indian living through meticulously engineered, high-quality household solutions you won't find anywhere else.
           </p>
