@@ -7,7 +7,7 @@ import About from './pages/About';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/viyona-designs-web">
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Navbar />
         <main style={{ flex: 1 }}>
