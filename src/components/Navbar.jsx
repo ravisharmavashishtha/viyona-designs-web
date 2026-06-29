@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import logoImg from '../assets/logo.jpg';
 
 function Navbar() {
   return (
@@ -11,8 +12,8 @@ function Navbar() {
       zIndex: 10
     }}>
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Link to="/" style={{ fontWeight: '700', fontSize: '1.5rem', letterSpacing: '-0.5px', textDecoration: 'none', color: 'inherit' }}>
-          Viyona Designs
+        <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
+          <img src={logoImg} alt="Viyona Designs" style={{ height: '40px', objectFit: 'contain' }} />
         </Link>
         <nav style={{ display: 'flex', gap: '2rem' }}>
           <Link to="/" style={{ fontWeight: '500', textDecoration: 'none', color: 'inherit' }}>Home</Link>

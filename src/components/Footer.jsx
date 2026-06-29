@@ -1,3 +1,5 @@
+import logoImg from '../assets/logo.jpg';
+
 function Footer() {
   return (
     <footer style={{ 
@@ -8,7 +10,7 @@ function Footer() {
     }}>
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <h3 style={{ fontWeight: '600', marginBottom: '0.5rem' }}>Viyona Designs</h3>
+          <img src={logoImg} alt="Viyona Designs" style={{ height: '30px', marginBottom: '1rem' }} />
           <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>Thoughtfully Designed. Perfectly Made.</p>
         </div>
         <div style={{ display: 'flex', gap: '1rem', color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>
