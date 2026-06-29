@@ -13,7 +13,7 @@ function Navbar() {
     }}>
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
-          <img src={logoImg} alt="Viyona Designs" style={{ height: '40px', objectFit: 'contain' }} />
+          <img src={logoImg} alt="Viyona Designs" style={{ height: '80px', objectFit: 'contain', margin: '-10px 0' }} />
         </Link>
         <nav style={{ display: 'flex', gap: '2rem' }}>
           <Link to="/" style={{ fontWeight: '500', textDecoration: 'none', color: 'inherit' }}>Home</Link>

@@ -10,7 +10,7 @@ function Footer() {
     }}>
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <img src={logoImg} alt="Viyona Designs" style={{ height: '30px', marginBottom: '1rem' }} />
+          <img src={logoImg} alt="Viyona Designs" style={{ height: '70px', marginBottom: '1rem' }} />
           <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>Thoughtfully Designed. Perfectly Made.</p>
         </div>
         <div style={{ display: 'flex', gap: '1rem', color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>
