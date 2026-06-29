@@ -2,9 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-// import Shop from './pages/Shop';
-// import ProductDetail from './pages/ProductDetail';
-// import About from './pages/About';
+import ProductDetail from './pages/ProductDetail';
+import About from './pages/About';
 
 function App() {
   return (
@@ -14,9 +13,8 @@ function App() {
         <main style={{ flex: 1 }}>
           <Routes>
             <Route path="/" element={<Home />} />
-            {/* <Route path="/shop" element={<Shop />} /> */}
-            {/* <Route path="/product/:id" element={<ProductDetail />} /> */}
-            {/* <Route path="/about" element={<About />} /> */}
+            <Route path="/product/:id" element={<ProductDetail />} />
+            <Route path="/about" element={<About />} />
           </Routes>
         </main>
         <Footer />

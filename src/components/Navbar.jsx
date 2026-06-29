@@ -11,12 +11,13 @@ function Navbar() {
       zIndex: 10
     }}>
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Link to="/" style={{ fontWeight: '700', fontSize: '1.5rem', letterSpacing: '-0.5px' }}>
+        <Link to="/" style={{ fontWeight: '700', fontSize: '1.5rem', letterSpacing: '-0.5px', textDecoration: 'none', color: 'inherit' }}>
           Viyona Designs
         </Link>
         <nav style={{ display: 'flex', gap: '2rem' }}>
-          <Link to="/" style={{ fontWeight: '500' }}>Home</Link>
-          <a href="#shop" style={{ fontWeight: '500' }}>Shop</a>
+          <Link to="/" style={{ fontWeight: '500', textDecoration: 'none', color: 'inherit' }}>Home</Link>
+          <a href="/#shop" style={{ fontWeight: '500', textDecoration: 'none', color: 'inherit' }}>Shop</a>
+          <Link to="/about" style={{ fontWeight: '500', textDecoration: 'none', color: 'inherit' }}>About</Link>
         </nav>
       </div>
     </header>

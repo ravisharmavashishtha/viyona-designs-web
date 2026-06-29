@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+import { products } from '../data/products';
+
 function Home() {
   return (
     <div>
@@ -27,27 +30,16 @@ function Home() {
             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
             gap: '2rem' 
           }}>
-            {/* Product 1 */}
-            <div style={{ border: '1px solid #eaeaea', borderRadius: 'var(--radius)', overflow: 'hidden', padding: '2rem', textAlign: 'center', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ height: '200px', backgroundColor: '#f3f4f6', marginBottom: '1rem', borderRadius: 'var(--radius-sm)' }}></div>
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>Premium Keychain</h3>
-              <p style={{ color: 'var(--color-text-muted)', marginBottom: '1.5rem', flex: 1 }}>Engineered for durability.</p>
-              <button className="btn btn-primary" style={{ width: '100%' }}>Buy on Amazon</button>
-            </div>
-            {/* Product 2 */}
-            <div style={{ border: '1px solid #eaeaea', borderRadius: 'var(--radius)', overflow: 'hidden', padding: '2rem', textAlign: 'center', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ height: '200px', backgroundColor: '#f3f4f6', marginBottom: '1rem', borderRadius: 'var(--radius-sm)' }}></div>
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>Krishna Aesthetic Statue</h3>
-              <p style={{ color: 'var(--color-text-muted)', marginBottom: '1.5rem', flex: 1 }}>Elegant decor for modern homes.</p>
-              <button className="btn btn-primary" style={{ width: '100%' }}>Buy on Amazon</button>
-            </div>
-            {/* Product 3 */}
-            <div style={{ border: '1px solid #eaeaea', borderRadius: 'var(--radius)', overflow: 'hidden', padding: '2rem', textAlign: 'center', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ height: '200px', backgroundColor: '#f3f4f6', marginBottom: '1rem', borderRadius: 'var(--radius-sm)' }}></div>
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>Bathroom Wiper Holder</h3>
-              <p style={{ color: 'var(--color-text-muted)', marginBottom: '1.5rem', flex: 1 }}>Clever solution for a tidy space.</p>
-              <button className="btn btn-primary" style={{ width: '100%' }}>Buy on Amazon</button>
-            </div>
+            {products.map(product => (
+              <div key={product.id} style={{ border: '1px solid #eaeaea', borderRadius: 'var(--radius)', overflow: 'hidden', padding: '2rem', textAlign: 'center', display: 'flex', flexDirection: 'column' }}>
+                <Link to={`/product/${product.id}`} style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
+                  <div style={{ height: '200px', backgroundColor: product.imageColor, marginBottom: '1rem', borderRadius: 'var(--radius-sm)' }}></div>
+                  <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>{product.name}</h3>
+                </Link>
+                <p style={{ color: 'var(--color-text-muted)', marginBottom: '1.5rem', flex: 1 }}>{product.shortDesc}</p>
+                <Link to={`/product/${product.id}`} className="btn btn-primary" style={{ width: '100%' }}>View Details</Link>
+              </div>
+            ))}
           </div>
         </div>
       </section>
