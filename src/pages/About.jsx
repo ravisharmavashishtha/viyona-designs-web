@@ -19,7 +19,7 @@ function About() {
       </section>
 
       <section style={{ padding: '5rem 0' }}>
-        <div className="container" style={{ maxWidth: '1000px' }}>
+        <div className="container">
           <div style={{ marginBottom: '4rem' }}>
             <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem', fontWeight: '600' }}>Our Vision</h2>
             <p style={{ fontSize: '1.1rem', lineHeight: '1.7', color: 'var(--color-text-muted)', fontStyle: 'italic', borderLeft: '4px solid var(--color-accent)', paddingLeft: '1rem' }}>

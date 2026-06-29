@@ -14,7 +14,7 @@ function Home() {
           <h1 style={{ fontSize: '3.5rem', fontWeight: '700', marginBottom: '1rem', letterSpacing: '-1px' }}>
             Thoughtfully Designed.<br/>Perfectly Made.
           </h1>
-          <p style={{ fontSize: '1.25rem', color: 'var(--color-text-muted)', marginBottom: '2rem', maxWidth: '600px', margin: '0 auto 2rem' }}>
+          <p style={{ fontSize: '1.25rem', color: 'var(--color-text-muted)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
             Elevating everyday Indian living through meticulously engineered, high-quality household solutions you won't find anywhere else.
           </p>
           <a href="#shop" className="btn btn-primary">Explore Collection</a>
