@@ -43,5 +43,20 @@ export const products = [
     ],
     amazonLink: '#',
     imageColor: '#94a3b8'
+  },
+  {
+    id: 'office-nameplate',
+    name: 'Custom Office Nameplate',
+    shortDesc: 'Premium 3D Printed Desk Sign',
+    description: 'Make a powerful first impression with the Viyona Designs Custom Office Nameplate. Far superior to generic acrylic or cheap plastic alternatives, this nameplate is precisely engineered using advanced 3D printing technology for a sleek, modern, and highly professional aesthetic. Featuring bold, crisp lettering set against a matte background, it stands perfectly stable on any desk. Perfect for CEOs, managers, or anyone looking to upgrade their office decor with a piece of customized, premium engineering.',
+    bullets: [
+      'CUSTOMIZED PROFESSIONALISM: A premium, personalized desk nameplate that immediately elevates your office aesthetic.',
+      'MODERN GEOMETRIC DESIGN: Engineered with clean lines and a solid matte finish that looks expensive and highly professional.',
+      'ULTRA-STABLE BASE: Designed with a perfectly weighted and angled base so it sits securely on any desk or reception counter without tipping over.',
+      'CRISP & CLEAR LETTERING: Advanced manufacturing ensures your name and title are perfectly sharp and highly legible from a distance.',
+      'THE PERFECT CORPORATE GIFT: An impressive, thoughtful gift for a promotion, new business owner, or office inauguration.'
+    ],
+    amazonLink: '#',
+    imageColor: '#f1f5f9'
   }
 ];
