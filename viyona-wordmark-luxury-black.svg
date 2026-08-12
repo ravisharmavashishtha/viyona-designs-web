@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 220" width="100%" height="100%" aria-label="Viyona Designs Luxury Solid Black Single Line Wordmark for Trademark Application">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&amp;family=Cormorant+Garamond:wght@700&amp;display=swap');
+
+    .luxury-black-title {
+      font-family: 'Cinzel', 'Cormorant Garamond', 'Didot', 'Bodoni MT', serif;
+      font-weight: 700;
+      font-size: 64px;
+      fill: #0B0B0B;
+      letter-spacing: 14px;
+    }
+  </style>
+
+  <!-- Clean Textured Pure White Background -->
+  <rect width="100%" height="100%" fill="#FFFFFF" rx="16"/>
+
+  <g transform="translate(60, 130)">
+    <!-- Single Line Luxury Wordmark "VIYONA DESIGNS" -->
+    <text x="0" y="0" class="luxury-black-title">VIYONA DESIGNS</text>
+  </g>
+</svg>

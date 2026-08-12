@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200" width="100%" height="100%" aria-label="Viyona Designs Single Line Thick Black Wordmark">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@800;900&amp;family=Syne:wght@800;900&amp;display=swap');
+    
+    .singleline-thick-title {
+      font-family: 'Outfit', 'Syne', 'Product Sans', -apple-system, sans-serif;
+      font-weight: 900;
+      font-size: 82px;
+      fill: #000000;
+      letter-spacing: -1px;
+    }
+  </style>
+
+  <!-- Clean Background -->
+  <rect width="100%" height="100%" fill="#FFFFFF" rx="16"/>
+
+  <g transform="translate(50, 125)">
+    <!-- Single Line Thick Wordmark "Viyona Designs" -->
+    <text x="0" y="0" class="singleline-thick-title">Viyona Designs</text>
+  </g>
+</svg>

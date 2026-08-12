@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" width="100%" height="100%" aria-label="Viyona Designs Google Style Wordmark">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;700&amp;family=Plus+Jakarta+Sans:wght@500;700&amp;display=swap');
+    
+    .letter-v { fill: #4285F4; } /* Google Blue */
+    .letter-i { fill: #EA4335; } /* Google Red */
+    .dot-i    { fill: #FBBC05; } /* Google Yellow Dot */
+    .letter-y { fill: #FBBC05; } /* Google Yellow */
+    .letter-o { fill: #4285F4; } /* Google Blue */
+    .letter-n { fill: #34A853; } /* Google Green */
+    .letter-a { fill: #EA4335; } /* Google Red */
+    
+    .brand-title {
+      font-family: 'Outfit', 'Plus Jakarta Sans', 'Product Sans', 'Futura', -apple-system, sans-serif;
+      font-weight: 700;
+      font-size: 88px;
+      letter-spacing: -1.5px;
+    }
+    
+    .subtitle {
+      font-family: 'Plus Jakarta Sans', 'Outfit', 'Product Sans', -apple-system, sans-serif;
+      font-weight: 700;
+      font-size: 26px;
+      fill: #5F6368;
+      letter-spacing: 12px;
+    }
+  </style>
+
+  <!-- Background for standalone viewing -->
+  <rect width="100%" height="100%" fill="#FFFFFF" rx="16"/>
+
+  <g transform="translate(60, 40)">
+    <!-- Wordmark "Viyona" -->
+    <text x="0" y="100" class="brand-title">
+      <tspan class="letter-v">V</tspan>
+      <tspan class="letter-i">i</tspan>
+      <tspan class="letter-y">y</tspan>
+      <tspan class="letter-o">o</tspan>
+      <tspan class="letter-n">n</tspan>
+      <tspan class="letter-a">a</tspan>
+    </text>
+
+    <!-- Subtitle "DESIGNS" -->
+    <text x="8" y="152" class="subtitle">DESIGNS</text>
+  </g>
+</svg>

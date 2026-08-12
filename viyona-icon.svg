@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%" aria-label="Viyona Designs Google Style Monogram Icon">
+  <defs>
+    <clipPath id="v-clip">
+      <!-- High contrast geometric V shape path -->
+      <path d="M 96,64 L 216,432 L 296,432 L 416,64 L 320,64 L 256,290 L 192,64 Z" />
+    </clipPath>
+  </defs>
+
+  <!-- Background rounded squircle -->
+  <rect width="512" height="512" rx="120" fill="#FFFFFF"/>
+  <rect width="504" height="504" x="4" y="4" rx="116" fill="none" stroke="#F1F3F4" stroke-width="8"/>
+
+  <!-- Google 4-color continuous V monogram -->
+  <g clip-path="url(#v-clip)">
+    <!-- Top Left: Blue -->
+    <rect x="0" y="0" width="230" height="200" fill="#4285F4" />
+    <!-- Bottom Left / Apex: Yellow -->
+    <polygon points="0,200 256,512 256,180 0,180" fill="#FBBC05" />
+    <!-- Bottom Right / Center: Green -->
+    <polygon points="256,180 256,512 512,200 512,180" fill="#34A853" />
+    <!-- Top Right: Red -->
+    <rect x="282" y="0" width="230" height="200" fill="#EA4335" />
+  </g>
+</svg>
