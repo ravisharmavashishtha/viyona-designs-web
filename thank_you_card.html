@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You Card</title>
+    <style>
+        /* Setup for A4 Print */
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            font-family: 'Georgia', serif; /* Elegant, classic font */
+            -webkit-print-color-adjust: exact;
+        }
+        .a4-page {
+            width: 210mm;
+            height: 297mm;
+            position: relative;
+            background: white;
+        }
+        
+        /* 1/4 of the page (top left) */
+        .card {
+            width: 105mm; /* Half of A4 width */
+            height: 148.5mm; /* Half of A4 height */
+            box-sizing: border-box;
+            padding: 20mm 15mm;
+            /* Dashed lines to guide cutting */
+            border-right: 1px dashed #aaaaaa;
+            border-bottom: 1px dashed #aaaaaa;
+            
+            display: flex;
+            flex-direction: column;
+            /* justify-content: center; */
+        }
+        
+        /* Typography */
+        h1 {
+            font-size: 24px;
+            color: #222;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: normal;
+            font-family: 'Arial', sans-serif;
+            letter-spacing: 1px;
+        }
+        p {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .signature {
+            margin-top: auto; /* Push to bottom slightly */
+            padding-top: 30px;
+        }
+        .signature-name {
+            font-weight: bold;
+            font-size: 16px;
+            color: #222;
+        }
+        .signature-company {
+            font-size: 15px;
+            color: #555;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="a4-page">
+        <!-- The Thank You Note takes up exactly 1/4 of the page -->
+        <div class="card">
+            <h1>A Special Thanks!</h1>
+            
+            <p>Dear Customer,</p>
+            
+            <p>You’re officially Customer #1! Thank you so much for supporting my business from day one. I hope you love the Sleeping Puppy Desk Organizer!</p>
+            
+            <p>Please accept the little gift inside as a special token of gratitude for your trust in our small business.</p>
+            
+            <div class="signature">
+                <div class="signature-name">Meenu Sharma</div>
+                <div class="signature-company">Viyona Designs</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

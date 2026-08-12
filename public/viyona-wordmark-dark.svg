@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" width="100%" height="100%" aria-label="Viyona Designs Dark Mode Wordmark">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;700&amp;family=Plus+Jakarta+Sans:wght@500;700&amp;display=swap');
+    
+    .letter-v-dark { fill: #8AB4F8; } /* Google Dark Blue */
+    .letter-i-dark { fill: #F28B82; } /* Google Dark Red */
+    .letter-y-dark { fill: #FDD663; } /* Google Dark Yellow */
+    .letter-o-dark { fill: #8AB4F8; } /* Google Dark Blue */
+    .letter-n-dark { fill: #81C995; } /* Google Dark Green */
+    .letter-a-dark { fill: #F28B82; } /* Google Dark Red */
+    
+    .brand-title {
+      font-family: 'Outfit', 'Plus Jakarta Sans', 'Product Sans', 'Futura', -apple-system, sans-serif;
+      font-weight: 700;
+      font-size: 88px;
+      letter-spacing: -1.5px;
+    }
+    
+    .subtitle-dark {
+      font-family: 'Plus Jakarta Sans', 'Outfit', 'Product Sans', -apple-system, sans-serif;
+      font-weight: 700;
+      font-size: 26px;
+      fill: #BDC1C6;
+      letter-spacing: 12px;
+    }
+  </style>
+
+  <!-- Background for Dark Mode -->
+  <rect width="100%" height="100%" fill="#171717" rx="16"/>
+
+  <g transform="translate(60, 40)">
+    <!-- Wordmark "Viyona" -->
+    <text x="0" y="100" class="brand-title">
+      <tspan class="letter-v-dark">V</tspan>
+      <tspan class="letter-i-dark">i</tspan>
+      <tspan class="letter-y-dark">y</tspan>
+      <tspan class="letter-o-dark">o</tspan>
+      <tspan class="letter-n-dark">n</tspan>
+      <tspan class="letter-a-dark">a</tspan>
+    </text>
+
+    <!-- Subtitle "DESIGNS" -->
+    <text x="8" y="152" class="subtitle-dark">DESIGNS</text>
+  </g>
+</svg>

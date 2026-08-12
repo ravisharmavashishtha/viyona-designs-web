@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 220" width="100%" height="100%" aria-label="Viyona Designs Dark Side Solid Black Ultra Thick Wordmark">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@900&amp;family=Syne:wght@800;900&amp;display=swap');
+
+    .darkside-black-title {
+      font-family: 'Outfit', 'Syne', 'Product Sans', sans-serif;
+      font-weight: 900;
+      font-size: 80px;
+      fill: #000000;
+      letter-spacing: -0.5px;
+    }
+  </style>
+
+  <!-- Dark Gunmetal Background -->
+  <rect width="100%" height="100%" fill="#18181B" rx="16"/>
+
+  <g transform="translate(50, 140)">
+    <!-- Single Line Ultra Thick Wordmark "Viyona Designs" -->
+    <text x="0" y="0" class="darkside-black-title">Viyona Designs</text>
+  </g>
+</svg>

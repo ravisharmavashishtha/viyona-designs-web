@@ -30,13 +30,14 @@ function Home() {
           <h2 style={{ textAlign: 'center', fontSize: '2rem', marginBottom: '3rem' }}>Our Collection</h2>
           <div style={{ 
             display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+            gridTemplateColumns: products.length === 1 ? 'minmax(250px, 400px)' : 'repeat(auto-fit, minmax(250px, 1fr))', 
+            justifyContent: products.length === 1 ? 'center' : 'start',
             gap: '2rem' 
           }}>
             {products.map(product => (
               <div key={product.id} style={{ border: '1px solid #eaeaea', borderRadius: 'var(--radius)', overflow: 'hidden', padding: '2rem', textAlign: 'center', display: 'flex', flexDirection: 'column' }}>
                 <Link to={`/product/${product.id}`} style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
-                  <div style={{ height: '200px', backgroundColor: product.imageColor, marginBottom: '1rem', borderRadius: 'var(--radius-sm)' }}></div>
+                  <img src={product.images[0]} alt={product.name} style={{ width: '100%', height: '250px', objectFit: 'cover', marginBottom: '1rem', borderRadius: 'var(--radius-sm)' }} />
                   <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>{product.name}</h3>
                 </Link>
                 <p style={{ color: 'var(--color-text-muted)', marginBottom: '1.5rem', flex: 1 }}>{product.shortDesc}</p>

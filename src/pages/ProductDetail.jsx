@@ -1,14 +1,18 @@
 import { useParams, Link } from 'react-router-dom';
 import { products } from '../data/products';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function ProductDetail() {
   const { id } = useParams();
   const product = products.find(p => p.id === id);
+  const [mainImage, setMainImage] = useState(product ? product.images[0] : null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [id]);
+    if (product) {
+      setMainImage(product.images[0]);
+    }
+  }, [id, product]);
 
   if (!product) {
     return (
@@ -27,21 +31,35 @@ function ProductDetail() {
       
       <div style={{ display: 'flex', gap: '4rem', flexWrap: 'wrap' }}>
         {/* Product Image Section */}
-        <div style={{ flex: '1 1 300px' }}>
-          <div style={{ 
-            backgroundColor: product.imageColor, 
+        <div style={{ flex: '1 1 300px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <img src={mainImage} alt={product.name} style={{ 
+            width: '100%', 
             minHeight: '350px', 
             aspectRatio: '1',
+            objectFit: 'cover',
             borderRadius: 'var(--radius-lg)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'white',
-            fontSize: '1.5rem',
-            fontWeight: '600',
-            opacity: 0.8
-          }}>
-            [Product Image Here]
+            display: 'block'
+          }} />
+          {/* Image Gallery Thumbnails */}
+          <div style={{ display: 'flex', gap: '1rem', overflowX: 'auto', paddingBottom: '0.5rem' }}>
+            {product.images.map((img, idx) => (
+              <img 
+                key={idx} 
+                src={img} 
+                alt={`${product.name} thumbnail ${idx + 1}`} 
+                onClick={() => setMainImage(img)}
+                style={{ 
+                  width: '80px', 
+                  height: '80px', 
+                  objectFit: 'cover', 
+                  borderRadius: 'var(--radius-sm)', 
+                  cursor: 'pointer',
+                  border: mainImage === img ? '2px solid var(--color-accent)' : '1px solid transparent',
+                  opacity: mainImage === img ? 1 : 0.6,
+                  transition: 'all 0.2s ease'
+                }} 
+              />
+            ))}
           </div>
         </div>
 
