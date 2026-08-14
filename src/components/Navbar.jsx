@@ -1,5 +1,5 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import logoImg from '../assets/logo-transparent.svg';
+import logoImg from '../assets/logo.png';
 
 function Navbar() {
   const navigate = useNavigate();
@@ -32,12 +32,12 @@ function Navbar() {
         display: 'flex', 
         justifyContent: 'space-between', 
         alignItems: 'center',
-        paddingTop: '0.85rem',
-        paddingBottom: '0.85rem',
+        paddingTop: '0.75rem',
+        paddingBottom: '0.75rem',
         flexWrap: 'wrap',
         gap: '1rem'
       }}>
-        {/* Transparent Vector Brand Logo - 100% Seamless with Header Color */}
+        {/* Official Viyona Designs Brand Logo */}
         <Link 
           to="/" 
           style={{ 
@@ -50,7 +50,7 @@ function Navbar() {
             src={logoImg} 
             alt="Viyona Designs — Thoughtfully Designed. Perfectly Made." 
             style={{ 
-              height: 'clamp(48px, 5.5vw, 68px)', 
+              height: 'clamp(52px, 6vw, 76px)', 
               width: 'auto',
               objectFit: 'contain',
               display: 'block',
