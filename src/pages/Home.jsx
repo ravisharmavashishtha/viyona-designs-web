@@ -20,7 +20,13 @@ function Home() {
           <p style={{ fontSize: '1.25rem', color: 'var(--color-text-muted)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
             Elevating everyday Indian living through meticulously engineered, high-quality household solutions you won't find anywhere else.
           </p>
-          <a href="#shop" className="btn btn-primary">Explore Collection</a>
+          <button 
+            onClick={() => document.getElementById('shop')?.scrollIntoView({ behavior: 'smooth' })} 
+            className="btn btn-primary"
+            style={{ cursor: 'pointer', border: 'none' }}
+          >
+            Explore Collection
+          </button>
         </div>
       </section>
 
@@ -38,9 +44,9 @@ function Home() {
               <div key={product.id} style={{ border: '1px solid #eaeaea', borderRadius: 'var(--radius)', overflow: 'hidden', padding: '2rem', textAlign: 'center', display: 'flex', flexDirection: 'column' }}>
                 <Link to={`/product/${product.id}`} style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
                   <img src={product.images[0]} alt={product.name} style={{ width: '100%', height: '250px', objectFit: 'cover', marginBottom: '1rem', borderRadius: 'var(--radius-sm)' }} />
-                  <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>{product.name}</h3>
+                  <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', fontWeight: '600' }}>{product.name}</h3>
                 </Link>
-                <p style={{ color: 'var(--color-text-muted)', marginBottom: '1.5rem', flex: 1 }}>{product.shortDesc}</p>
+                <p style={{ color: 'var(--color-text-muted)', marginBottom: '1.5rem', fontSize: '0.95rem', flex: 1 }}>{product.shortDesc}</p>
                 <Link to={`/product/${product.id}`} className="btn btn-primary" style={{ width: '100%' }}>View Details</Link>
               </div>
             ))}
