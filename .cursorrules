@@ -1,0 +1,6 @@
+# Repository Workflow & Deployment Rules
+
+1. Work MUST always be done on a dedicated feature/fix branch (e.g., `feat/<name>`, `fix/<name>`).
+2. Never make direct unreviewed changes or commits to `master`.
+3. Create and merge Pull Requests into `master` before considering a task complete.
+4. Deployments (`npm run deploy`) MUST only be performed from a clean, fully-merged `master` branch. Never deploy uncommitted code or feature branches to production.
