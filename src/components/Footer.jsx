@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import logoImg from '../assets/logo.png';
 
 function Footer() {
   return (
@@ -20,46 +21,28 @@ function Footer() {
           {/* Brand Manifesto Column */}
           <div style={{ maxWidth: '380px' }}>
             <Link to="/" style={{ display: 'inline-block', marginBottom: '1.25rem', textDecoration: 'none' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-                <div style={{
-                  width: '44px',
-                  height: '44px',
-                  borderRadius: '10px',
-                  background: 'linear-gradient(135deg, #D4AF37 0%, #AA771C 100%)',
-                  color: '#121211',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontFamily: 'var(--font-sans)',
-                  fontWeight: '900',
-                  fontSize: '1.25rem',
-                  letterSpacing: '-0.5px',
-                  boxShadow: '0 4px 12px rgba(212, 175, 55, 0.3)'
-                }}>
-                  VD
-                </div>
-                <div>
-                  <div style={{ 
-                    fontFamily: 'var(--font-serif)', 
-                    fontSize: '1.75rem', 
-                    fontWeight: '700', 
-                    letterSpacing: '0.04em', 
-                    color: '#FFFFFF',
-                    lineHeight: 1
-                  }}>
-                    VIYONA DESIGNS
-                  </div>
-                  <div style={{ 
-                    fontSize: '0.72rem', 
-                    letterSpacing: '0.16em', 
-                    textTransform: 'uppercase', 
-                    color: '#D4AF37',
-                    marginTop: '0.25rem',
-                    fontWeight: '600'
-                  }}>
-                    Thoughtfully Designed • Made in India
-                  </div>
-                </div>
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                padding: '0.35rem 0.85rem',
+                backgroundColor: '#FFFFFF',
+                borderRadius: 'var(--radius-sm)',
+                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.25)',
+                transition: 'transform var(--transition-base)'
+              }}
+              onMouseOver={e => e.currentTarget.style.transform = 'scale(1.02)'}
+              onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
+              >
+                <img 
+                  src={logoImg} 
+                  alt="Viyona Designs — Thoughtfully Designed. Perfectly Made." 
+                  style={{ 
+                    height: '62px', 
+                    width: 'auto',
+                    objectFit: 'contain',
+                    display: 'block'
+                  }} 
+                />
               </div>
             </Link>
 
