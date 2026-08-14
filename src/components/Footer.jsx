@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import footerLogoImg from '../assets/logo-footer.png';
+import whiteLogoImg from '../assets/logo-white.png';
 
 function Footer() {
   return (
@@ -22,10 +22,10 @@ function Footer() {
           <div style={{ maxWidth: '380px' }}>
             <Link to="/" style={{ display: 'inline-block', marginBottom: '1.25rem', textDecoration: 'none' }}>
               <img 
-                src={footerLogoImg} 
+                src={whiteLogoImg} 
                 alt="Viyona Designs — Thoughtfully Designed. Perfectly Made." 
                 style={{ 
-                  height: '62px', 
+                  height: '58px', 
                   width: 'auto',
                   objectFit: 'contain',
                   display: 'block',
