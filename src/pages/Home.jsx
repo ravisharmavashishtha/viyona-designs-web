@@ -8,7 +8,7 @@ function Home() {
     <div style={{ minHeight: '100vh', width: '100%' }}>
       {/* 1. Dramatic Full-Width Editorial Hero Section */}
       <section style={{ 
-        padding: 'clamp(3rem, 6vw, 6rem) 0',
+        padding: 'clamp(3.5rem, 6vw, 6.5rem) 0',
         background: 'radial-gradient(ellipse at top, #FFFDF8 0%, #FAF8F2 60%, #F3EFE6 100%)',
         position: 'relative',
         overflow: 'hidden',
@@ -16,13 +16,15 @@ function Home() {
       }}>
         <div className="container">
           <div style={{ 
+            maxWidth: '1240px',
+            margin: '0 auto',
             display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 480px), 1fr))', 
-            gap: 'clamp(2.5rem, 5vw, 5rem)',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 460px), 1fr))', 
+            gap: 'clamp(2rem, 4vw, 3.5rem)',
             alignItems: 'center'
           }}>
             {/* Left Content */}
-            <div className="fade-in" style={{ width: '100%', maxWidth: '680px' }}>
+            <div className="fade-in" style={{ width: '100%', maxWidth: '600px' }}>
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
                 <span className="badge badge-gold">Design Studio</span>
                 <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: '500' }}>
@@ -31,10 +33,10 @@ function Home() {
               </div>
 
               <h1 style={{ 
-                fontSize: 'clamp(2.5rem, 5.5vw, 4.5rem)', 
+                fontSize: 'clamp(2.5rem, 4.5vw, 4.2rem)', 
                 fontWeight: '600', 
                 letterSpacing: '-0.025em', 
-                lineHeight: 1.08,
+                lineHeight: 1.1,
                 marginBottom: '1.5rem',
                 color: 'var(--text-primary)'
               }}>
@@ -45,7 +47,7 @@ function Home() {
               </h1>
 
               <p style={{ 
-                fontSize: 'clamp(1.05rem, 1.6vw, 1.22rem)', 
+                fontSize: 'clamp(1.05rem, 1.4vw, 1.2rem)', 
                 lineHeight: 1.65, 
                 color: 'var(--text-secondary)', 
                 marginBottom: '2.25rem' 
@@ -111,7 +113,7 @@ function Home() {
             </div>
 
             {/* Right Hero Image Card */}
-            <div style={{ position: 'relative', width: '100%' }}>
+            <div style={{ position: 'relative', width: '100%', maxWidth: '540px', justifySelf: 'center' }}>
               <div style={{
                 position: 'relative',
                 borderRadius: 'var(--radius-lg)',
@@ -126,7 +128,7 @@ function Home() {
                   alt="Lord Ganesha Modern Minimalist Statue in Serene Ambient Setting" 
                   style={{ 
                     width: '100%', 
-                    height: 'clamp(360px, 45vw, 560px)', 
+                    height: 'clamp(360px, 42vw, 520px)', 
                     objectFit: 'cover',
                     display: 'block'
                   }} 
@@ -135,10 +137,10 @@ function Home() {
                 {/* Floating Aesthetic Pill */}
                 <div style={{
                   position: 'absolute',
-                  bottom: 'clamp(1rem, 2vw, 1.75rem)',
-                  left: 'clamp(1rem, 2vw, 1.75rem)',
-                  right: 'clamp(1rem, 2vw, 1.75rem)',
-                  padding: '1.25rem 1.5rem',
+                  bottom: 'clamp(1rem, 2vw, 1.5rem)',
+                  left: 'clamp(1rem, 2vw, 1.5rem)',
+                  right: 'clamp(1rem, 2vw, 1.5rem)',
+                  padding: '1.15rem 1.35rem',
                   background: 'rgba(255, 255, 255, 0.94)',
                   backdropFilter: 'blur(16px)',
                   borderRadius: 'var(--radius-md)',
@@ -154,14 +156,14 @@ function Home() {
                     <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--accent-gold)' }}>
                       Contemporary Vinayaka
                     </span>
-                    <h3 style={{ fontSize: '1.15rem', fontWeight: '600', color: 'var(--text-primary)', marginTop: '0.15rem' }}>
+                    <h3 style={{ fontSize: '1.12rem', fontWeight: '600', color: 'var(--text-primary)', marginTop: '0.15rem' }}>
                       Lord Ganesha Minimalist Murti
                     </h3>
                   </div>
                   <Link 
                     to="/product/ganesha-statue" 
                     className="btn btn-primary"
-                    style={{ padding: '0.6rem 1.25rem', fontSize: '0.85rem', width: 'auto' }}
+                    style={{ padding: '0.55rem 1.15rem', fontSize: '0.85rem', width: 'auto', minHeight: '38px' }}
                   >
                     View ₹550
                   </Link>
@@ -174,22 +176,24 @@ function Home() {
 
       {/* 2. Trust Bar */}
       <section className="trust-bar">
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', gap: '1.5rem' }}>
-          <div className="trust-item">
-            <span style={{ fontSize: '1.3rem' }}>🌱</span>
-            <span>100% Plant-Based Bio-Plastic</span>
-          </div>
-          <div className="trust-item">
-            <span style={{ fontSize: '1.3rem' }}>📐</span>
-            <span>Micro-Layer Precision Craft</span>
-          </div>
-          <div className="trust-item">
-            <span style={{ fontSize: '1.3rem' }}>🇮🇳</span>
-            <span>Designed & Made in India</span>
-          </div>
-          <div className="trust-item">
-            <span style={{ fontSize: '1.3rem' }}>📦</span>
-            <span>Secure Gift-Ready Packaging</span>
+        <div className="container">
+          <div style={{ maxWidth: '1240px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
+            <div className="trust-item">
+              <span style={{ fontSize: '1.3rem' }}>🌱</span>
+              <span>100% Plant-Based Bio-Plastic</span>
+            </div>
+            <div className="trust-item">
+              <span style={{ fontSize: '1.3rem' }}>📐</span>
+              <span>Micro-Layer Precision Craft</span>
+            </div>
+            <div className="trust-item">
+              <span style={{ fontSize: '1.3rem' }}>🇮🇳</span>
+              <span>Designed & Made in India</span>
+            </div>
+            <div className="trust-item">
+              <span style={{ fontSize: '1.3rem' }}>📦</span>
+              <span>Secure Gift-Ready Packaging</span>
+            </div>
           </div>
         </div>
       </section>
@@ -197,162 +201,164 @@ function Home() {
       {/* 3. Curated Product Collection */}
       <section id="collection" style={{ padding: 'clamp(4rem, 7vw, 7rem) 0' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto clamp(2.5rem, 5vw, 4.5rem)' }}>
-            <span className="badge badge-gold" style={{ marginBottom: '0.75rem' }}>
-              The Studio Collection
-            </span>
-            <h2 style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)', fontWeight: '600', marginBottom: '1rem' }}>
-              Distinct Objects of Daily Joy
-            </h2>
-            <p style={{ fontSize: 'clamp(1rem, 1.4vw, 1.15rem)', color: 'var(--text-secondary)' }}>
-              Each piece in our catalog is thoughtfully engineered from the ground up, blending scandinavian minimalism, eco-friendly materials, and tactile beauty.
-            </p>
-          </div>
+          <div style={{ maxWidth: '1240px', margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto clamp(2.5rem, 5vw, 4.5rem)' }}>
+              <span className="badge badge-gold" style={{ marginBottom: '0.75rem' }}>
+                The Studio Collection
+              </span>
+              <h2 style={{ fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', fontWeight: '600', marginBottom: '1rem' }}>
+                Distinct Objects of Daily Joy
+              </h2>
+              <p style={{ fontSize: 'clamp(1rem, 1.4vw, 1.15rem)', color: 'var(--text-secondary)' }}>
+                Each piece in our catalog is thoughtfully engineered from the ground up, blending scandinavian minimalism, eco-friendly materials, and tactile beauty.
+              </p>
+            </div>
 
-          {/* Panoramic Product Grid */}
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 460px), 1fr))', 
-            gap: 'clamp(2rem, 3.5vw, 3.5rem)' 
-          }}>
-            {products.map(product => (
-              <div 
-                key={product.id} 
-                className="card-interactive" 
-                style={{ 
-                  display: 'flex', 
-                  flexDirection: 'column',
-                  position: 'relative',
-                  width: '100%'
-                }}
-              >
-                {/* Main Product Image Container */}
-                <Link 
-                  to={`/product/${product.id}`} 
+            {/* Harmonized Product Grid */}
+            <div style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 440px), 1fr))', 
+              gap: 'clamp(2rem, 3.5vw, 3rem)' 
+            }}>
+              {products.map(product => (
+                <div 
+                  key={product.id} 
+                  className="card-interactive" 
                   style={{ 
-                    display: 'block', 
-                    overflow: 'hidden', 
+                    display: 'flex', 
+                    flexDirection: 'column',
                     position: 'relative',
-                    backgroundColor: '#FAF9F6',
-                    height: 'clamp(320px, 35vw, 460px)'
+                    width: '100%'
                   }}
                 >
-                  <img 
-                    src={product.lifestyleImage || product.images[0]} 
-                    alt={product.name} 
+                  {/* Main Product Image Container */}
+                  <Link 
+                    to={`/product/${product.id}`} 
                     style={{ 
-                      width: '100%', 
-                      height: '100%', 
-                      objectFit: 'cover',
-                      transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
-                    }} 
-                    onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.04)'}
-                    onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                  />
-                </Link>
-
-                {/* Product Info Body */}
-                <div style={{ padding: 'clamp(1.5rem, 3vw, 2.5rem)', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
-                    <span style={{ fontSize: '0.82rem', fontWeight: '600', color: 'var(--accent-gold)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                      {product.category}
-                    </span>
-                    <span style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--accent-sage)', backgroundColor: 'var(--accent-sage-light)', padding: '0.2rem 0.6rem', borderRadius: 'var(--radius-full)' }}>
-                      100% Bio-Plastic
-                    </span>
-                  </div>
-
-                  <Link to={`/product/${product.id}`}>
-                    <h3 style={{ 
-                      fontSize: 'clamp(1.35rem, 2.2vw, 1.75rem)', 
-                      fontWeight: '600', 
-                      lineHeight: 1.25, 
-                      marginBottom: '0.75rem',
-                      color: 'var(--text-primary)'
-                    }}>
-                      {product.displayName || product.name}
-                    </h3>
+                      display: 'block', 
+                      overflow: 'hidden', 
+                      position: 'relative',
+                      backgroundColor: '#FAF9F6',
+                      height: 'clamp(320px, 32vw, 420px)'
+                    }}
+                  >
+                    <img 
+                      src={product.lifestyleImage || product.images[0]} 
+                      alt={product.name} 
+                      style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover',
+                        transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
+                      }} 
+                      onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.04)'}
+                      onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                    />
                   </Link>
 
-                  <p style={{ 
-                    fontSize: '0.98rem', 
-                    color: 'var(--text-secondary)', 
-                    lineHeight: 1.65, 
-                    marginBottom: '1.5rem',
-                    flex: 1
-                  }}>
-                    {product.shortDesc}
-                  </p>
-
-                  {/* Highlights Pill List */}
-                  {product.highlights && (
-                    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.75rem' }}>
-                      {product.highlights.map((h, i) => (
-                        <span key={i} style={{ 
-                          fontSize: '0.78rem', 
-                          padding: '0.3rem 0.75rem', 
-                          backgroundColor: 'var(--bg-subtle)', 
-                          borderRadius: 'var(--radius-xs)',
-                          color: 'var(--text-secondary)',
-                          fontWeight: '500'
-                        }}>
-                          {h.label}: <strong style={{ color: 'var(--text-primary)' }}>{h.value}</strong>
-                        </span>
-                      ))}
+                  {/* Product Info Body */}
+                  <div style={{ padding: 'clamp(1.5rem, 2.5vw, 2.25rem)', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                      <span style={{ fontSize: '0.82rem', fontWeight: '600', color: 'var(--accent-gold)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                        {product.category}
+                      </span>
+                      <span style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--accent-sage)', backgroundColor: 'var(--accent-sage-light)', padding: '0.2rem 0.6rem', borderRadius: 'var(--radius-full)' }}>
+                        100% Bio-Plastic
+                      </span>
                     </div>
-                  )}
 
-                  {/* Pricing & CTA Row */}
-                  <div style={{ 
-                    paddingTop: '1.5rem', 
-                    borderTop: '1px solid var(--border-subtle)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    gap: '1rem',
-                    flexWrap: 'wrap',
-                    marginTop: 'auto'
-                  }}>
-                    <div>
-                      <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
-                        <span style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-primary)' }}>
-                          {product.price}
-                        </span>
-                        {product.mrp && (
-                          <span style={{ fontSize: '0.95rem', color: 'var(--text-muted)', textDecoration: 'line-through' }}>
-                            {product.mrp}
+                    <Link to={`/product/${product.id}`}>
+                      <h3 style={{ 
+                        fontSize: 'clamp(1.35rem, 2vw, 1.65rem)', 
+                        fontWeight: '600', 
+                        lineHeight: 1.25, 
+                        marginBottom: '0.75rem',
+                        color: 'var(--text-primary)'
+                      }}>
+                        {product.displayName || product.name}
+                      </h3>
+                    </Link>
+
+                    <p style={{ 
+                      fontSize: '0.98rem', 
+                      color: 'var(--text-secondary)', 
+                      lineHeight: 1.65, 
+                      marginBottom: '1.5rem',
+                      flex: 1
+                    }}>
+                      {product.shortDesc}
+                    </p>
+
+                    {/* Highlights Pill List */}
+                    {product.highlights && (
+                      <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.75rem' }}>
+                        {product.highlights.map((h, i) => (
+                          <span key={i} style={{ 
+                            fontSize: '0.78rem', 
+                            padding: '0.3rem 0.75rem', 
+                            backgroundColor: 'var(--bg-subtle)', 
+                            borderRadius: 'var(--radius-xs)',
+                            color: 'var(--text-secondary)',
+                            fontWeight: '500'
+                          }}>
+                            {h.label}: <strong style={{ color: 'var(--text-primary)' }}>{h.value}</strong>
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Pricing & CTA Row */}
+                    <div style={{ 
+                      paddingTop: '1.5rem', 
+                      borderTop: '1px solid var(--border-subtle)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      gap: '1rem',
+                      flexWrap: 'wrap',
+                      marginTop: 'auto'
+                    }}>
+                      <div>
+                        <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
+                          <span style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-primary)' }}>
+                            {product.price}
+                          </span>
+                          {product.mrp && (
+                            <span style={{ fontSize: '0.95rem', color: 'var(--text-muted)', textDecoration: 'line-through' }}>
+                              {product.mrp}
+                            </span>
+                          )}
+                        </div>
+                        {product.discount && (
+                          <span style={{ fontSize: '0.78rem', fontWeight: '700', color: '#16A34A' }}>
+                            Save {product.discount}
                           </span>
                         )}
                       </div>
-                      {product.discount && (
-                        <span style={{ fontSize: '0.78rem', fontWeight: '700', color: '#16A34A' }}>
-                          Save {product.discount}
-                        </span>
-                      )}
-                    </div>
 
-                    <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', width: 'auto' }}>
-                      <Link 
-                        to={`/product/${product.id}`} 
-                        className="btn btn-secondary"
-                        style={{ padding: '0.75rem 1.35rem', fontSize: '0.9rem', width: 'auto' }}
-                      >
-                        Details
-                      </Link>
-                      <a 
-                        href={product.amazonLink} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="btn btn-amazon"
-                        style={{ padding: '0.75rem 1.35rem', fontSize: '0.9rem', width: 'auto' }}
-                      >
-                        Buy on Amazon ↗
-                      </a>
+                      <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', width: 'auto' }}>
+                        <Link 
+                          to={`/product/${product.id}`} 
+                          className="btn btn-secondary"
+                          style={{ padding: '0.75rem 1.35rem', fontSize: '0.9rem', width: 'auto' }}
+                        >
+                          Details
+                        </Link>
+                        <a 
+                          href={product.amazonLink} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="btn btn-amazon"
+                          style={{ padding: '0.75rem 1.35rem', fontSize: '0.9rem', width: 'auto' }}
+                        >
+                          Buy on Amazon ↗
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -366,9 +372,11 @@ function Home() {
       }}>
         <div className="container">
           <div style={{ 
+            maxWidth: '1240px',
+            margin: '0 auto',
             display: 'grid', 
             gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 460px), 1fr))', 
-            gap: 'clamp(2.5rem, 5vw, 5rem)',
+            gap: 'clamp(2.5rem, 5vw, 4.5rem)',
             alignItems: 'center'
           }}>
             <div>
@@ -384,7 +392,7 @@ function Home() {
                 The Future of Sustainable Craft
               </span>
               <h2 style={{ 
-                fontSize: 'clamp(2.2rem, 4vw, 3.4rem)', 
+                fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', 
                 fontWeight: '600', 
                 color: '#FFFFFF',
                 lineHeight: 1.15,
