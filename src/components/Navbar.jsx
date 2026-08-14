@@ -32,10 +32,12 @@ function Navbar() {
         display: 'flex', 
         justifyContent: 'space-between', 
         alignItems: 'center',
-        paddingTop: '0.65rem',
-        paddingBottom: '0.65rem'
+        paddingTop: '0.75rem',
+        paddingBottom: '0.75rem',
+        flexWrap: 'wrap',
+        gap: '1rem'
       }}>
-        {/* Brand Logo - Enlarged & Highly Visible */}
+        {/* Brand Logo - Enlarged & Fluid Responsive */}
         <Link 
           to="/" 
           style={{ 
@@ -48,12 +50,12 @@ function Navbar() {
             src={logoImg} 
             alt="Viyona Designs — Thoughtfully Designed. Perfectly Made." 
             style={{ 
-              height: '78px', 
+              height: 'clamp(58px, 6.5vw, 84px)', 
               width: 'auto',
               objectFit: 'contain',
               display: 'block',
               transition: 'transform var(--transition-base)',
-              filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.04))'
+              filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.05))'
             }} 
             onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.03)'}
             onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
@@ -61,15 +63,20 @@ function Navbar() {
         </Link>
 
         {/* Navigation Links */}
-        <nav style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}>
+        <nav style={{ 
+          display: 'flex', 
+          gap: 'clamp(1.25rem, 2.5vw, 2.75rem)', 
+          alignItems: 'center',
+          flexWrap: 'wrap'
+        }}>
           <Link 
             to="/" 
             style={{ 
-              fontSize: '0.95rem',
+              fontSize: '0.96rem',
               fontWeight: location.pathname === '/' ? '700' : '500', 
               color: location.pathname === '/' ? 'var(--text-primary)' : 'var(--text-secondary)',
               letterSpacing: '0.01em',
-              transition: 'color var(--transition-fast)'
+              padding: '0.35rem 0'
             }}
           >
             Home
@@ -78,11 +85,12 @@ function Navbar() {
             href="#collection" 
             onClick={handleShopClick} 
             style={{ 
-              fontSize: '0.95rem',
+              fontSize: '0.96rem',
               fontWeight: '500', 
               color: 'var(--text-secondary)',
               letterSpacing: '0.01em',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              padding: '0.35rem 0'
             }}
           >
             Collection
@@ -91,11 +99,12 @@ function Navbar() {
             href="#craft" 
             onClick={handleStoryClick} 
             style={{ 
-              fontSize: '0.95rem',
+              fontSize: '0.96rem',
               fontWeight: '500', 
               color: 'var(--text-secondary)',
               letterSpacing: '0.01em',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              padding: '0.35rem 0'
             }}
           >
             Our Craft
@@ -103,10 +112,11 @@ function Navbar() {
           <Link 
             to="/about" 
             style={{ 
-              fontSize: '0.95rem',
+              fontSize: '0.96rem',
               fontWeight: location.pathname === '/about' ? '700' : '500', 
               color: location.pathname === '/about' ? 'var(--text-primary)' : 'var(--text-secondary)',
-              letterSpacing: '0.01em'
+              letterSpacing: '0.01em',
+              padding: '0.35rem 0'
             }}
           >
             About Us
@@ -114,14 +124,16 @@ function Navbar() {
         </nav>
 
         {/* Right CTA Button */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
           <a 
             href="#collection" 
             onClick={handleShopClick}
             className="btn btn-primary"
             style={{ 
-              padding: '0.7rem 1.5rem', 
-              fontSize: '0.88rem' 
+              padding: '0.65rem 1.6rem', 
+              fontSize: '0.9rem',
+              minHeight: '44px',
+              width: 'auto'
             }}
           >
             Explore Studio
