@@ -1,5 +1,5 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import logoImg from '../assets/logo.png';
+import logoImg from '../assets/logo-transparent.svg';
 
 function Navbar() {
   const navigate = useNavigate();
@@ -32,12 +32,12 @@ function Navbar() {
         display: 'flex', 
         justifyContent: 'space-between', 
         alignItems: 'center',
-        paddingTop: '0.75rem',
-        paddingBottom: '0.75rem',
+        paddingTop: '0.85rem',
+        paddingBottom: '0.85rem',
         flexWrap: 'wrap',
         gap: '1rem'
       }}>
-        {/* Brand Logo - Enlarged & Fluid Responsive */}
+        {/* Transparent Vector Brand Logo - 100% Seamless with Header Color */}
         <Link 
           to="/" 
           style={{ 
@@ -50,12 +50,11 @@ function Navbar() {
             src={logoImg} 
             alt="Viyona Designs — Thoughtfully Designed. Perfectly Made." 
             style={{ 
-              height: 'clamp(58px, 6.5vw, 84px)', 
+              height: 'clamp(48px, 5.5vw, 68px)', 
               width: 'auto',
               objectFit: 'contain',
               display: 'block',
-              transition: 'transform var(--transition-base)',
-              filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.05))'
+              transition: 'transform var(--transition-base)'
             }} 
             onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.03)'}
             onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}

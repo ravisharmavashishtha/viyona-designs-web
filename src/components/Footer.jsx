@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import logoImg from '../assets/logo.png';
+import footerLogoImg from '../assets/logo-transparent-white.svg';
 
 function Footer() {
   return (
@@ -21,29 +21,19 @@ function Footer() {
           {/* Brand Manifesto Column */}
           <div style={{ maxWidth: '380px' }}>
             <Link to="/" style={{ display: 'inline-block', marginBottom: '1.25rem', textDecoration: 'none' }}>
-              <div style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                padding: '0.35rem 0.85rem',
-                backgroundColor: '#FFFFFF',
-                borderRadius: 'var(--radius-sm)',
-                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.25)',
-                transition: 'transform var(--transition-base)'
-              }}
-              onMouseOver={e => e.currentTarget.style.transform = 'scale(1.02)'}
-              onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
-              >
-                <img 
-                  src={logoImg} 
-                  alt="Viyona Designs — Thoughtfully Designed. Perfectly Made." 
-                  style={{ 
-                    height: '62px', 
-                    width: 'auto',
-                    objectFit: 'contain',
-                    display: 'block'
-                  }} 
-                />
-              </div>
+              <img 
+                src={footerLogoImg} 
+                alt="Viyona Designs" 
+                style={{ 
+                  height: '56px', 
+                  width: 'auto',
+                  objectFit: 'contain',
+                  display: 'block',
+                  transition: 'transform var(--transition-base)'
+                }} 
+                onMouseOver={e => e.currentTarget.style.transform = 'scale(1.02)'}
+                onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
+              />
             </Link>
 
             <p style={{ 

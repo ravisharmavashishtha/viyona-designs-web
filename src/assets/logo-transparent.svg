@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 180" width="100%" height="100%" aria-label="Viyona Designs Brand Logo">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap');
+    
+    .letter-v { fill: #4285F4; }
+    .letter-i { fill: #EA4335; }
+    .dot-i    { fill: #FBBC05; }
+    .letter-y { fill: #FBBC05; }
+    .letter-o { fill: #4285F4; }
+    .letter-n { fill: #34A853; }
+    .letter-a { fill: #EA4335; }
+    
+    .brand-title {
+      font-family: 'Outfit', 'Plus Jakarta Sans', -apple-system, sans-serif;
+      font-weight: 800;
+      font-size: 94px;
+      letter-spacing: -2px;
+    }
+    
+    .subtitle {
+      font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      fill: #585650;
+      letter-spacing: 14px;
+    }
+  </style>
+
+  <!-- Fully Transparent Canvas - No background rect -->
+  <g transform="translate(10, 15)">
+    <text x="0" y="90" class="brand-title">
+      <tspan class="letter-v">V</tspan>
+      <tspan class="letter-i">i</tspan>
+      <tspan class="letter-y">y</tspan>
+      <tspan class="letter-o">o</tspan>
+      <tspan class="letter-n">n</tspan>
+      <tspan class="letter-a">a</tspan>
+    </text>
+    <text x="6" y="140" class="subtitle">DESIGNS</text>
+  </g>
+</svg>
