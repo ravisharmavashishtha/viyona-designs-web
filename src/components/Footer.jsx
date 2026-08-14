@@ -24,10 +24,12 @@ function Footer() {
               src={logoImg} 
               alt="Viyona Designs" 
               style={{ 
-                height: '52px', 
+                height: '76px', 
+                width: 'auto',
                 marginBottom: '1.25rem', 
                 objectFit: 'contain',
-                filter: 'brightness(0) invert(1)' 
+                filter: 'brightness(0) invert(1)',
+                display: 'block'
               }} 
             />
             <p style={{ 

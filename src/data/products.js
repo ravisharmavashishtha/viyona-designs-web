@@ -5,7 +5,7 @@ export const products = [
     displayName: 'Modern Minimalist Lord Ganesha',
     tagline: 'Sculptural Serenity for Sacred & Everyday Spaces',
     category: 'Sacred & Mindful Living',
-    badge: 'Bestseller',
+    badge: 'Amazon India Listing',
     badgeColor: 'gold',
     shortDesc: 'Precision-engineered contemporary Vinayaka murti crafted from 100% plant-based bio-plastic.',
     description: 'Elevate the spiritual ambiance and aesthetic of your home, car dashboard, or office with the Viyona Designs Lord Ganesha Idol. Designed with pure modern Scandinavian-inspired lines, this statue balances traditional reverence with architectural minimalism. Each piece is precision-crafted in India from plant-based, biodegradable bio-polymer for a smooth matte tactile finish and durable, lifelong beauty.',
@@ -35,8 +35,6 @@ export const products = [
     price: '₹550.00',
     mrp: '₹1,199.00',
     discount: '54% OFF',
-    rating: 4.9,
-    reviewsCount: 148,
     specs: {
       'Category': 'Spiritual & Religious Decor',
       'Brand': 'Viyona Designs',
@@ -54,13 +52,13 @@ export const products = [
     displayName: 'Sleeping Puppy Catchall Tray',
     tagline: 'Playful Charm Meets Everyday Desktop Utility',
     category: 'Desk & Everyday Organization',
-    badge: 'Popular Choice',
+    badge: 'Amazon India Listing',
     badgeColor: 'sage',
     shortDesc: 'Delightful sleeping puppy valet tray to organize keys, coins, jewelry, and stationery.',
     description: 'Transform cluttered desks into moments of quiet joy. The Sleeping Puppy Desk Organizer is an adorable catchall tray designed to hold your essential everyday items — rings, keys, paperclips, earphones, and pocket coins. Sculpted with affectionate detail and engineered from eco-friendly bio-plastic, it blends seamlessly into both minimalist office setups and cozy bedside nightstands.',
     bullets: [
       'ADORABLE & PRACTICAL DESIGN: Charming sleeping puppy posture that doubles as an ergonomic catchall bowl for daily accessories.',
-      'VERSATILE DESKTOP TRAY: Deep recessed basin safely cradles keys, coins, stationery, flash drives, and small desk essentials.',
+      'VERSATILE DESKTOP TRAY: Deep recessed basin safely cradles keys, coins, stationery, flash drives, and small desk accessories.',
       'ECO-FRIENDLY BIO-PLASTIC: 3D-crafted with high-density plant-based bio-materials for strength, featherweight durability, and eco-conscious peace of mind.',
       'DELIGHTFUL GIFT FOR PET LOVERS: A heartwarming and functional present for coworkers, students, creators, and dog enthusiasts.',
       'READY OUT OF THE BOX: Sturdy one-piece design with anti-scratch base. Seamlessly complements modern wood, marble, and white desk surfaces.'
@@ -81,8 +79,6 @@ export const products = [
     price: '₹499.00',
     mrp: '₹999.00',
     discount: '50% OFF',
-    rating: 4.8,
-    reviewsCount: 92,
     specs: {
       'Category': 'Desk Accessories & Catchall Trays',
       'Brand': 'Viyona Designs',

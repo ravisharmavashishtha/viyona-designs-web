@@ -32,20 +32,30 @@ function Navbar() {
         display: 'flex', 
         justifyContent: 'space-between', 
         alignItems: 'center',
-        paddingTop: '0.85rem',
-        paddingBottom: '0.85rem'
+        paddingTop: '0.65rem',
+        paddingBottom: '0.65rem'
       }}>
-        {/* Brand Logo */}
-        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        {/* Brand Logo - Enlarged & Highly Visible */}
+        <Link 
+          to="/" 
+          style={{ 
+            display: 'flex', 
+            alignItems: 'center',
+            textDecoration: 'none'
+          }}
+        >
           <img 
             src={logoImg} 
-            alt="Viyona Designs" 
+            alt="Viyona Designs — Thoughtfully Designed. Perfectly Made." 
             style={{ 
-              height: '52px', 
+              height: '78px', 
+              width: 'auto',
               objectFit: 'contain',
-              transition: 'transform var(--transition-base)'
+              display: 'block',
+              transition: 'transform var(--transition-base)',
+              filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.04))'
             }} 
-            onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
+            onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.03)'}
             onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
           />
         </Link>
@@ -55,8 +65,8 @@ function Navbar() {
           <Link 
             to="/" 
             style={{ 
-              fontSize: '0.92rem',
-              fontWeight: '500', 
+              fontSize: '0.95rem',
+              fontWeight: location.pathname === '/' ? '700' : '500', 
               color: location.pathname === '/' ? 'var(--text-primary)' : 'var(--text-secondary)',
               letterSpacing: '0.01em',
               transition: 'color var(--transition-fast)'
@@ -68,7 +78,7 @@ function Navbar() {
             href="#collection" 
             onClick={handleShopClick} 
             style={{ 
-              fontSize: '0.92rem',
+              fontSize: '0.95rem',
               fontWeight: '500', 
               color: 'var(--text-secondary)',
               letterSpacing: '0.01em',
@@ -81,7 +91,7 @@ function Navbar() {
             href="#craft" 
             onClick={handleStoryClick} 
             style={{ 
-              fontSize: '0.92rem',
+              fontSize: '0.95rem',
               fontWeight: '500', 
               color: 'var(--text-secondary)',
               letterSpacing: '0.01em',
@@ -93,8 +103,8 @@ function Navbar() {
           <Link 
             to="/about" 
             style={{ 
-              fontSize: '0.92rem',
-              fontWeight: '500', 
+              fontSize: '0.95rem',
+              fontWeight: location.pathname === '/about' ? '700' : '500', 
               color: location.pathname === '/about' ? 'var(--text-primary)' : 'var(--text-secondary)',
               letterSpacing: '0.01em'
             }}
@@ -110,8 +120,8 @@ function Navbar() {
             onClick={handleShopClick}
             className="btn btn-primary"
             style={{ 
-              padding: '0.65rem 1.4rem', 
-              fontSize: '0.85rem' 
+              padding: '0.7rem 1.5rem', 
+              fontSize: '0.88rem' 
             }}
           >
             Explore Studio

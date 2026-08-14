@@ -93,13 +93,6 @@ function ProductDetail() {
               justifyContent: 'center',
               position: 'relative'
             }}>
-              {product.badge && (
-                <div style={{ position: 'absolute', top: '1.25rem', left: '1.25rem', zIndex: 2 }}>
-                  <span className={`badge ${product.badgeColor === 'gold' ? 'badge-gold' : 'badge-sage'}`}>
-                    {product.badge}
-                  </span>
-                </div>
-              )}
               <img 
                 src={mainImage} 
                 alt={product.name} 
@@ -150,14 +143,14 @@ function ProductDetail() {
           {/* Right Column: Product Narrative, Specs, CTA */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.6rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.6rem', flexWrap: 'wrap' }}>
                 <span style={{ fontSize: '0.82rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--accent-gold)' }}>
                   {product.category}
                 </span>
                 <span style={{ color: 'var(--border-subtle)' }}>•</span>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.85rem', fontWeight: '600', color: '#B88E52' }}>
-                  <span>★</span> {product.rating} <span style={{ color: 'var(--text-muted)', fontWeight: '400' }}>({product.reviewsCount} verified reviews)</span>
-                </div>
+                <span style={{ fontSize: '0.8rem', fontWeight: '600', color: 'var(--accent-sage)', backgroundColor: 'var(--accent-sage-light)', padding: '0.15rem 0.6rem', borderRadius: 'var(--radius-full)' }}>
+                  100% Plant-Based Bio-Plastic
+                </span>
               </div>
 
               <h1 style={{ 
@@ -205,16 +198,16 @@ function ProductDetail() {
                     )}
                   </div>
                   <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                    Inclusive of all taxes & doorstep delivery
+                    Amazon India Selling Price (M.R.P. {product.mrp})
                   </span>
                 </div>
 
                 <div style={{ textAlign: 'right' }}>
                   <div style={{ fontSize: '0.85rem', fontWeight: '700', color: '#16A34A', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                    <span>●</span> In Stock & Ready to Ship
+                    <span>●</span> Live on Amazon India
                   </div>
                   <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                    Fulfilled via Amazon Prime
+                    Fast Prime Delivery
                   </span>
                 </div>
               </div>
@@ -237,22 +230,22 @@ function ProductDetail() {
                   gap: '0.75rem'
                 }}
               >
-                <span>🛒</span> Order Directly on Amazon India ↗
+                <span>🛒</span> Buy on Amazon India ↗
               </a>
 
               {/* Guaranteed Trust Badges */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem', textAlign: 'center', marginBottom: '2rem' }}>
                 <div style={{ padding: '0.75rem', backgroundColor: 'var(--bg-subtle)', borderRadius: 'var(--radius-xs)' }}>
                   <div style={{ fontSize: '1.1rem', marginBottom: '0.2rem' }}>📦</div>
-                  <div style={{ fontSize: '0.75rem', fontWeight: '600' }}>Safe Box Packaging</div>
+                  <div style={{ fontSize: '0.75rem', fontWeight: '600' }}>5×5×5" Box Packaging</div>
                 </div>
                 <div style={{ padding: '0.75rem', backgroundColor: 'var(--bg-subtle)', borderRadius: 'var(--radius-xs)' }}>
                   <div style={{ fontSize: '1.1rem', marginBottom: '0.2rem' }}>🌱</div>
                   <div style={{ fontSize: '0.75rem', fontWeight: '600' }}>100% Bio-Plastic</div>
                 </div>
                 <div style={{ padding: '0.75rem', backgroundColor: 'var(--bg-subtle)', borderRadius: 'var(--radius-xs)' }}>
-                  <div style={{ fontSize: '1.1rem', marginBottom: '0.2rem' }}>⚡</div>
-                  <div style={{ fontSize: '0.75rem', fontWeight: '600' }}>Fast Prime Dispatch</div>
+                  <div style={{ fontSize: '1.1rem', marginBottom: '0.2rem' }}>🇮🇳</div>
+                  <div style={{ fontSize: '0.75rem', fontWeight: '600' }}>Made in India</div>
                 </div>
               </div>
             </div>

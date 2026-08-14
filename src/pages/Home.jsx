@@ -23,9 +23,9 @@ function Home() {
             {/* Left Content */}
             <div className="fade-in" style={{ maxWidth: '580px' }}>
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem' }}>
-                <span className="badge badge-gold">New Studio Release</span>
+                <span className="badge badge-gold">Design Studio</span>
                 <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: '500' }}>
-                  Handcrafted Precision 3D Objects
+                  Precision-Engineered 3D Objects
                 </span>
               </div>
 
@@ -73,7 +73,7 @@ function Home() {
                 </Link>
               </div>
 
-              {/* Verified Trust Metrics */}
+              {/* Verified Authentic Facts */}
               <div style={{ 
                 display: 'flex', 
                 gap: '2rem', 
@@ -82,27 +82,27 @@ function Home() {
                 borderTop: '1px solid var(--border-subtle)'
               }}>
                 <div>
-                  <div style={{ fontSize: '1.4rem', fontWeight: '700', color: 'var(--text-primary)', fontFamily: 'var(--font-serif)' }}>
-                    100%
+                  <div style={{ fontSize: '1.35rem', fontWeight: '700', color: 'var(--text-primary)', fontFamily: 'var(--font-serif)' }}>
+                    100% Bio-Plastic
                   </div>
                   <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '500' }}>
-                    Plant-Based Bio-Plastic
+                    Plant-Based Material
                   </div>
                 </div>
                 <div>
-                  <div style={{ fontSize: '1.4rem', fontWeight: '700', color: 'var(--text-primary)', fontFamily: 'var(--font-serif)' }}>
-                    ★ 4.9 / 5.0
+                  <div style={{ fontSize: '1.35rem', fontWeight: '700', color: 'var(--text-primary)', fontFamily: 'var(--font-serif)' }}>
+                    Zero-Waste
                   </div>
                   <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '500' }}>
-                    Verified Amazon Rating
+                    Additive Precision
                   </div>
                 </div>
                 <div>
-                  <div style={{ fontSize: '1.4rem', fontWeight: '700', color: 'var(--text-primary)', fontFamily: 'var(--font-serif)' }}>
+                  <div style={{ fontSize: '1.35rem', fontWeight: '700', color: 'var(--text-primary)', fontFamily: 'var(--font-serif)' }}>
                     Made in India
                   </div>
                   <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '500' }}>
-                    Precision Engineered
+                    Designed & Crafted
                   </div>
                 </div>
               </div>
@@ -136,7 +136,7 @@ function Home() {
                   left: '1.5rem',
                   right: '1.5rem',
                   padding: '1.25rem 1.5rem',
-                  background: 'rgba(255, 255, 255, 0.92)',
+                  background: 'rgba(255, 255, 255, 0.94)',
                   backdropFilter: 'blur(16px)',
                   borderRadius: 'var(--radius-md)',
                   border: '1px solid rgba(255, 255, 255, 0.8)',
@@ -147,7 +147,7 @@ function Home() {
                 }}>
                   <div>
                     <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--accent-gold)' }}>
-                      Featured Masterpiece
+                      Contemporary Vinayaka
                     </span>
                     <h3 style={{ fontSize: '1.15rem', fontWeight: '600', color: 'var(--text-primary)', marginTop: '0.15rem' }}>
                       Lord Ganesha Minimalist Murti
@@ -172,7 +172,7 @@ function Home() {
         <div className="container" style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', gap: '1.5rem' }}>
           <div className="trust-item">
             <span style={{ fontSize: '1.2rem' }}>🌱</span>
-            <span>100% Biodegradable Bio-Polymer</span>
+            <span>100% Plant-Based Bio-Plastic</span>
           </div>
           <div className="trust-item">
             <span style={{ fontSize: '1.2rem' }}>📐</span>
@@ -183,8 +183,8 @@ function Home() {
             <span>Designed & Made in India</span>
           </div>
           <div className="trust-item">
-            <span style={{ fontSize: '1.2rem' }}>⚡</span>
-            <span>Amazon Prime Fast Dispatch</span>
+            <span style={{ fontSize: '1.2rem' }}>📦</span>
+            <span>Secure Gift-Ready Packaging</span>
           </div>
         </div>
       </section>
@@ -194,7 +194,7 @@ function Home() {
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 4rem' }}>
             <span className="badge badge-gold" style={{ marginBottom: '0.75rem' }}>
-              The Studio Showcase
+              The Studio Collection
             </span>
             <h2 style={{ fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', fontWeight: '600', marginBottom: '1rem' }}>
               Distinct Objects of Daily Joy
@@ -220,15 +220,6 @@ function Home() {
                   position: 'relative'
                 }}
               >
-                {/* Product Badge */}
-                {product.badge && (
-                  <div style={{ position: 'absolute', top: '1.25rem', left: '1.25rem', zIndex: 2 }}>
-                    <span className={`badge ${product.badgeColor === 'gold' ? 'badge-gold' : 'badge-sage'}`}>
-                      {product.badge}
-                    </span>
-                  </div>
-                )}
-
                 {/* Main Product Image Container */}
                 <Link 
                   to={`/product/${product.id}`} 
@@ -257,12 +248,12 @@ function Home() {
                 {/* Product Info Body */}
                 <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                    <span style={{ fontSize: '0.8rem', fontWeight: '600', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    <span style={{ fontSize: '0.8rem', fontWeight: '600', color: 'var(--accent-gold)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                       {product.category}
                     </span>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.85rem', fontWeight: '600', color: '#B88E52' }}>
-                      <span>★</span> {product.rating} <span style={{ color: 'var(--text-muted)', fontWeight: '400' }}>({product.reviewsCount})</span>
-                    </div>
+                    <span style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--accent-sage)', backgroundColor: 'var(--accent-sage-light)', padding: '0.15rem 0.5rem', borderRadius: 'var(--radius-full)' }}>
+                      100% Bio-Plastic
+                    </span>
                   </div>
 
                   <Link to={`/product/${product.id}`}>
@@ -464,7 +455,7 @@ function Home() {
                 <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>🎁</div>
                 <h4 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#fff', marginBottom: '0.5rem' }}>Gift Ready</h4>
                 <p style={{ fontSize: '0.85rem', color: 'var(--text-inverse-muted)', lineHeight: 1.5 }}>
-                  Packed in premium 5×5×5 inch gift-grade cartons ready for housewarmings and festivals.
+                  Packed in standard 5×5×5 inch gift-grade cartons ready for housewarmings and festivals.
                 </p>
               </div>
             </div>
@@ -480,13 +471,13 @@ function Home() {
       }}>
         <div className="container" style={{ maxWidth: '750px' }}>
           <span className="badge badge-gold" style={{ marginBottom: '1rem' }}>
-            Direct Amazon India Store
+            Official Amazon India Listings
           </span>
           <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', fontWeight: '600', marginBottom: '1rem' }}>
             Elevate Your Space with Viyona Today
           </h2>
           <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', marginBottom: '2.5rem', lineHeight: 1.6 }}>
-            Enjoy the peace of mind of 100% genuine products, Prime express delivery, and easy Amazon returns.
+            Browse our catalog, order with Amazon India fulfillment, and experience plant-based precision craftsmanship in your own home.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a 
