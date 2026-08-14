@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import logoImg from '../assets/logo.png';
 
 function Footer() {
   return (
@@ -19,19 +18,51 @@ function Footer() {
           borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
         }}>
           {/* Brand Manifesto Column */}
-          <div style={{ maxWidth: '360px' }}>
-            <img 
-              src={logoImg} 
-              alt="Viyona Designs" 
-              style={{ 
-                height: '76px', 
-                width: 'auto',
-                marginBottom: '1.25rem', 
-                objectFit: 'contain',
-                filter: 'brightness(0) invert(1)',
-                display: 'block'
-              }} 
-            />
+          <div style={{ maxWidth: '380px' }}>
+            <Link to="/" style={{ display: 'inline-block', marginBottom: '1.25rem', textDecoration: 'none' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                <div style={{
+                  width: '44px',
+                  height: '44px',
+                  borderRadius: '10px',
+                  background: 'linear-gradient(135deg, #D4AF37 0%, #AA771C 100%)',
+                  color: '#121211',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontFamily: 'var(--font-sans)',
+                  fontWeight: '900',
+                  fontSize: '1.25rem',
+                  letterSpacing: '-0.5px',
+                  boxShadow: '0 4px 12px rgba(212, 175, 55, 0.3)'
+                }}>
+                  VD
+                </div>
+                <div>
+                  <div style={{ 
+                    fontFamily: 'var(--font-serif)', 
+                    fontSize: '1.75rem', 
+                    fontWeight: '700', 
+                    letterSpacing: '0.04em', 
+                    color: '#FFFFFF',
+                    lineHeight: 1
+                  }}>
+                    VIYONA DESIGNS
+                  </div>
+                  <div style={{ 
+                    fontSize: '0.72rem', 
+                    letterSpacing: '0.16em', 
+                    textTransform: 'uppercase', 
+                    color: '#D4AF37',
+                    marginTop: '0.25rem',
+                    fontWeight: '600'
+                  }}>
+                    Thoughtfully Designed • Made in India
+                  </div>
+                </div>
+              </div>
+            </Link>
+
             <p style={{ 
               color: 'var(--text-inverse-muted)', 
               fontSize: '0.92rem', 
