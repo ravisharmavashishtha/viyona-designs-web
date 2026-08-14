@@ -13,10 +13,25 @@ function ProductDetail() {
     window.scrollTo(0, 0);
     if (product) {
       setMainImage(product.images[0]);
-      document.title = `${product.displayName || product.name} | Viyona Designs`;
+      
+      // Dynamic SEO Title & Meta Updates
+      const pageTitle = `${product.displayName || product.name} — ${product.price} | Viyona Designs`;
+      document.title = pageTitle;
+
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', product.description.slice(0, 160) + '...');
+
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle) ogTitle.setAttribute('content', pageTitle);
+
+      const ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogDesc) ogDesc.setAttribute('content', product.shortDesc);
+
+      const ogImg = document.querySelector('meta[property="og:image"]');
+      if (ogImg) ogImg.setAttribute('content', `${window.location.origin}${product.lifestyleImage || product.images[0]}`);
     }
     return () => {
-      document.title = 'Viyona Designs | Distinct, High-Precision Design Goods';
+      document.title = 'Viyona Designs — Thoughtfully Designed. Perfectly Made. | Modern Eco-Friendly Decor & Studio Objects';
     };
   }, [id, product]);
 
@@ -34,10 +49,28 @@ function ProductDetail() {
 
   const otherProducts = products.filter(p => p.id !== product.id);
   const currentUrl = window.location.href;
-  const shareText = `Discover ${product.name} on Viyona Designs: ${product.shortDesc}`;
+  const shareTitle = `${product.displayName || product.name} by Viyona Designs`;
+  const shareText = `✨ Discover the ${product.displayName || product.name} by Viyona Designs!\n🌱 100% Plant-Based Bio-Plastic | Made in India\n💰 Selling Price: ${product.price} (M.R.P. ${product.mrp})\n\n`;
+
+  // Native Mobile Web Share API
+  const handleNativeShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: shareTitle,
+          text: `${shareTitle} — ${product.shortDesc}`,
+          url: currentUrl,
+        });
+      } catch {
+        // user cancelled or share failed
+      }
+    } else {
+      handleCopyLink();
+    }
+  };
 
   const shareOnWhatsApp = () => {
-    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareText}\n${currentUrl}`)}`, '_blank');
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareText}${currentUrl}`)}`, '_blank');
   };
 
   const shareOnFacebook = () => {
@@ -50,7 +83,8 @@ function ProductDetail() {
   };
 
   const shareOnX = () => {
-    window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(shareText)}`, '_blank');
+    const tweetText = `${shareTitle} — ${product.shortDesc} #HomeDecor #EcoFriendly #ViyonaDesigns #MadeInIndia`;
+    window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(tweetText)}`, '_blank');
   };
 
   const handleCopyLink = () => {
@@ -60,16 +94,16 @@ function ProductDetail() {
   };
 
   return (
-    <div style={{ padding: 'clamp(2rem, 4vw, 3.5rem) 0 6rem', backgroundColor: 'var(--bg-primary)', width: '100%' }}>
+    <article style={{ padding: 'clamp(2rem, 4vw, 3.5rem) 0 6rem', backgroundColor: 'var(--bg-primary)', width: '100%' }}>
       <div className="container">
         {/* Navigation Breadcrumb */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '2rem', fontSize: '0.9rem', color: 'var(--text-muted)', flexWrap: 'wrap' }}>
+        <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '2rem', fontSize: '0.9rem', color: 'var(--text-muted)', flexWrap: 'wrap' }}>
           <Link to="/" style={{ color: 'var(--text-secondary)' }}>Studio</Link>
           <span>/</span>
           <span>{product.category}</span>
           <span>/</span>
           <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>{product.displayName || product.name}</span>
-        </div>
+        </nav>
 
         {/* Main Product Showcase Grid - Full Width Responsive */}
         <div style={{ 
@@ -80,7 +114,7 @@ function ProductDetail() {
           width: '100%'
         }}>
           {/* Left Column: Interactive Image Gallery */}
-          <div style={{ position: 'sticky', top: '100px', width: '100%' }}>
+          <section aria-label="Product Gallery" style={{ position: 'sticky', top: '100px', width: '100%' }}>
             <div style={{ 
               backgroundColor: '#FFFFFF', 
               borderRadius: 'var(--radius-lg)', 
@@ -97,7 +131,7 @@ function ProductDetail() {
             }}>
               <img 
                 src={mainImage} 
-                alt={product.name} 
+                alt={`${product.name} - Official studio high-resolution photograph`} 
                 style={{ 
                   width: '100%', 
                   height: '100%', 
@@ -119,6 +153,7 @@ function ProductDetail() {
                 <button
                   key={idx}
                   onClick={() => setMainImage(img)}
+                  aria-label={`View ${product.name} angle ${idx + 1}`}
                   style={{
                     width: 'clamp(70px, 12vw, 84px)',
                     height: 'clamp(70px, 12vw, 84px)',
@@ -135,16 +170,16 @@ function ProductDetail() {
                 >
                   <img 
                     src={img} 
-                    alt={`${product.name} preview ${idx + 1}`} 
+                    alt={`${product.name} perspective ${idx + 1}`} 
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
                   />
                 </button>
               ))}
             </div>
-          </div>
+          </section>
 
           {/* Right Column: Product Narrative, Specs, CTA */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '100%' }}>
+          <section aria-label="Product Information" style={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '100%' }}>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.6rem', flexWrap: 'wrap' }}>
                 <span style={{ fontSize: '0.85rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--accent-gold)' }}>
@@ -212,7 +247,7 @@ function ProductDetail() {
                     <span>●</span> Live on Amazon India
                   </div>
                   <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                    Fast Prime Delivery
+                    Fast Prime Delivery Available
                   </span>
                 </div>
               </div>
@@ -257,9 +292,9 @@ function ProductDetail() {
 
             {/* Description Body */}
             <div>
-              <h3 style={{ fontSize: '1.45rem', fontWeight: '600', marginBottom: '0.85rem' }}>
+              <h2 style={{ fontSize: '1.45rem', fontWeight: '600', marginBottom: '0.85rem' }}>
                 The Story Behind the Design
-              </h3>
+              </h2>
               <p style={{ fontSize: '1.05rem', lineHeight: 1.75, color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
                 {product.description}
               </p>
@@ -336,21 +371,46 @@ function ProductDetail() {
               </div>
             </div>
 
-            {/* Social Share Bar */}
+            {/* Social Share Bar with Native Share & Channel Buttons */}
             <div style={{ 
-              padding: '1.25rem 1.5rem', 
+              padding: '1.35rem 1.5rem', 
               backgroundColor: '#FFFFFF', 
               borderRadius: 'var(--radius-md)', 
-              border: '1px solid var(--border-subtle)' 
+              border: '1px solid var(--border-subtle)',
+              boxShadow: 'var(--shadow-sm)'
             }}>
-              <div style={{ fontSize: '0.82rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-secondary)', marginBottom: '0.85rem' }}>
-                Share with Friends & Family:
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                <span style={{ fontSize: '0.85rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-primary)' }}>
+                  Share with Friends & Family:
+                </span>
+                {typeof navigator !== 'undefined' && navigator.share && (
+                  <button 
+                    onClick={handleNativeShare}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.35rem',
+                      padding: '0.35rem 0.75rem',
+                      backgroundColor: 'var(--accent-gold-light)',
+                      color: 'var(--accent-gold-dark)',
+                      border: '1px solid var(--accent-gold-border)',
+                      borderRadius: 'var(--radius-full)',
+                      fontSize: '0.78rem',
+                      fontWeight: '700',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    <span>📤</span> Share Sheet
+                  </button>
+                )}
               </div>
+              
               <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', alignItems: 'center' }}>
                 <button 
                   onClick={shareOnWhatsApp} 
+                  aria-label="Share product on WhatsApp"
                   style={{ 
-                    padding: '0.55rem 1rem', 
+                    padding: '0.6rem 1.1rem', 
                     backgroundColor: '#25D366', 
                     color: 'white', 
                     border: 'none', 
@@ -360,7 +420,7 @@ function ProductDetail() {
                     fontWeight: '600', 
                     display: 'flex', 
                     alignItems: 'center', 
-                    gap: '0.4rem',
+                    gap: '0.45rem',
                     width: 'auto'
                   }}
                 >
@@ -368,8 +428,9 @@ function ProductDetail() {
                 </button>
                 <button 
                   onClick={shareOnFacebook} 
+                  aria-label="Share product on Facebook"
                   style={{ 
-                    padding: '0.55rem 1rem', 
+                    padding: '0.6rem 1.1rem', 
                     backgroundColor: '#1877F2', 
                     color: 'white', 
                     border: 'none', 
@@ -379,7 +440,7 @@ function ProductDetail() {
                     fontWeight: '600', 
                     display: 'flex', 
                     alignItems: 'center', 
-                    gap: '0.4rem',
+                    gap: '0.45rem',
                     width: 'auto'
                   }}
                 >
@@ -387,8 +448,9 @@ function ProductDetail() {
                 </button>
                 <button 
                   onClick={shareOnPinterest} 
+                  aria-label="Pin product on Pinterest"
                   style={{ 
-                    padding: '0.55rem 1rem', 
+                    padding: '0.6rem 1.1rem', 
                     backgroundColor: '#E60023', 
                     color: 'white', 
                     border: 'none', 
@@ -398,7 +460,7 @@ function ProductDetail() {
                     fontWeight: '600', 
                     display: 'flex', 
                     alignItems: 'center', 
-                    gap: '0.4rem',
+                    gap: '0.45rem',
                     width: 'auto'
                   }}
                 >
@@ -406,8 +468,9 @@ function ProductDetail() {
                 </button>
                 <button 
                   onClick={shareOnX} 
+                  aria-label="Post product on X"
                   style={{ 
-                    padding: '0.55rem 1rem', 
+                    padding: '0.6rem 1.1rem', 
                     backgroundColor: '#000000', 
                     color: 'white', 
                     border: 'none', 
@@ -417,7 +480,7 @@ function ProductDetail() {
                     fontWeight: '600', 
                     display: 'flex', 
                     alignItems: 'center', 
-                    gap: '0.4rem',
+                    gap: '0.45rem',
                     width: 'auto'
                   }}
                 >
@@ -425,8 +488,9 @@ function ProductDetail() {
                 </button>
                 <button 
                   onClick={handleCopyLink} 
+                  aria-label="Copy product URL to clipboard"
                   style={{ 
-                    padding: '0.55rem 1rem', 
+                    padding: '0.6rem 1.1rem', 
                     backgroundColor: copied ? '#10B981' : 'var(--bg-subtle)', 
                     color: copied ? 'white' : 'var(--text-primary)', 
                     border: '1px solid var(--border-subtle)', 
@@ -442,7 +506,7 @@ function ProductDetail() {
                 </button>
               </div>
             </div>
-          </div>
+          </section>
         </div>
 
         {/* Explore Other Creations */}
@@ -481,7 +545,7 @@ function ProductDetail() {
           </div>
         )}
       </div>
-    </div>
+    </article>
   );
 }
 
