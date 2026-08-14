@@ -100,13 +100,32 @@ Products are centrally defined in `src/data/products.js`. Both `Home.jsx` and `P
 
 ---
 
-## 🤖 5. Handoff Instructions for AI Assistants
+## 🤖 5. Handoff Instructions for AI Assistants & Development Rules
 
-When taking over tasks for Viyona Designs:
+### 🛡️ Core Git & Deployment Protocol (MANDATORY FOR ALL AI AGENTS)
+1. **Feature Branch Isolation**: 
+   - NEVER make direct changes or commit directly onto `master` for feature work.
+   - Always create a new branch with a descriptive name before writing code: `git checkout -b feat/<feature-name>` (or `fix/<fix-name>`).
+2. **Pull Request Workflow**:
+   - All changes made in feature branches must be committed with clear messages.
+   - Push the branch and create a Pull Request (PR) targeted at `master`.
+   - Merge into `master` only after verification and user review.
+3. **Production Deployment Standard**:
+   - **Deployments ONLY from `master`**: Never run `npm run deploy` from a feature branch or with uncommitted/dirty working files.
+   - Switch to `master`, ensure working tree is 100% clean (`git status`), pull latest (`git pull origin master`), and only then run `npm run deploy`.
+4. **Local Verification**:
+   - Always test changes locally on `npm run dev` in the feature branch before creating a PR or requesting a merge.
+
+---
+
+## 📝 6. Standard Procedures
+
 1. **Adding a New Product:**
+   - Create a feature branch: `git checkout -b feat/add-<product-id>`.
    - Add product object to `src/data/products.js` with `id`, `name`, `shortDesc`, `description`, `bullets`, `amazonLink`, `images`, and `specs`.
    - Place white-background images in `public/images/`.
-   - Run `npm run deploy` to publish changes to GitHub Pages.
+   - Commit all changes, merge into `master`, and deploy from `master`.
 2. **Amazon Content Writing:**
    - Avoid mentioning "3D printed" in titles/bullets; emphasize **"Plant-based Biodegradable Bio-Plastic"** and **"Eco-Friendly Precision Engineering"**.
    - Standard main image requirement: Pure white background `#FFFFFF` (RGB 255, 255, 255) with zero borders or text.
+
