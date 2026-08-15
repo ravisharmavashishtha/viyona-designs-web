@@ -119,12 +119,12 @@ function Contact() {
                 borderRadius: 'var(--radius-lg)',
                 border: '1px solid var(--border-subtle)'
               }}>
-                <span className="badge badge-gold" style={{ marginBottom: '0.75rem' }}>Amazon Prime Orders</span>
+                <span className="badge badge-gold" style={{ marginBottom: '0.75rem' }}>Amazon India Orders</span>
                 <h4 style={{ fontSize: '1.15rem', fontWeight: '600', marginBottom: '0.5rem' }}>
                   Ordered via Amazon India?
                 </h4>
                 <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '1rem' }}>
-                  For real-time delivery tracking, 1-day Prime shipping updates, or Amazon return requests, you can manage your order directly on your Amazon account.
+                  For live parcel tracking, delivery updates, or Amazon return requests, you can manage your order directly on your Amazon account.
                 </p>
                 <a 
                   href="https://www.amazon.in/gp/css/order-history" 

@@ -70,22 +70,14 @@ function ShippingPolicy() {
 
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
                 gap: '1rem'
               }}>
                 <div style={{ padding: '1.25rem', backgroundColor: '#FAF9F5', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)' }}>
-                  <div style={{ fontSize: '1.4rem', marginBottom: '0.5rem' }}>⚡</div>
-                  <h4 style={{ fontSize: '1.05rem', fontWeight: '600', marginBottom: '0.35rem' }}>Amazon Prime</h4>
-                  <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: 0 }}>
-                    <strong>1 – 2 Business Days</strong> for Prime eligible pincodes across major Indian metros.
-                  </p>
-                </div>
-
-                <div style={{ padding: '1.25rem', backgroundColor: '#FAF9F5', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '1.4rem', marginBottom: '0.5rem' }}>🏙️</div>
-                  <h4 style={{ fontSize: '1.05rem', fontWeight: '600', marginBottom: '0.35rem' }}>Metro Cities (Standard)</h4>
+                  <h4 style={{ fontSize: '1.05rem', fontWeight: '600', marginBottom: '0.35rem' }}>Metro Cities (Express Transit)</h4>
                   <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: 0 }}>
-                    <strong>3 – 5 Business Days</strong> (Delhi NCR, Mumbai, Bengaluru, Hyderabad, Chennai, Kolkata, Pune).
+                    <strong>3 – 5 Business Days</strong> across Delhi NCR, Mumbai, Bengaluru, Hyderabad, Chennai, Kolkata, Pune, and Ahmedabad.
                   </p>
                 </div>
 
@@ -93,7 +85,7 @@ function ShippingPolicy() {
                   <div style={{ fontSize: '1.4rem', marginBottom: '0.5rem' }}>🗺️</div>
                   <h4 style={{ fontSize: '1.05rem', fontWeight: '600', marginBottom: '0.35rem' }}>Rest of India</h4>
                   <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: 0 }}>
-                    <strong>5 – 7 Business Days</strong> for Tier 2, Tier 3 cities, and regional destinations.
+                    <strong>5 – 7 Business Days</strong> for Tier 2, Tier 3 cities, and all regional serviceable pincodes.
                   </p>
                 </div>
               </div>
@@ -105,7 +97,7 @@ function ShippingPolicy() {
                 3. Shipping Charges & Free Delivery
               </h2>
               <ul style={{ paddingLeft: '1.25rem', color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '0.98rem' }}>
-                <li><strong>Amazon India Orders:</strong> Free standard and 1-Day Prime shipping available as per Amazon India Prime membership guidelines.</li>
+                <li><strong>Amazon India Orders:</strong> Shipping and delivery rates apply as per standard Amazon India fulfillment rates at checkout.</li>
                 <li><strong>Direct Website Orders:</strong> Standard nominal delivery fee of ₹49 applicable for orders below ₹499. Orders of ₹499 and above qualify for <strong>100% Free Shipping</strong>.</li>
               </ul>
             </div>

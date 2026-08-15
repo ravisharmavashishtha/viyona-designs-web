@@ -49,7 +49,7 @@ function RefundPolicy() {
             gap: '2.5rem'
           }}>
 
-            {/* 1. 7-Day Replacement Guarantee */}
+            {/* 1. 10-Day Replacement Guarantee */}
             <div>
               <div style={{
                 display: 'inline-flex',
@@ -63,13 +63,13 @@ function RefundPolicy() {
                 fontWeight: '700',
                 marginBottom: '0.75rem'
               }}>
-                <span>🛡️</span> 7-Day Replacement Window
+                <span>🛡️</span> 10-Day Replacement & Return Window
               </div>
               <h2 style={{ fontSize: '1.5rem', fontWeight: '600', marginBottom: '0.85rem', color: 'var(--text-primary)' }}>
-                1. 7-Day Hassle-Free Replacement Guarantee
+                1. 10-Day Hassle-Free Replacement & Return Guarantee
               </h2>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.75, fontSize: '0.98rem' }}>
-                If your product arrives damaged in transit, with a manufacturing defect, or if the wrong item is delivered, we provide an <strong>immediate, zero-cost replacement</strong> within 7 days of delivery.
+                If your product arrives damaged in transit, with a manufacturing defect, or if the wrong item is delivered, we provide an <strong>immediate, zero-cost replacement or return</strong> within 10 days of delivery.
               </p>
             </div>
 
@@ -84,7 +84,7 @@ function RefundPolicy() {
                   <div>
                     <h4 style={{ fontSize: '1rem', fontWeight: '600', marginBottom: '0.25rem' }}>Send Us an Email or Message</h4>
                     <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: 0 }}>
-                      Email <a href="mailto:support@viyonadesigns.com" style={{ color: 'var(--accent-gold)' }}>support@viyonadesigns.com</a> or use our <Link to="/contact" style={{ color: 'var(--accent-gold)' }}>Contact Form</Link> within 7 days of receiving the package.
+                      Email <a href="mailto:support@viyonadesigns.com" style={{ color: 'var(--accent-gold)' }}>support@viyonadesigns.com</a> or use our <Link to="/contact" style={{ color: 'var(--accent-gold)' }}>Contact Form</Link> within 10 days of receiving the package.
                     </p>
                   </div>
                 </div>
@@ -131,7 +131,7 @@ function RefundPolicy() {
                 4. Order Cancellation Policy
               </h2>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.75, fontSize: '0.98rem' }}>
-                You can cancel your order at any time before it has been dispatched from our facility for a 100% full refund. Once the package has been handed over to our courier partner, it cannot be intercepted in transit, but can be replaced or returned upon delivery as per our 7-day policy.
+                You can cancel your order at any time before it has been dispatched from our facility for a 100% full refund. Once the package has been handed over to our courier partner, it cannot be intercepted in transit, but can be replaced or returned upon delivery as per our 10-day policy.
               </p>
             </div>
 

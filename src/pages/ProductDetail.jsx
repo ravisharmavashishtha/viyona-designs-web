@@ -348,7 +348,7 @@ function ProductDetail() {
                     <span>●</span> In Stock
                   </div>
                   <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                    Amazon Prime Delivery
+                    Fast Pan-India Delivery
                   </span>
                 </div>
               </div>
@@ -652,7 +652,7 @@ function ProductDetail() {
             {product.price}
           </div>
           <div style={{ fontSize: '0.72rem', color: '#16A34A', fontWeight: '700' }}>
-            Prime Delivery Available
+            Fast Pan-India Delivery
           </div>
         </div>
 
