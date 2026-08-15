@@ -7,6 +7,7 @@ function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -18,6 +19,7 @@ function Navbar() {
     };
   }, [mobileMenuOpen]);
 
+  // Close drawer on route change
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
@@ -31,7 +33,7 @@ function Navbar() {
       navigate('/');
       setTimeout(() => {
         document.getElementById('collection')?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
+      }, 150);
     }
   };
 
@@ -41,7 +43,10 @@ function Navbar() {
     if (location.pathname === '/') {
       document.getElementById('craft')?.scrollIntoView({ behavior: 'smooth' });
     } else {
-      navigate('/about');
+      navigate('/');
+      setTimeout(() => {
+        document.getElementById('craft')?.scrollIntoView({ behavior: 'smooth' });
+      }, 150);
     }
   };
 
@@ -217,7 +222,7 @@ function Navbar() {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Drawer Header */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.75rem', paddingBottom: '1rem', borderBottom: '1px solid var(--border-subtle)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', paddingBottom: '1rem', borderBottom: '1px solid var(--border-subtle)' }}>
               <Link to="/" onClick={() => setMobileMenuOpen(false)}>
                 <img 
                   src={logoImg} 
@@ -232,13 +237,14 @@ function Navbar() {
                   background: 'var(--bg-subtle)',
                   border: 'none',
                   borderRadius: '50%',
-                  width: '36px',
-                  height: '36px',
+                  width: '40px',
+                  height: '40px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  color: 'var(--text-primary)'
+                  color: 'var(--text-primary)',
+                  fontSize: '1.2rem'
                 }}
               >
                 ✕
@@ -246,7 +252,7 @@ function Navbar() {
             </div>
 
             {/* Nav Items */}
-            <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: 'auto' }}>
+            <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginBottom: 'auto' }}>
               <Link 
                 to="/" 
                 onClick={() => setMobileMenuOpen(false)}
@@ -259,7 +265,8 @@ function Navbar() {
                   fontSize: '1.05rem',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between'
+                  justifyContent: 'space-between',
+                  minHeight: '48px'
                 }}
               >
                 <span>🏠 Home</span>
@@ -277,7 +284,8 @@ function Navbar() {
                   fontSize: '1.05rem',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between'
+                  justifyContent: 'space-between',
+                  minHeight: '48px'
                 }}
               >
                 <span>🏺 The Collection</span>
@@ -295,7 +303,8 @@ function Navbar() {
                   fontSize: '1.05rem',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between'
+                  justifyContent: 'space-between',
+                  minHeight: '48px'
                 }}
               >
                 <span>🌿 Our Craft & Values</span>
@@ -314,7 +323,8 @@ function Navbar() {
                   fontSize: '1.05rem',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between'
+                  justifyContent: 'space-between',
+                  minHeight: '48px'
                 }}
               >
                 <span>📖 About Us & Story</span>
@@ -333,7 +343,8 @@ function Navbar() {
                   fontSize: '1.05rem',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between'
+                  justifyContent: 'space-between',
+                  minHeight: '48px'
                 }}
               >
                 <span>✉️ Contact & Support</span>
@@ -341,8 +352,35 @@ function Navbar() {
               </Link>
             </nav>
 
+            {/* Quick Policies Strip in Drawer */}
+            <div style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '0.6rem 1rem',
+              padding: '1rem 0.5rem',
+              marginTop: '1.25rem',
+              borderTop: '1px solid var(--border-subtle)',
+              fontSize: '0.82rem'
+            }}>
+              <Link to="/shipping-policy" onClick={() => setMobileMenuOpen(false)} style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>
+                Shipping Policy
+              </Link>
+              <span style={{ color: 'var(--text-muted)' }}>•</span>
+              <Link to="/refund-policy" onClick={() => setMobileMenuOpen(false)} style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>
+                Return Policy
+              </Link>
+              <span style={{ color: 'var(--text-muted)' }}>•</span>
+              <Link to="/privacy-policy" onClick={() => setMobileMenuOpen(false)} style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>
+                Privacy
+              </Link>
+              <span style={{ color: 'var(--text-muted)' }}>•</span>
+              <Link to="/terms" onClick={() => setMobileMenuOpen(false)} style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>
+                Terms
+              </Link>
+            </div>
+
             {/* Drawer Bottom Actions */}
-            <div style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingTop: '1.25rem', borderTop: '1px solid var(--border-subtle)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingTop: '0.75rem' }}>
               <div style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -352,8 +390,7 @@ function Navbar() {
                 backgroundColor: 'var(--accent-sage-light)',
                 padding: '0.4rem 0.75rem',
                 borderRadius: 'var(--radius-full)',
-                width: 'fit-content',
-                marginBottom: '0.5rem'
+                width: 'fit-content'
               }}>
                 <span>🌱</span> 100% Plant-Based Bio-Plastic
               </div>

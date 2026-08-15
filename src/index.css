@@ -365,12 +365,17 @@ img {
     font-size: 14.5px;
   }
 
+  /* Prevent iOS Safari from auto-zooming into form inputs */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+
   .sticky-mobile-bar {
     display: flex;
   }
 
   .container {
-    padding: 0 1rem;
+    padding: 0 1.15rem;
   }
 
   .trust-bar {
@@ -380,6 +385,6 @@ img {
   .btn {
     width: 100%;
     padding: 0.85rem 1.25rem;
-    font-size: 0.92rem;
+    font-size: 0.95rem;
   }
 }
