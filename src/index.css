@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cinzel:wght@600;700;800&display=swap');
 
 :root {
   /* Brand Color Palette */
@@ -29,6 +29,7 @@
   /* Typography */
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Cinzel', 'Cormorant Garamond', serif;
   
   /* Radii */
   --radius-xs: 6px;
@@ -42,6 +43,7 @@
   --shadow-md: 0 8px 24px -4px rgba(24, 23, 20, 0.06), 0 2px 6px -1px rgba(24, 23, 20, 0.03);
   --shadow-lg: 0 24px 48px -12px rgba(24, 23, 20, 0.12), 0 8px 16px -4px rgba(24, 23, 20, 0.04);
   --shadow-glass: 0 8px 32px 0 rgba(24, 23, 20, 0.06);
+  --shadow-floating: 0 -4px 24px rgba(0, 0, 0, 0.08), 0 -1px 4px rgba(0, 0, 0, 0.04);
   
   /* Transitions */
   --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
@@ -53,6 +55,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
@@ -82,6 +85,10 @@ h1, h2, h3, h4, .font-serif {
   font-family: var(--font-sans);
 }
 
+.font-display {
+  font-family: var(--font-display);
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -94,12 +101,30 @@ img {
   display: block;
 }
 
-/* Full-Width Panoramic Container */
+/* Panoramic Fluid Container */
 .container {
   width: 100%;
-  max-width: 100%;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 clamp(1rem, 3.5vw, 4rem);
+  padding: 0 clamp(1rem, 4vw, 3.5rem);
+}
+
+/* Responsive Visibility Helpers */
+.desktop-only {
+  display: flex !important;
+}
+
+.mobile-only {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+  .mobile-only {
+    display: flex !important;
+  }
 }
 
 /* Premium Fluid Buttons */
@@ -112,15 +137,20 @@ img {
   font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0.01em;
-  padding: 0.9rem 1.85rem;
-  min-height: 48px; /* mobile-friendly tap target */
+  padding: 0.85rem 1.75rem;
+  min-height: 48px; /* Mobile-friendly tap target */
   border-radius: var(--radius-full);
   border: 1px solid transparent;
   cursor: pointer;
   transition: all var(--transition-base);
   text-decoration: none;
   position: relative;
+  user-select: none;
   white-space: nowrap;
+}
+
+.btn:active {
+  transform: scale(0.98);
 }
 
 .btn-primary {
@@ -204,7 +234,7 @@ img {
   backdrop-filter: blur(8px);
 }
 
-/* Card Hover Animations */
+/* Interactive Cards */
 .card-interactive {
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
@@ -214,7 +244,7 @@ img {
 }
 
 .card-interactive:hover {
-  transform: translateY(-6px);
+  transform: translateY(-5px);
   border-color: rgba(158, 116, 58, 0.3);
   box-shadow: var(--shadow-lg);
 }
@@ -223,7 +253,7 @@ img {
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -232,28 +262,89 @@ img {
 }
 
 .fade-in {
-  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Blur Header */
+/* Glass Header */
 .glass-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(250, 249, 245, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(233, 230, 220, 0.8);
+  background: rgba(250, 249, 245, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(233, 230, 220, 0.85);
   transition: all var(--transition-base);
 }
 
-/* Trust Pill Section */
-.trust-bar {
+/* Mobile Drawer Overlay */
+.mobile-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 15, 18, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 999;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(85vw, 360px);
+  background: #FAF9F5;
+  z-index: 1000;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.2);
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-  padding: 1.5rem 0;
+  flex-direction: column;
+  padding: 1.5rem 1.5rem calc(1.5rem + env(safe-area-inset-bottom));
+  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Sticky Mobile Bottom Checkout Bar */
+.sticky-mobile-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-top: 1px solid rgba(233, 230, 220, 0.9);
+  padding: 0.75rem 1.25rem calc(0.75rem + env(safe-area-inset-bottom));
+  z-index: 90;
+  box-shadow: var(--shadow-floating);
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  animation: slideUpBottom 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUpBottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Trust Bar */
+.trust-bar {
+  padding: 1.25rem 0;
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
   background: var(--bg-surface);
@@ -263,30 +354,32 @@ img {
   display: flex;
   align-items: center;
   gap: 0.65rem;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: var(--text-secondary);
 }
 
-/* Mobile Friendly Overrides */
+/* Mobile Touch & Viewport Tweaks */
 @media (max-width: 768px) {
   body {
     font-size: 14.5px;
   }
 
-  .trust-bar {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-    padding: 1.25rem 1rem;
+  .sticky-mobile-bar {
+    display: flex;
   }
 
-  .trust-item {
-    font-size: 0.82rem;
+  .container {
+    padding: 0 1rem;
+  }
+
+  .trust-bar {
+    padding: 1rem 0;
   }
 
   .btn {
     width: 100%;
     padding: 0.85rem 1.25rem;
+    font-size: 0.92rem;
   }
 }
