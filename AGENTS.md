@@ -28,3 +28,7 @@ Every AI assistant or developer working in this repository MUST follow these rul
   2. Pull latest merged changes: `git pull origin master`
   3. Ensure working tree is clean: `git status`
   4. Run deploy: `npm run deploy`
+
+## 4. Brand Information & Cloud Sync Rule (`H:\My Drive\Website\brandinfo`)
+- All master brand guidelines, product catalogs (Markdown & JSON), Amazon listing copies, and deployment manuals are stored at `H:\My Drive\Website\brandinfo\`.
+- Whenever any change is made to brand identity, product details, pricing, keywords, or images, the files in `H:\My Drive\Website\brandinfo\` MUST be updated concurrently.
