@@ -13,13 +13,13 @@ function Footer() {
       <div className="container">
         <div style={{ 
           display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', 
-          gap: 'clamp(2rem, 4vw, 3.5rem)',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 210px), 1fr))', 
+          gap: 'clamp(2rem, 3.5vw, 3rem)',
           paddingBottom: '2.5rem',
           borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
         }}>
-          {/* Brand Manifesto Column */}
-          <div style={{ maxWidth: '380px' }}>
+          {/* 1. Brand Manifesto Column */}
+          <div style={{ maxWidth: '340px' }}>
             <Link to="/" style={{ display: 'inline-block', marginBottom: '1.25rem', textDecoration: 'none' }}>
               <img 
                 src={footerLogoImg} 
@@ -38,7 +38,7 @@ function Footer() {
 
             <p style={{ 
               color: 'var(--text-inverse-muted)', 
-              fontSize: '0.9rem', 
+              fontSize: '0.88rem', 
               lineHeight: 1.65,
               marginBottom: '1.25rem'
             }}>
@@ -58,7 +58,7 @@ function Footer() {
             </div>
           </div>
 
-          {/* Quick Navigation Column */}
+          {/* 2. Collection Column */}
           <div>
             <h4 style={{ 
               fontSize: '0.82rem', 
@@ -95,7 +95,7 @@ function Footer() {
             </ul>
           </div>
 
-          {/* Social & Connect Column */}
+          {/* 3. Customer Care & Policies Column */}
           <div>
             <h4 style={{ 
               fontSize: '0.82rem', 
@@ -106,10 +106,52 @@ function Footer() {
               marginBottom: '1rem',
               fontFamily: 'var(--font-sans)'
             }}>
-              Connect & Follow
+              Customer Care
             </h4>
-            <p style={{ color: 'var(--text-inverse-muted)', fontSize: '0.88rem', marginBottom: '1rem' }}>
-              Follow our latest product launches, manufacturing behind-the-scenes, and design stories.
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <li>
+                <Link to="/contact" style={{ color: 'var(--text-inverse-muted)', fontSize: '0.88rem', transition: 'color var(--transition-fast)' }} onMouseOver={e => e.currentTarget.style.color = '#fff'} onMouseOut={e => e.currentTarget.style.color = 'var(--text-inverse-muted)'}>
+                  Contact Us & Support
+                </Link>
+              </li>
+              <li>
+                <Link to="/shipping-policy" style={{ color: 'var(--text-inverse-muted)', fontSize: '0.88rem', transition: 'color var(--transition-fast)' }} onMouseOver={e => e.currentTarget.style.color = '#fff'} onMouseOut={e => e.currentTarget.style.color = 'var(--text-inverse-muted)'}>
+                  Shipping & Delivery
+                </Link>
+              </li>
+              <li>
+                <Link to="/refund-policy" style={{ color: 'var(--text-inverse-muted)', fontSize: '0.88rem', transition: 'color var(--transition-fast)' }} onMouseOver={e => e.currentTarget.style.color = '#fff'} onMouseOut={e => e.currentTarget.style.color = 'var(--text-inverse-muted)'}>
+                  Return & Refund Policy
+                </Link>
+              </li>
+              <li>
+                <Link to="/privacy-policy" style={{ color: 'var(--text-inverse-muted)', fontSize: '0.88rem', transition: 'color var(--transition-fast)' }} onMouseOver={e => e.currentTarget.style.color = '#fff'} onMouseOut={e => e.currentTarget.style.color = 'var(--text-inverse-muted)'}>
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link to="/terms" style={{ color: 'var(--text-inverse-muted)', fontSize: '0.88rem', transition: 'color var(--transition-fast)' }} onMouseOver={e => e.currentTarget.style.color = '#fff'} onMouseOut={e => e.currentTarget.style.color = 'var(--text-inverse-muted)'}>
+                  Terms of Service
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* 4. Social & Connect Column */}
+          <div>
+            <h4 style={{ 
+              fontSize: '0.82rem', 
+              fontWeight: '700', 
+              letterSpacing: '0.1em', 
+              textTransform: 'uppercase', 
+              color: '#FFFFFF',
+              marginBottom: '1rem',
+              fontFamily: 'var(--font-sans)'
+            }}>
+              Connect With Us
+            </h4>
+            <p style={{ color: 'var(--text-inverse-muted)', fontSize: '0.88rem', marginBottom: '1rem', lineHeight: 1.5 }}>
+              Follow our latest product launches, precision craft behind-the-scenes, and design stories.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
               <a 
@@ -121,8 +163,11 @@ function Footer() {
                   alignItems: 'center', 
                   gap: '0.6rem',
                   color: 'var(--text-inverse)',
-                  fontSize: '0.88rem'
+                  fontSize: '0.88rem',
+                  transition: 'color var(--transition-fast)'
                 }}
+                onMouseOver={e => e.currentTarget.style.color = 'var(--accent-gold)'}
+                onMouseOut={e => e.currentTarget.style.color = 'var(--text-inverse)'}
               >
                 <span>📸</span> Instagram (@viyonadesigns)
               </a>
@@ -135,32 +180,61 @@ function Footer() {
                   alignItems: 'center', 
                   gap: '0.6rem',
                   color: 'var(--text-inverse)',
-                  fontSize: '0.88rem'
+                  fontSize: '0.88rem',
+                  transition: 'color var(--transition-fast)'
+                }}
+                onMouseOver={e => e.currentTarget.style.color = 'var(--accent-gold)'}
+                onMouseOut={e => e.currentTarget.style.color = 'var(--text-inverse)'}
+              >
+                <span>📘</span> Facebook (/viyonadesigns)
+              </a>
+              <a 
+                href="mailto:support@viyonadesigns.com" 
+                style={{ 
+                  display: 'inline-flex', 
+                  alignItems: 'center', 
+                  gap: '0.6rem',
+                  color: 'var(--accent-gold)',
+                  fontSize: '0.88rem',
+                  fontWeight: '500'
                 }}
               >
-                <span>📘</span> Facebook Community
+                <span>✉️</span> support@viyonadesigns.com
               </a>
             </div>
           </div>
         </div>
 
-        {/* Bottom Copyright & Guarantee */}
+        {/* Bottom Copyright and Compliance Row */}
         <div style={{ 
           display: 'flex', 
           justifyContent: 'space-between', 
           alignItems: 'center', 
           flexWrap: 'wrap', 
-          gap: '0.75rem',
-          paddingTop: '1.75rem',
-          fontSize: '0.8rem',
+          gap: '1.25rem',
+          paddingTop: '2rem',
+          fontSize: '0.82rem',
           color: 'var(--text-inverse-muted)'
         }}>
           <div>
-            © {new Date().getFullYear()} Viyona Designs (viyonadesigns.com). Made in India.
+            © {new Date().getFullYear()} Viyona Designs. All rights reserved. Designed & Precision-Manufactured in India.
           </div>
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            <span>• 100% Sustainable Bio-Polymers</span>
-            <span>• Direct Amazon India Delivery</span>
+          <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap' }}>
+            <Link to="/shipping-policy" style={{ color: 'var(--text-inverse-muted)', textDecoration: 'none' }}>
+              Shipping Policy
+            </Link>
+            <span>•</span>
+            <Link to="/refund-policy" style={{ color: 'var(--text-inverse-muted)', textDecoration: 'none' }}>
+              Return & Refund Policy
+            </Link>
+            <span>•</span>
+            <Link to="/privacy-policy" style={{ color: 'var(--text-inverse-muted)', textDecoration: 'none' }}>
+              Privacy Policy
+            </Link>
+            <span>•</span>
+            <Link to="/terms" style={{ color: 'var(--text-inverse-muted)', textDecoration: 'none' }}>
+              Terms of Service
+            </Link>
           </div>
         </div>
       </div>

@@ -83,7 +83,7 @@ function Navbar() {
           {/* Desktop Navigation Links */}
           <nav className="desktop-only" style={{ 
             alignItems: 'center', 
-            gap: 'clamp(1.5rem, 2.5vw, 2.75rem)'
+            gap: 'clamp(1.25rem, 2vw, 2.5rem)'
           }}>
             <Link 
               to="/" 
@@ -138,6 +138,19 @@ function Navbar() {
               }}
             >
               About Us
+            </Link>
+            <Link 
+              to="/contact" 
+              style={{ 
+                fontSize: '0.94rem',
+                fontWeight: location.pathname === '/contact' ? '700' : '500', 
+                color: location.pathname === '/contact' ? 'var(--text-primary)' : 'var(--text-secondary)',
+                letterSpacing: '0.01em',
+                padding: '0.35rem 0',
+                borderBottom: location.pathname === '/contact' ? '2px solid var(--accent-gold)' : '2px solid transparent'
+              }}
+            >
+              Contact
             </Link>
           </nav>
 
@@ -306,6 +319,25 @@ function Navbar() {
               >
                 <span>📖 About Us & Story</span>
                 {location.pathname === '/about' && <span style={{ color: 'var(--accent-gold)' }}>●</span>}
+              </Link>
+
+              <Link 
+                to="/contact" 
+                onClick={() => setMobileMenuOpen(false)}
+                style={{ 
+                  padding: '0.85rem 1rem', 
+                  borderRadius: 'var(--radius-sm)',
+                  backgroundColor: location.pathname === '/contact' ? 'var(--bg-subtle)' : 'transparent',
+                  color: 'var(--text-primary)',
+                  fontWeight: location.pathname === '/contact' ? '700' : '500',
+                  fontSize: '1.05rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between'
+                }}
+              >
+                <span>✉️ Contact & Support</span>
+                {location.pathname === '/contact' && <span style={{ color: 'var(--accent-gold)' }}>●</span>}
               </Link>
             </nav>
 
