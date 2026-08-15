@@ -49,8 +49,7 @@ This document serves as an exhaustive reference manual for developers, brand man
 
 ### Product 2: Lord Ganesha Idol - Modern Minimalist Statue
 * **ASIN:** `B0HF5124YZ`
-* **SKU (White):** `VD-GANESHA-WHT-01`
-* **SKU (Pink Variant):** `VD-GANESHA-PNK-01`
+* **SKU:** `VD-GANESHA-WHT-01`
 * **Brand Name:** Viyona Designs *(Listed via GTIN Exemption)*
 * **Amazon Link:** [https://www.amazon.in/dp/B0HF5124YZ](https://www.amazon.in/dp/B0HF5124YZ)
 * **Selling Price:** ₹550.00 | **M.R.P.:** ₹1,199.00 (-54% off)

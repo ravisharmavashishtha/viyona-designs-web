@@ -28,8 +28,7 @@ export const products = [
       '/first_post_ganesha_option2.jpg',
       '/images/ganesha_right.jpg',
       '/images/ganesha_left.jpg',
-      '/images/ganesha_back.jpg',
-      '/images/ganesha_pink.jpg'
+      '/images/ganesha_back.jpg'
     ],
     lifestyleImage: '/first_post_ganesha_option2.jpg',
     price: '₹550.00',
