@@ -59,7 +59,7 @@ export const products = [
     bullets: [
       'ADORABLE & PRACTICAL DESIGN: Charming sleeping puppy posture that doubles as an ergonomic catchall bowl for daily accessories.',
       'VERSATILE DESKTOP TRAY: Deep recessed basin safely cradles keys, coins, stationery, flash drives, and small desk accessories.',
-      'ECO-FRIENDLY BIO-PLASTIC: 3D-crafted with high-density plant-based bio-materials for strength, featherweight durability, and eco-conscious peace of mind.',
+      'ECO-FRIENDLY BIO-PLASTIC: Precision-crafted with high-density plant-based bio-materials for strength, featherweight durability, and eco-conscious peace of mind.',
       'DELIGHTFUL GIFT FOR PET LOVERS: A heartwarming and functional present for coworkers, students, creators, and dog enthusiasts.',
       'READY OUT OF THE BOX: Sturdy one-piece design with anti-scratch base. Seamlessly complements modern wood, marble, and white desk surfaces.'
     ],

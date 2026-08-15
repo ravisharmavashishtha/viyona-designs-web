@@ -7,7 +7,6 @@ function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -19,7 +18,6 @@ function Navbar() {
     };
   }, [mobileMenuOpen]);
 
-  // Close drawer on route change
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
@@ -156,7 +154,7 @@ function Navbar() {
                 width: 'auto'
               }}
             >
-              Explore Studio
+              Shop Collection
             </a>
           </div>
 
@@ -334,7 +332,7 @@ function Navbar() {
                 className="btn btn-primary"
                 style={{ width: '100%', padding: '0.85rem', fontSize: '0.95rem' }}
               >
-                Explore Studio
+                Shop Collection
               </a>
 
               <a 

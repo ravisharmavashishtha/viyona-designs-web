@@ -14,7 +14,7 @@ function About() {
       }}>
         <div className="container" style={{ maxWidth: '1000px' }}>
           <span className="badge badge-gold" style={{ marginBottom: '1rem' }}>
-            The Studio Story
+            Our Story
           </span>
           <h1 style={{ 
             fontSize: 'clamp(2.5rem, 5vw, 4.2rem)', 
@@ -139,7 +139,7 @@ function About() {
             </h3>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
               <Link to="/#collection" className="btn btn-primary" style={{ width: 'auto' }}>
-                Explore Studio Collection
+                Explore Our Collection
               </Link>
               <a 
                 href="https://www.amazon.in/dp/B0HF5124YZ" 

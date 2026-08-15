@@ -24,9 +24,9 @@ function Home() {
             {/* Left Content */}
             <div className="fade-in" style={{ width: '100%', maxWidth: '620px' }}>
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
-                <span className="badge badge-gold">Design Studio</span>
+                <span className="badge badge-gold">Eco-Luxury</span>
                 <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: '500' }}>
-                  Precision-Engineered 3D Objects
+                  Precision-Engineered Eco Products
                 </span>
               </div>
 
@@ -218,10 +218,10 @@ function Home() {
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto clamp(2rem, 4vw, 3.5rem)' }}>
             <span className="badge badge-gold" style={{ marginBottom: '0.65rem' }}>
-              The Studio Collection
+              The Collection
             </span>
             <h2 style={{ fontSize: 'clamp(1.9rem, 3.5vw, 3rem)', fontWeight: '600', marginBottom: '0.75rem' }}>
-              Distinct Objects of Daily Joy
+              Distinct Creations for Daily Living
             </h2>
             <p style={{ fontSize: 'clamp(0.95rem, 1.2vw, 1.12rem)', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
               Each piece in our catalog is thoughtfully engineered from the ground up, blending scandinavian minimalism, eco-friendly materials, and tactile beauty.

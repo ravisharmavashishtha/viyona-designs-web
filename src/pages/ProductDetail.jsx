@@ -31,7 +31,7 @@ function ProductDetail() {
       if (ogImg) ogImg.setAttribute('content', `${window.location.origin}${product.lifestyleImage || product.images[0]}`);
     }
     return () => {
-      document.title = 'Viyona Designs — Thoughtfully Designed. Perfectly Made. | Modern Eco-Friendly Decor & Studio Objects';
+      document.title = 'Viyona Designs — Thoughtfully Designed. Perfectly Made. | Modern Eco-Friendly Decor & Home Products';
     };
   }, [id, product]);
 
@@ -40,7 +40,7 @@ function ProductDetail() {
       <div className="container" style={{ padding: '6rem 0', textAlign: 'center' }}>
         <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Product Not Found</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-          The studio piece you are looking for might have been moved or updated.
+          The product you are looking for might have been moved or updated.
         </p>
         <Link to="/" className="btn btn-primary">Return to Collection</Link>
       </div>
@@ -121,7 +121,7 @@ function ProductDetail() {
       <div className="container">
         {/* Navigation Breadcrumb */}
         <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '1.5rem', fontSize: '0.85rem', color: 'var(--text-muted)', flexWrap: 'wrap' }}>
-          <Link to="/" style={{ color: 'var(--text-secondary)' }}>Studio</Link>
+          <Link to="/" style={{ color: 'var(--text-secondary)' }}>Home</Link>
           <span>/</span>
           <span>{product.category}</span>
           <span>/</span>
@@ -159,7 +159,7 @@ function ProductDetail() {
             >
               <img 
                 src={currentImage} 
-                alt={`${product.name} - Studio view ${activeImgIdx + 1}`} 
+                alt={`${product.name} - Product view ${activeImgIdx + 1}`} 
                 style={{ 
                   width: '100%', 
                   height: '100%', 
@@ -612,7 +612,7 @@ function ProductDetail() {
         {otherProducts.length > 0 && (
           <div style={{ marginTop: '4.5rem', paddingTop: '3rem', borderTop: '1px solid var(--border-subtle)' }}>
             <h3 style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2rem)', fontWeight: '600', marginBottom: '1.5rem', textAlign: 'center' }}>
-              Explore Other Studio Creations
+              Explore More Creations
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '1.5rem' }}>
               {otherProducts.map(other => (

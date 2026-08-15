@@ -42,7 +42,7 @@ function Footer() {
               lineHeight: 1.65,
               marginBottom: '1.25rem'
             }}>
-              Curators of distinct, precision-crafted design goods. Sculpted for modern Indian homes, serene mandirs, mindful workspaces, and intentional living.
+              Makers of distinct, precision-crafted eco-friendly products & decor. Sculpted for modern Indian homes, serene mandirs, mindful workspaces, and intentional living.
             </p>
             <div style={{ 
               display: 'inline-flex', 
@@ -69,7 +69,7 @@ function Footer() {
               marginBottom: '1rem',
               fontFamily: 'var(--font-sans)'
             }}>
-              Curated Studio
+              Our Collection
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <li>
