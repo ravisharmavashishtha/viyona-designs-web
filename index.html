@@ -11,6 +11,20 @@
       gtag('config', 'G-R2FR44J83H');
     </script>
 
+    <!-- Single Page App Redirect Receiver for GitHub Pages -->
+    <script>
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
+
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/profile_picture.jpg" />
@@ -145,7 +159,7 @@
         ]
       }
     </script>
-    <script type="module" crossorigin src="/assets/index-zqa6_s_z.js"></script>
+    <script type="module" crossorigin src="/assets/index-W0BD5wRQ.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-oj5Ojp4Y.css">
   </head>
   <body>
