@@ -1,8 +1,26 @@
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { products } from '../data/products';
 
 function Home() {
+  const location = useLocation();
   const ganeshaProduct = products.find(p => p.id === 'ganesha-statue') || products[0];
+
+  useEffect(() => {
+    if (location.pathname === '/collection' || location.pathname === '/products') {
+      document.title = 'The Collection — Modern Sculptural Decor | Viyona Designs';
+      setTimeout(() => {
+        document.getElementById('collection')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else if (location.pathname === '/craft') {
+      document.title = 'Our Craft — 100% Plant-Based Sustainable Innovation | Viyona Designs';
+      setTimeout(() => {
+        document.getElementById('craft')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      document.title = 'Viyona Designs — Thoughtfully Designed. Perfectly Made. | Modern Eco-Friendly Decor & Studio Objects';
+    }
+  }, [location.pathname]);
 
   return (
     <div style={{ minHeight: '100vh', width: '100%' }}>

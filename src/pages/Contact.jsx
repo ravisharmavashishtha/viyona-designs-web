@@ -112,6 +112,43 @@ function Contact() {
                 </div>
               </div>
 
+              {/* Social Channels Card */}
+              <div style={{
+                padding: 'clamp(1.5rem, 2.5vw, 2rem)',
+                backgroundColor: '#FFFFFF',
+                borderRadius: 'var(--radius-lg)',
+                border: '1px solid var(--border-subtle)',
+                boxShadow: 'var(--shadow-sm)'
+              }}>
+                <span className="badge badge-gold" style={{ marginBottom: '0.75rem' }}>Social Care</span>
+                <h4 style={{ fontSize: '1.15rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+                  Connect on Social Media
+                </h4>
+                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '1.25rem' }}>
+                  Follow our latest product drops, behind-the-scenes craft, and send us direct messages on social media:
+                </p>
+                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                  <a 
+                    href="https://www.instagram.com/viyonadesigns" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="btn btn-secondary"
+                    style={{ flex: '1', minWidth: '130px', textAlign: 'center', padding: '0.65rem 1rem', fontSize: '0.88rem', textDecoration: 'none' }}
+                  >
+                    📸 Instagram
+                  </a>
+                  <a 
+                    href="https://www.facebook.com/viyonadesigns" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="btn btn-secondary"
+                    style={{ flex: '1', minWidth: '130px', textAlign: 'center', padding: '0.65rem 1rem', fontSize: '0.88rem', textDecoration: 'none' }}
+                  >
+                    📘 Facebook
+                  </a>
+                </div>
+              </div>
+
               {/* Amazon Storefront Card */}
               <div style={{
                 padding: 'clamp(1.5rem, 2.5vw, 2rem)',

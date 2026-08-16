@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -12,12 +12,19 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import BrandShowcase from './pages/BrandShowcase';
 
-function ScrollToTop() {
-  const { pathname } = useLocation();
+import { initGA, trackPageView } from './utils/analytics';
+
+function RouteAnalyticsTracker() {
+  const location = useLocation();
+
+  useEffect(() => {
+    initGA();
+  }, []);
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-  }, [pathname]);
+    trackPageView(location.pathname + location.search, document.title);
+  }, [location]);
 
   return null;
 }
@@ -25,12 +32,15 @@ function ScrollToTop() {
 function App() {
   return (
     <Router>
-      <ScrollToTop />
+      <RouteAnalyticsTracker />
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Navbar />
         <main style={{ flex: 1 }}>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/collection" element={<Home />} />
+            <Route path="/products" element={<Home />} />
+            <Route path="/craft" element={<Home />} />
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
@@ -39,6 +49,8 @@ function App() {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/brand-assets" element={<BrandShowcase />} />
+            {/* Catch-all fallback route */}
+            <Route path="*" element={<Home />} />
           </Routes>
         </main>
         <Footer />

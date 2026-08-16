@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { products } from '../data/products';
 import { useEffect, useState, useRef } from 'react';
+import { trackEvent } from '../utils/analytics';
 
 function ProductDetail() {
   const { id } = useParams();
@@ -71,24 +72,29 @@ function ProductDetail() {
   };
 
   const shareOnWhatsApp = () => {
+    trackEvent('share_product', { method: 'whatsapp', product_id: product.id, product_name: product.name });
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareText}${currentUrl}`)}`, '_blank');
   };
 
   const shareOnFacebook = () => {
+    trackEvent('share_product', { method: 'facebook', product_id: product.id, product_name: product.name });
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`, '_blank');
   };
 
   const shareOnPinterest = () => {
+    trackEvent('share_product', { method: 'pinterest', product_id: product.id, product_name: product.name });
     const fullImgUrl = `${window.location.origin}${currentImage}`;
     window.open(`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(currentUrl)}&media=${encodeURIComponent(fullImgUrl)}&description=${encodeURIComponent(shareText)}`, '_blank');
   };
 
   const shareOnX = () => {
+    trackEvent('share_product', { method: 'x_twitter', product_id: product.id, product_name: product.name });
     const tweetText = `${shareTitle} — ${product.shortDesc} #HomeDecor #EcoFriendly #ViyonaDesigns #MadeInIndia`;
     window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(tweetText)}`, '_blank');
   };
 
   const handleCopyLink = () => {
+    trackEvent('share_product', { method: 'copy_link', product_id: product.id, product_name: product.name });
     navigator.clipboard.writeText(currentUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -358,6 +364,7 @@ function ProductDetail() {
                 href={product.amazonLink} 
                 target="_blank" 
                 rel="noopener noreferrer" 
+                onClick={() => trackEvent('click_buy_amazon', { product_id: product.id, product_name: product.name, price: product.price, location: 'main_cta' })}
                 className="btn btn-amazon"
                 style={{ 
                   width: '100%', 
@@ -660,6 +667,7 @@ function ProductDetail() {
           href={product.amazonLink} 
           target="_blank" 
           rel="noopener noreferrer" 
+          onClick={() => trackEvent('click_buy_amazon', { product_id: product.id, product_name: product.name, price: product.price, location: 'mobile_sticky_bar' })}
           className="btn btn-amazon"
           style={{ 
             flex: '1', 

@@ -103,34 +103,32 @@ function Navbar() {
             >
               Home
             </Link>
-            <a 
-              href="#collection" 
-              onClick={handleShopClick} 
+            <Link 
+              to="/collection" 
               style={{ 
                 fontSize: '0.94rem',
-                fontWeight: '500', 
-                color: 'var(--text-secondary)',
+                fontWeight: (location.pathname === '/collection' || location.pathname === '/products') ? '700' : '500', 
+                color: (location.pathname === '/collection' || location.pathname === '/products') ? 'var(--text-primary)' : 'var(--text-secondary)',
                 letterSpacing: '0.01em',
-                cursor: 'pointer',
-                padding: '0.35rem 0'
+                padding: '0.35rem 0',
+                borderBottom: (location.pathname === '/collection' || location.pathname === '/products') ? '2px solid var(--accent-gold)' : '2px solid transparent'
               }}
             >
               Collection
-            </a>
-            <a 
-              href="#craft" 
-              onClick={handleStoryClick} 
+            </Link>
+            <Link 
+              to="/craft" 
               style={{ 
                 fontSize: '0.94rem',
-                fontWeight: '500', 
-                color: 'var(--text-secondary)',
+                fontWeight: location.pathname === '/craft' ? '700' : '500', 
+                color: location.pathname === '/craft' ? 'var(--text-primary)' : 'var(--text-secondary)',
                 letterSpacing: '0.01em',
-                cursor: 'pointer',
-                padding: '0.35rem 0'
+                padding: '0.35rem 0',
+                borderBottom: location.pathname === '/craft' ? '2px solid var(--accent-gold)' : '2px solid transparent'
               }}
             >
               Our Craft
-            </a>
+            </Link>
             <Link 
               to="/about" 
               style={{ 
@@ -273,14 +271,15 @@ function Navbar() {
                 {location.pathname === '/' && <span style={{ color: 'var(--accent-gold)' }}>●</span>}
               </Link>
 
-              <a 
-                href="#collection" 
-                onClick={handleShopClick}
+              <Link 
+                to="/collection" 
+                onClick={() => setMobileMenuOpen(false)}
                 style={{ 
                   padding: '0.85rem 1rem', 
                   borderRadius: 'var(--radius-sm)',
+                  backgroundColor: (location.pathname === '/collection' || location.pathname === '/products') ? 'var(--bg-subtle)' : 'transparent',
                   color: 'var(--text-primary)',
-                  fontWeight: '500',
+                  fontWeight: (location.pathname === '/collection' || location.pathname === '/products') ? '700' : '500',
                   fontSize: '1.05rem',
                   display: 'flex',
                   alignItems: 'center',
@@ -289,17 +288,18 @@ function Navbar() {
                 }}
               >
                 <span>🏺 The Collection</span>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>→</span>
-              </a>
+                {(location.pathname === '/collection' || location.pathname === '/products') ? <span style={{ color: 'var(--accent-gold)' }}>●</span> : <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>→</span>}
+              </Link>
 
-              <a 
-                href="#craft" 
-                onClick={handleStoryClick}
+              <Link 
+                to="/craft" 
+                onClick={() => setMobileMenuOpen(false)}
                 style={{ 
                   padding: '0.85rem 1rem', 
                   borderRadius: 'var(--radius-sm)',
+                  backgroundColor: location.pathname === '/craft' ? 'var(--bg-subtle)' : 'transparent',
                   color: 'var(--text-primary)',
-                  fontWeight: '500',
+                  fontWeight: location.pathname === '/craft' ? '700' : '500',
                   fontSize: '1.05rem',
                   display: 'flex',
                   alignItems: 'center',
@@ -308,8 +308,8 @@ function Navbar() {
                 }}
               >
                 <span>🌿 Our Craft & Values</span>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>→</span>
-              </a>
+                {location.pathname === '/craft' ? <span style={{ color: 'var(--accent-gold)' }}>●</span> : <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>→</span>}
+              </Link>
 
               <Link 
                 to="/about" 
