@@ -11,9 +11,10 @@
       gtag('config', 'G-R2FR44J83H');
     </script>
 
-    <!-- Single Page App Redirect Receiver for GitHub Pages -->
+    <!-- Single Page App Redirect Receiver & Hash Link Resolver -->
     <script>
       (function(l) {
+        // 1. Convert GitHub Pages 404 query param redirect back to clean pathname
         if (l.search[1] === '/' ) {
           var decoded = l.search.slice(1).split('&').map(function(s) { 
             return s.replace(/~and~/g, '&')
@@ -21,6 +22,11 @@
           window.history.replaceState(null, null,
               l.pathname.slice(0, -1) + decoded + l.hash
           );
+        }
+        // 2. Convert hash links like /#/product/ganesha-statue to clean path /product/ganesha-statue
+        if (l.hash && l.hash.indexOf('#/') === 0) {
+          var cleanPath = l.hash.slice(1);
+          window.history.replaceState(null, null, cleanPath);
         }
       }(window.location))
     </script>
@@ -159,7 +165,7 @@
         ]
       }
     </script>
-    <script type="module" crossorigin src="/assets/index-C2RmzgrL.js"></script>
+    <script type="module" crossorigin src="/assets/index-XaZ9wFSO.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-oj5Ojp4Y.css">
   </head>
   <body>
