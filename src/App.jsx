@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -16,10 +16,16 @@ import { initGA, trackPageView } from './utils/analytics';
 
 function RouteAnalyticsTracker() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     initGA();
-  }, []);
+    // Catch and redirect legacy hash routes like #/product/ganesha-statue
+    if (window.location.hash && window.location.hash.startsWith('#/')) {
+      const target = window.location.hash.slice(1);
+      navigate(target, { replace: true });
+    }
+  }, [navigate]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
