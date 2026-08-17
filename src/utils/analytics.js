@@ -1,6 +1,7 @@
-// Google Analytics 4 (GA4) Tracking Utility for Viyona Designs
+// Analytics Tracking Utility for Viyona Designs (GA4 + Meta Pixel)
 
 export const GA_MEASUREMENT_ID = 'G-R2FR44J83H';
+export const META_PIXEL_ID = '2533819650389389';
 
 /**
  * Initialize Google Analytics script dynamically
@@ -28,28 +29,44 @@ export const initGA = (measurementId = GA_MEASUREMENT_ID) => {
 };
 
 /**
- * Track Page Views on SPA route change
+ * Track Page Views on SPA route change (GA4 + Meta Pixel)
  */
 export const trackPageView = (path, title) => {
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', 'page_view', {
-      page_path: path,
-      page_title: title || document.title,
-      page_location: window.location.href,
-    });
+  if (typeof window !== 'undefined') {
+    // GA4
+    if (window.gtag) {
+      window.gtag('event', 'page_view', {
+        page_path: path,
+        page_title: title || document.title,
+        page_location: window.location.href,
+      });
+    }
+    // Meta Pixel
+    if (window.fbq) {
+      window.fbq('track', 'PageView');
+    }
   }
 };
 
 /**
- * Track Custom Events (e.g. Amazon click, social share)
+ * Track Custom Events in GA4
  */
 export const trackEvent = (action, params = {}) => {
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', action, params);
-  } else {
-    // Helpful development logger
-    if (import.meta.env.DEV) {
-      console.log(`[GA4 Event] ${action}`, params);
-    }
+  } else if (import.meta.env.DEV) {
+    console.log(`[GA4 Event] ${action}`, params);
   }
 };
+
+/**
+ * Track Meta Pixel Events (e.g. ViewContent, InitiateCheckout, Search)
+ */
+export const trackMetaEvent = (eventName, params = {}) => {
+  if (typeof window !== 'undefined' && window.fbq) {
+    window.fbq('track', eventName, params);
+  } else if (import.meta.env.DEV) {
+    console.log(`[Meta Pixel Event] ${eventName}`, params);
+  }
+};
+

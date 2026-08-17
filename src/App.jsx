@@ -12,7 +12,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import BrandShowcase from './pages/BrandShowcase';
 
-import { initGA, trackPageView, trackEvent } from './utils/analytics';
+import { initGA, trackPageView, trackEvent, trackMetaEvent } from './utils/analytics';
 
 function AmazonFastRedirect({ url, product }) {
   useEffect(() => {
@@ -27,8 +27,15 @@ function AmazonFastRedirect({ url, product }) {
       value: 550,
       currency: 'INR'
     });
+    trackMetaEvent('InitiateCheckout', {
+      content_name: product === 'ganesha-statue' ? 'Lord Ganesha Minimalist Murti' : product,
+      content_ids: [product],
+      content_type: 'product',
+      value: 550,
+      currency: 'INR'
+    });
 
-    // 350ms safe delay gives Google Analytics gtag beacon 100% time to dispatch over the network
+    // 350ms safe delay gives analytics beacons time to dispatch over the network
     const timer = setTimeout(() => {
       window.location.replace(url);
     }, 350);
