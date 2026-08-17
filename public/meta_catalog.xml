@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
+  <channel>
+    <title>Viyona Designs Product Catalog</title>
+    <link>https://viyonadesigns.com</link>
+    <description>Meticulously engineered, plant-based sustainable design goods</description>
+    
+    <!-- Item 1: Lord Ganesha Statue -->
+    <item>
+      <g:id>ganesha-statue</g:id>
+      <g:title>Lord Ganesha Idol — Modern Minimalist Statue</g:title>
+      <g:description>Elevate your car dashboard, home mandir, or office with the Viyona Designs Lord Ganesha Idol. Modern Scandinavian architectural lines crafted from 100% plant-based bio-plastic in India.</g:description>
+      <g:link>https://viyonadesigns.com/product/ganesha-statue</g:link>
+      <g:image_link>https://viyonadesigns.com/first_post_ganesha_dashboard_v2.jpg</g:image_link>
+      <g:brand>Viyona Designs</g:brand>
+      <g:condition>new</g:condition>
+      <g:availability>in stock</g:availability>
+      <g:price>1199.00 INR</g:price>
+      <g:sale_price>550.00 INR</g:sale_price>
+      <g:google_product_category>Home &amp; Garden &gt; Decor &gt; Statues</g:google_product_category>
+      <g:fb_product_category>Home &amp; Garden &gt; Decor</g:fb_product_category>
+    </item>
+
+    <!-- Item 2: Sleeping Puppy Catchall Tray -->
+    <item>
+      <g:id>sleeping-puppy-organizer</g:id>
+      <g:title>Sleeping Puppy Desk Organizer &amp; Catchall Tray</g:title>
+      <g:description>Delightful sleeping puppy valet catchall tray to organize keys, coins, jewelry, and desk stationery. Precision crafted in India from eco-friendly bio-materials.</g:description>
+      <g:link>https://viyonadesigns.com/product/sleeping-puppy-organizer</g:link>
+      <g:image_link>https://viyonadesigns.com/images/puppy_angled.jpg</g:image_link>
+      <g:brand>Viyona Designs</g:brand>
+      <g:condition>new</g:condition>
+      <g:availability>in stock</g:availability>
+      <g:price>999.00 INR</g:price>
+      <g:sale_price>499.00 INR</g:sale_price>
+      <g:google_product_category>Home &amp; Garden &gt; Decor &gt; Trays</g:google_product_category>
+      <g:fb_product_category>Home &amp; Garden &gt; Decor</g:fb_product_category>
+    </item>
+  </channel>
+</rss>
