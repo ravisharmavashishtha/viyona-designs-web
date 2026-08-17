@@ -16,8 +16,24 @@ import { initGA, trackPageView, trackEvent } from './utils/analytics';
 
 function AmazonFastRedirect({ url, product }) {
   useEffect(() => {
-    trackEvent('amazon_fast_redirect', { product, url });
-    window.location.replace(url);
+    initGA();
+    const pageTitle = `Redirecting to Amazon — ${product}`;
+    document.title = pageTitle;
+    trackPageView(window.location.pathname + window.location.search, pageTitle);
+    trackEvent('amazon_fast_redirect', {
+      product_id: product,
+      product_name: product === 'ganesha-statue' ? 'Lord Ganesha Minimalist Murti' : product,
+      destination: url,
+      value: 550,
+      currency: 'INR'
+    });
+
+    // 350ms safe delay gives Google Analytics gtag beacon 100% time to dispatch over the network
+    const timer = setTimeout(() => {
+      window.location.replace(url);
+    }, 350);
+
+    return () => clearTimeout(timer);
   }, [url, product]);
 
   return (
@@ -30,12 +46,12 @@ function AmazonFastRedirect({ url, product }) {
       textAlign: 'center',
       padding: '2rem'
     }}>
-      <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🛒</div>
+      <div style={{ fontSize: '2.5rem', marginBottom: '1rem', animation: 'pulse 1.5s infinite' }}>🛒</div>
       <h2 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
-        Redirecting to Amazon India...
+        Taking you to Amazon India...
       </h2>
       <p style={{ fontSize: '0.92rem', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
-        Taking you directly to the official product listing on Amazon.
+        Opening the official Viyona Designs product listing.
       </p>
       <a 
         href={url} 
