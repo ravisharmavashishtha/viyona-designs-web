@@ -12,7 +12,41 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import BrandShowcase from './pages/BrandShowcase';
 
-import { initGA, trackPageView } from './utils/analytics';
+import { initGA, trackPageView, trackEvent } from './utils/analytics';
+
+function AmazonFastRedirect({ url, product }) {
+  useEffect(() => {
+    trackEvent('amazon_fast_redirect', { product, url });
+    window.location.replace(url);
+  }, [url, product]);
+
+  return (
+    <div style={{ 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center', 
+      justifyContent: 'center', 
+      minHeight: '70vh',
+      textAlign: 'center',
+      padding: '2rem'
+    }}>
+      <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🛒</div>
+      <h2 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
+        Redirecting to Amazon India...
+      </h2>
+      <p style={{ fontSize: '0.92rem', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
+        Taking you directly to the official product listing on Amazon.
+      </p>
+      <a 
+        href={url} 
+        className="btn btn-amazon"
+        style={{ padding: '0.65rem 1.5rem', fontSize: '0.9rem' }}
+      >
+        Click here if not redirected automatically ↗
+      </a>
+    </div>
+  );
+}
 
 function RouteAnalyticsTracker() {
   const location = useLocation();
@@ -48,6 +82,12 @@ function App() {
             <Route path="/products" element={<Home />} />
             <Route path="/craft" element={<Home />} />
             <Route path="/product/:id" element={<ProductDetail />} />
+            
+            {/* Branded Fast Amazon Redirects */}
+            <Route path="/buy-ganesha" element={<AmazonFastRedirect url="https://www.amazon.in/dp/B0HF5124YZ" product="ganesha-statue" />} />
+            <Route path="/buy-puppy" element={<AmazonFastRedirect url="https://www.amazon.in/dp/B0HC36C861" product="sleeping-puppy" />} />
+            <Route path="/amazon" element={<AmazonFastRedirect url="https://www.amazon.in/dp/B0HF5124YZ" product="store" />} />
+
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/shipping-policy" element={<ShippingPolicy />} />
