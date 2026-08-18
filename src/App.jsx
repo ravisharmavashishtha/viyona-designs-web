@@ -12,11 +12,12 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import BrandShowcase from './pages/BrandShowcase';
 
-import { initGA, trackPageView, trackEvent, trackMetaEvent } from './utils/analytics';
+import { initGA, initMetaPixel, trackPageView, trackEvent, trackMetaEvent } from './utils/analytics';
 
 function AmazonFastRedirect({ url, product }) {
   useEffect(() => {
     initGA();
+    initMetaPixel();
     const pageTitle = `Redirecting to Amazon — ${product}`;
     document.title = pageTitle;
     trackPageView(window.location.pathname + window.location.search, pageTitle);
@@ -77,6 +78,7 @@ function RouteAnalyticsTracker() {
 
   useEffect(() => {
     initGA();
+    initMetaPixel();
     // Catch and redirect legacy hash routes like #/product/ganesha-statue
     if (window.location.hash && window.location.hash.startsWith('#/')) {
       const target = window.location.hash.slice(1);
