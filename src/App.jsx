@@ -87,6 +87,7 @@ function RouteAnalyticsTracker() {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     trackPageView(location.pathname + location.search, document.title);
+    trackMetaEvent('PageView');
   }, [location]);
 
   return null;
