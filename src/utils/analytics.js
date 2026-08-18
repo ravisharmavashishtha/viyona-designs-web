@@ -103,61 +103,71 @@ export const trackEvent = (action, params = {}) => {
   }
 };
 
+// Event deduplication cache to prevent duplicate rapid fires
+const recentMetaEvents = new Map();
+
 /**
  * Track Meta Pixel Events (e.g. ViewContent, InitiateCheckout, PageView)
- * Uses both standard fbq() and direct image beacon fallback for 100% deliverability
+ * Clean, single-dispatch with auto-deduplication within 600ms window
  */
 export const trackMetaEvent = (eventName, params = {}) => {
   if (typeof window === 'undefined') return;
 
   initMetaPixel();
 
+  // Deduplicate identical event calls within 600ms
+  const eventKey = `${eventName}_${JSON.stringify(params)}`;
+  const now = Date.now();
+  if (recentMetaEvents.has(eventKey) && (now - recentMetaEvents.get(eventKey)) < 600) {
+    return;
+  }
+  recentMetaEvents.set(eventKey, now);
+
   const testCode = getTestEventCode();
   const options = testCode ? { test_event_code: testCode } : undefined;
 
-  // 1. Standard Meta Pixel SDK Dispatch
+  // 1. Standard Official Meta Pixel SDK Dispatch
   if (window.fbq) {
     if (options) {
       window.fbq('track', eventName, params, options);
     } else {
       window.fbq('track', eventName, params);
     }
-  }
+  } else {
+    // 2. Direct Fallback Beacon only if window.fbq failed to load
+    try {
+      const beaconParams = new URLSearchParams({
+        id: META_PIXEL_ID,
+        ev: eventName,
+        dl: window.location.href,
+        rl: document.referrer || '',
+        if: 'false',
+        ts: String(now),
+        v: '2.9.150',
+        r: 'stable',
+        noscript: '1',
+      });
 
-  // 2. Direct Fallback Beacon to Facebook Collection Server
-  try {
-    const beaconParams = new URLSearchParams({
-      id: META_PIXEL_ID,
-      ev: eventName,
-      dl: window.location.href,
-      rl: document.referrer || '',
-      if: 'false',
-      ts: String(Date.now()),
-      v: '2.9.150',
-      r: 'stable',
-      noscript: '1',
-    });
+      if (testCode) {
+        beaconParams.append('test_event_code', testCode);
+      }
 
-    if (testCode) {
-      beaconParams.append('test_event_code', testCode);
-    }
+      if (params.content_name) beaconParams.append('cd[content_name]', params.content_name);
+      if (params.content_ids) beaconParams.append('cd[content_ids]', JSON.stringify(params.content_ids));
+      if (params.content_type) beaconParams.append('cd[content_type]', params.content_type);
+      if (params.value) beaconParams.append('cd[value]', String(params.value));
+      if (params.currency) beaconParams.append('cd[currency]', params.currency);
 
-    if (params.content_name) beaconParams.append('cd[content_name]', params.content_name);
-    if (params.content_ids) beaconParams.append('cd[content_ids]', JSON.stringify(params.content_ids));
-    if (params.content_type) beaconParams.append('cd[content_type]', params.content_type);
-    if (params.value) beaconParams.append('cd[value]', String(params.value));
-    if (params.currency) beaconParams.append('cd[currency]', params.currency);
-
-    const beaconUrl = `https://www.facebook.com/tr/?${beaconParams.toString()}`;
-    const img = new Image();
-    img.src = beaconUrl;
-  } catch (err) {
-    // Fail silently in production
+      const beaconUrl = `https://www.facebook.com/tr/?${beaconParams.toString()}`;
+      const img = new Image();
+      img.src = beaconUrl;
+    } catch (err) {}
   }
 
   if (import.meta.env.DEV) {
     console.log(`[Meta Pixel Event: ${eventName}]`, params, options || '');
   }
 };
+
 
 
