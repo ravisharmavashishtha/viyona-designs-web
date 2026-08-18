@@ -73,6 +73,7 @@ export const trackPageView = (path, title) => {
       });
     }
     // Meta Pixel
+    initMetaPixel();
     if (window.fbq) {
       window.fbq('track', 'PageView');
     }
@@ -94,8 +95,11 @@ export const trackEvent = (action, params = {}) => {
  * Track Meta Pixel Events (e.g. ViewContent, InitiateCheckout, Search)
  */
 export const trackMetaEvent = (eventName, params = {}) => {
-  if (typeof window !== 'undefined' && window.fbq) {
-    window.fbq('track', eventName, params);
+  if (typeof window !== 'undefined') {
+    initMetaPixel();
+    if (window.fbq) {
+      window.fbq('track', eventName, params);
+    }
   } else if (import.meta.env.DEV) {
     console.log(`[Meta Pixel Event] ${eventName}`, params);
   }
