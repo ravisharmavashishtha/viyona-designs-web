@@ -12,12 +12,11 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import BrandShowcase from './pages/BrandShowcase';
 
-import { initGA, initMetaPixel, trackPageView, trackEvent, trackMetaEvent } from './utils/analytics';
+import { initGA, trackPageView, trackEvent } from './utils/analytics';
 
 function AmazonFastRedirect({ url, product }) {
   useEffect(() => {
     initGA();
-    initMetaPixel();
     const pageTitle = `Redirecting to Amazon — ${product}`;
     document.title = pageTitle;
     trackPageView(window.location.pathname + window.location.search, pageTitle);
@@ -28,15 +27,8 @@ function AmazonFastRedirect({ url, product }) {
       value: 550,
       currency: 'INR'
     });
-    trackMetaEvent('InitiateCheckout', {
-      content_name: product === 'ganesha-statue' ? 'Lord Ganesha Minimalist Murti' : product,
-      content_ids: [product],
-      content_type: 'product',
-      value: 550,
-      currency: 'INR'
-    });
 
-    // 350ms safe delay gives analytics beacons time to dispatch over the network
+    // 350ms safe delay gives Google Analytics gtag beacon 100% time to dispatch over the network
     const timer = setTimeout(() => {
       window.location.replace(url);
     }, 350);
@@ -75,11 +67,9 @@ function AmazonFastRedirect({ url, product }) {
 function RouteAnalyticsTracker() {
   const location = useLocation();
   const navigate = useNavigate();
-  const isInitialRef = useRef(true);
 
   useEffect(() => {
     initGA();
-    initMetaPixel();
     // Catch and redirect legacy hash routes like #/product/ganesha-statue
     if (window.location.hash && window.location.hash.startsWith('#/')) {
       const target = window.location.hash.slice(1);
@@ -89,11 +79,7 @@ function RouteAnalyticsTracker() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    const isInitial = isInitialRef.current;
-    trackPageView(location.pathname + location.search, document.title, isInitial);
-    if (isInitial) {
-      isInitialRef.current = false;
-    }
+    trackPageView(location.pathname + location.search, document.title);
   }, [location]);
 
   return null;

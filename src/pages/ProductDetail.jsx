@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { products } from '../data/products';
 import { useEffect, useState, useRef } from 'react';
-import { trackEvent, trackMetaEvent } from '../utils/analytics';
+import { trackEvent } from '../utils/analytics';
 
 function ProductDetail() {
   const { id } = useParams();
@@ -18,15 +18,6 @@ function ProductDetail() {
       // Dynamic SEO Title & Meta Updates
       const pageTitle = `${product.displayName || product.name} — ${product.price} | Viyona Designs`;
       document.title = pageTitle;
-
-      // Meta Pixel ViewContent event
-      trackMetaEvent('ViewContent', {
-        content_name: product.displayName || product.name,
-        content_ids: [product.id],
-        content_type: 'product',
-        value: parseFloat(product.price.replace(/[^0-9.]/g, '')) || 550,
-        currency: 'INR'
-      });
 
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) metaDesc.setAttribute('content', product.description.slice(0, 160) + '...');
@@ -373,10 +364,7 @@ function ProductDetail() {
                 href={product.amazonLink} 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                onClick={() => {
-                  trackEvent('click_buy_amazon', { product_id: product.id, product_name: product.name, price: product.price, location: 'main_cta' });
-                  trackMetaEvent('InitiateCheckout', { content_name: product.displayName || product.name, content_ids: [product.id], content_type: 'product', value: 550, currency: 'INR' });
-                }}
+                onClick={() => trackEvent('click_buy_amazon', { product_id: product.id, product_name: product.name, price: product.price, location: 'main_cta' })}
                 className="btn btn-amazon"
                 style={{ 
                   width: '100%', 
@@ -679,10 +667,7 @@ function ProductDetail() {
           href={product.amazonLink} 
           target="_blank" 
           rel="noopener noreferrer" 
-          onClick={() => {
-            trackEvent('click_buy_amazon', { product_id: product.id, product_name: product.name, price: product.price, location: 'mobile_sticky_bar' });
-            trackMetaEvent('InitiateCheckout', { content_name: product.displayName || product.name, content_ids: [product.id], content_type: 'product', value: 550, currency: 'INR' });
-          }}
+          onClick={() => trackEvent('click_buy_amazon', { product_id: product.id, product_name: product.name, price: product.price, location: 'mobile_sticky_bar' })}
           className="btn btn-amazon"
           style={{ 
             flex: '1', 
