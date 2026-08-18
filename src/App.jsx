@@ -14,25 +14,25 @@ import BrandShowcase from './pages/BrandShowcase';
 
 import { initGA, initMetaPixel, trackPageView, trackEvent, trackMetaEvent } from './utils/analytics';
 
-function AmazonFastRedirect({ url, product }) {
+function AmazonFastRedirect({ url, product, name = 'Lord Ganesha Minimalist Murti', price = 550 }) {
   useEffect(() => {
     initGA();
     initMetaPixel();
-    const pageTitle = `Redirecting to Amazon — ${product}`;
+    const pageTitle = `Redirecting to Amazon — ${name}`;
     document.title = pageTitle;
     trackPageView(window.location.pathname + window.location.search, pageTitle);
     trackEvent('amazon_fast_redirect', {
       product_id: product,
-      product_name: product === 'ganesha-statue' ? 'Lord Ganesha Minimalist Murti' : product,
+      product_name: name,
       destination: url,
-      value: 550,
+      value: price,
       currency: 'INR'
     });
     trackMetaEvent('InitiateCheckout', {
-      content_name: product === 'ganesha-statue' ? 'Lord Ganesha Minimalist Murti' : product,
+      content_name: name,
       content_ids: [product],
       content_type: 'product',
-      value: 550,
+      value: price,
       currency: 'INR'
     });
 
@@ -42,7 +42,7 @@ function AmazonFastRedirect({ url, product }) {
     }, 350);
 
     return () => clearTimeout(timer);
-  }, [url, product]);
+  }, [url, product, name, price]);
 
   return (
     <div style={{ 
@@ -109,9 +109,9 @@ function App() {
             <Route path="/product/:id" element={<ProductDetail />} />
             
             {/* Branded Fast Amazon Redirects */}
-            <Route path="/buy-ganesha" element={<AmazonFastRedirect url="https://www.amazon.in/dp/B0HF5124YZ" product="ganesha-statue" />} />
-            <Route path="/buy-puppy" element={<AmazonFastRedirect url="https://www.amazon.in/dp/B0HC36C861" product="sleeping-puppy" />} />
-            <Route path="/amazon" element={<AmazonFastRedirect url="https://www.amazon.in/dp/B0HF5124YZ" product="store" />} />
+            <Route path="/buy-ganesha" element={<AmazonFastRedirect url="https://www.amazon.in/dp/B0HF5124YZ" product="ganesha-statue" name="Lord Ganesha Minimalist Murti" price={550} />} />
+            <Route path="/buy-puppy" element={<AmazonFastRedirect url="https://www.amazon.in/dp/B0HC36C861" product="sleeping-puppy-organizer" name="Sleeping Puppy Desk Organizer & Catchall Tray" price={499} />} />
+            <Route path="/amazon" element={<AmazonFastRedirect url="https://www.amazon.in/dp/B0HF5124YZ" product="ganesha-statue" name="Viyona Designs Amazon Official Store" price={550} />} />
 
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />

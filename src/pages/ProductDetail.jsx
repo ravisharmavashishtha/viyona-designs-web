@@ -5,7 +5,7 @@ import { trackEvent, trackMetaEvent } from '../utils/analytics';
 
 function ProductDetail() {
   const { id } = useParams();
-  const product = products.find(p => p.id === id);
+  const product = products.find(p => p.id === id || (p.id === 'sleeping-puppy-organizer' && (id === 'sleeping-puppy' || id === 'sleeping-puppy-tray')));
   const [activeImgIdx, setActiveImgIdx] = useState(0);
   const [copied, setCopied] = useState(false);
   const [activeTab, setActiveTab] = useState('about');
