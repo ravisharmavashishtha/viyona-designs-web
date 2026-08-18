@@ -55,11 +55,17 @@ export const trackEvent = (action, params = {}) => {
  * Track Meta Pixel Standard Events (e.g. ViewContent, InitiateCheckout, Contact)
  */
 export const trackMetaEvent = (eventName, params = {}) => {
-  if (typeof window !== 'undefined' && window.fbq) {
-    if (Object.keys(params).length > 0) {
-      window.fbq('track', eventName, params);
+  if (typeof window !== 'undefined') {
+    if (window.fbq) {
+      if (Object.keys(params).length > 0) {
+        window.fbq('track', eventName, params);
+        console.log(`[Meta Pixel ✅] Fired: ${eventName}`, params);
+      } else {
+        window.fbq('track', eventName);
+        console.log(`[Meta Pixel ✅] Fired: ${eventName}`);
+      }
     } else {
-      window.fbq('track', eventName);
+      console.warn(`[Meta Pixel ❌] Window.fbq not found! Event missed: ${eventName}`);
     }
   }
 };
