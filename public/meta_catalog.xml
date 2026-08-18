@@ -36,53 +36,5 @@
       <g:google_product_category>Home &amp; Garden &gt; Decor &gt; Trays</g:google_product_category>
       <g:fb_product_category>Home &amp; Garden &gt; Decor</g:fb_product_category>
     </item>
-
-    <!-- Item 3: Lord Ganesha Twin Gift Set -->
-    <item>
-      <g:id>ganesha-twin-pack</g:id>
-      <g:title>Lord Ganesha Murti — Auspicious Gifting Twin Pack (Set of 2)</g:title>
-      <g:description>Double the blessings. Premium set of two minimalist Lord Ganesha statues for home altar and car dashboard. Crafted from 100% plant-based bio-materials in India.</g:description>
-      <g:link>https://viyonadesigns.com/buy-ganesha</g:link>
-      <g:image_link>https://viyonadesigns.com/first_post_ganesha_option2.jpg</g:image_link>
-      <g:brand>Viyona Designs</g:brand>
-      <g:condition>new</g:condition>
-      <g:availability>in stock</g:availability>
-      <g:price>2398.00 INR</g:price>
-      <g:sale_price>999.00 INR</g:sale_price>
-      <g:google_product_category>Home &amp; Garden &gt; Decor &gt; Statues</g:google_product_category>
-      <g:fb_product_category>Home &amp; Garden &gt; Decor</g:fb_product_category>
-    </item>
-
-    <!-- Item 4: Lord Ganesha Car Dashboard Edition -->
-    <item>
-      <g:id>ganesha-car-altar-edition</g:id>
-      <g:title>Lord Ganesha Idol — Car Dashboard Edition</g:title>
-      <g:description>Start every journey with divine peace. Minimalist Vinayaka statue with heat-resistant matte white finish designed specifically for luxury car cabins and desks.</g:description>
-      <g:link>https://viyonadesigns.com/buy-ganesha</g:link>
-      <g:image_link>https://viyonadesigns.com/ganesha_reel_vertical.jpg</g:image_link>
-      <g:brand>Viyona Designs</g:brand>
-      <g:condition>new</g:condition>
-      <g:availability>in stock</g:availability>
-      <g:price>1199.00 INR</g:price>
-      <g:sale_price>550.00 INR</g:sale_price>
-      <g:google_product_category>Home &amp; Garden &gt; Decor &gt; Statues</g:google_product_category>
-      <g:fb_product_category>Home &amp; Garden &gt; Decor</g:fb_product_category>
-    </item>
-
-    <!-- Item 5: Sleeping Puppy Dual Set -->
-    <item>
-      <g:id>sleeping-puppy-dual-set</g:id>
-      <g:title>Sleeping Puppy Catchall Tray — Dual Gift Set (Pair)</g:title>
-      <g:description>Charming pair of sleeping puppy desk organizers to keep bedside nightstands and office desks tidy. 100% eco-friendly bio-plastic crafted in India.</g:description>
-      <g:link>https://viyonadesigns.com/buy-puppy</g:link>
-      <g:image_link>https://viyonadesigns.com/images/puppy_front.jpg</g:image_link>
-      <g:brand>Viyona Designs</g:brand>
-      <g:condition>new</g:condition>
-      <g:availability>in stock</g:availability>
-      <g:price>1998.00 INR</g:price>
-      <g:sale_price>899.00 INR</g:sale_price>
-      <g:google_product_category>Home &amp; Garden &gt; Decor &gt; Trays</g:google_product_category>
-      <g:fb_product_category>Home &amp; Garden &gt; Decor</g:fb_product_category>
-    </item>
   </channel>
 </rss>
