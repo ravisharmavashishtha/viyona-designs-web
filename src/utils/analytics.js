@@ -3,26 +3,8 @@
 export const GA_MEASUREMENT_ID = 'G-R2FR44J83H';
 export const META_PIXEL_ID = '2533819650389389';
 
-// Extract test_event_code if user is testing inside Meta Events Manager
-const getTestEventCode = () => {
-  if (typeof window === 'undefined') return null;
-  const params = new URLSearchParams(window.location.search);
-  const code = params.get('test_event_code') || params.get('_fb_test_code') || params.get('fb_test_code');
-  if (code) {
-    try {
-      sessionStorage.setItem('meta_test_event_code', code);
-    } catch (e) {}
-    return code;
-  }
-  try {
-    return sessionStorage.getItem('meta_test_event_code');
-  } catch (e) {
-    return null;
-  }
-};
-
 /**
- * Initialize Meta Pixel script dynamically
+ * Initialize Meta Pixel script dynamically if not already loaded
  */
 export const initMetaPixel = (pixelId = META_PIXEL_ID) => {
   if (typeof window === 'undefined' || !pixelId) return;
@@ -75,9 +57,12 @@ export const initGA = (measurementId = GA_MEASUREMENT_ID) => {
 };
 
 /**
- * Track Page Views on SPA route change (GA4 + Meta Pixel)
+ * Track Page Views on SPA route change
+ * @param {string} path - URL pathname
+ * @param {string} title - Page document title
+ * @param {boolean} isInitialLoad - True only on first component mount
  */
-export const trackPageView = (path, title) => {
+export const trackPageView = (path, title, isInitialLoad = false) => {
   if (typeof window !== 'undefined') {
     // GA4
     if (window.gtag) {
@@ -87,8 +72,11 @@ export const trackPageView = (path, title) => {
         page_location: window.location.href,
       });
     }
-    // Meta Pixel
-    trackMetaEvent('PageView');
+
+    // Meta Pixel: index.html fires the first PageView. Subsequent route changes fire here.
+    if (!isInitialLoad) {
+      trackMetaEvent('PageView');
+    }
   }
 };
 
@@ -103,71 +91,23 @@ export const trackEvent = (action, params = {}) => {
   }
 };
 
-// Event deduplication cache to prevent duplicate rapid fires
-const recentMetaEvents = new Map();
-
 /**
- * Track Meta Pixel Events (e.g. ViewContent, InitiateCheckout, PageView)
- * Clean, single-dispatch with auto-deduplication within 600ms window
+ * Track Meta Pixel Standard Events (ViewContent, InitiateCheckout, PageView)
  */
 export const trackMetaEvent = (eventName, params = {}) => {
   if (typeof window === 'undefined') return;
 
   initMetaPixel();
 
-  // Deduplicate identical event calls within 600ms
-  const eventKey = `${eventName}_${JSON.stringify(params)}`;
-  const now = Date.now();
-  if (recentMetaEvents.has(eventKey) && (now - recentMetaEvents.get(eventKey)) < 600) {
-    return;
-  }
-  recentMetaEvents.set(eventKey, now);
-
-  const testCode = getTestEventCode();
-  const options = testCode ? { test_event_code: testCode } : undefined;
-
-  // 1. Standard Official Meta Pixel SDK Dispatch
   if (window.fbq) {
-    if (options) {
-      window.fbq('track', eventName, params, options);
-    } else {
+    if (Object.keys(params).length > 0) {
       window.fbq('track', eventName, params);
+    } else {
+      window.fbq('track', eventName);
     }
-  } else {
-    // 2. Direct Fallback Beacon only if window.fbq failed to load
-    try {
-      const beaconParams = new URLSearchParams({
-        id: META_PIXEL_ID,
-        ev: eventName,
-        dl: window.location.href,
-        rl: document.referrer || '',
-        if: 'false',
-        ts: String(now),
-        v: '2.9.150',
-        r: 'stable',
-        noscript: '1',
-      });
-
-      if (testCode) {
-        beaconParams.append('test_event_code', testCode);
-      }
-
-      if (params.content_name) beaconParams.append('cd[content_name]', params.content_name);
-      if (params.content_ids) beaconParams.append('cd[content_ids]', JSON.stringify(params.content_ids));
-      if (params.content_type) beaconParams.append('cd[content_type]', params.content_type);
-      if (params.value) beaconParams.append('cd[value]', String(params.value));
-      if (params.currency) beaconParams.append('cd[currency]', params.currency);
-
-      const beaconUrl = `https://www.facebook.com/tr/?${beaconParams.toString()}`;
-      const img = new Image();
-      img.src = beaconUrl;
-    } catch (err) {}
   }
 
   if (import.meta.env.DEV) {
-    console.log(`[Meta Pixel Event: ${eventName}]`, params, options || '');
+    console.log(`[Meta Pixel Event: ${eventName}]`, params);
   }
 };
-
-
-
