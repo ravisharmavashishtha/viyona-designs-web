@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { trackMetaEvent, trackEvent } from '../utils/analytics';
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -18,8 +19,10 @@ function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simulate submission state
     setSubmitted(true);
+    // Meta: Contact standard event
+    trackMetaEvent('Contact');
+    trackEvent('generate_lead', { method: 'contact_form' });
   };
 
   return (
@@ -80,7 +83,7 @@ function Contact() {
                     <div style={{ fontSize: '1.4rem', lineHeight: 1 }}>✉️</div>
                     <div>
                       <div style={{ fontSize: '0.82rem', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: '600', letterSpacing: '0.05em' }}>Email Support</div>
-                      <a href="mailto:support@viyonadesigns.com" style={{ color: 'var(--accent-gold)', fontWeight: '600', fontSize: '1.02rem', textDecoration: 'none' }}>
+                      <a href="mailto:support@viyonadesigns.com" onClick={() => { trackMetaEvent('Lead', { lead_type: 'email' }); trackEvent('generate_lead', { method: 'email' }); }} style={{ color: 'var(--accent-gold)', fontWeight: '600', fontSize: '1.02rem', textDecoration: 'none' }}>
                         support@viyonadesigns.com
                       </a>
                       <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>Mon – Sat, 10:00 AM – 7:00 PM IST</div>

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import footerLogoImg from '../assets/logo-footer.png';
+import { trackMetaEvent, trackEvent } from '../utils/analytics';
 
 function Footer() {
   return (
@@ -190,6 +191,10 @@ function Footer() {
               </a>
               <a 
                 href="mailto:support@viyonadesigns.com" 
+                onClick={() => {
+                  trackMetaEvent('Lead', { lead_type: 'email' });
+                  trackEvent('generate_lead', { method: 'email' });
+                }}
                 style={{ 
                   display: 'inline-flex', 
                   alignItems: 'center', 
