@@ -74,6 +74,7 @@ function AmazonFastRedirect({ url, product }) {
 function RouteAnalyticsTracker() {
   const location = useLocation();
   const navigate = useNavigate();
+  const isInitialRef = useRef(true);
 
   useEffect(() => {
     initGA();
@@ -87,7 +88,11 @@ function RouteAnalyticsTracker() {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     trackPageView(location.pathname + location.search, document.title);
-    trackMetaEvent('PageView');
+    
+    if (!isInitialRef.current) {
+      trackMetaEvent('PageView');
+    }
+    isInitialRef.current = false;
   }, [location]);
 
   return null;
