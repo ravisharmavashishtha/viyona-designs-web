@@ -50,3 +50,17 @@ export const trackEvent = (action, params = {}) => {
     console.log(`[GA4 Event] ${action}`, params);
   }
 };
+
+/**
+ * Track Meta Pixel Standard Events (e.g. ViewContent, InitiateCheckout, Contact)
+ */
+export const trackMetaEvent = (eventName, params = {}) => {
+  if (typeof window !== 'undefined' && window.fbq) {
+    if (Object.keys(params).length > 0) {
+      window.fbq('track', eventName, params);
+    } else {
+      window.fbq('track', eventName);
+    }
+  }
+};
+
