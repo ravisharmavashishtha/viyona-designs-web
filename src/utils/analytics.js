@@ -1,105 +1,113 @@
-/**
- * Analytics Utility — Viyona Designs
- * Tracks GA4 and Meta Pixel (Facebook) events cleanly across all SPA routes.
- *
- * Architecture:
- *  - GA4:        Google Analytics 4 via gtag (initialised in index.html)
- *  - Meta Pixel: react-facebook-pixel SDK (single entry point, no duplicate beacons)
- *  - EventID:    UUID-based deduplication for server-side attribution compatibility
- */
+// Comprehensive Analytics Utility for Viyona Designs
+// Supports Google Analytics 4 (GA4) + Meta Pixel (react-facebook-pixel + Direct SDK + Image Beacon Fallback)
 
 import ReactPixel from 'react-facebook-pixel';
 
-// ─── Constants ───────────────────────────────────────────────────────────────
-export const GA_MEASUREMENT_ID  = 'G-R2FR44J83H';
-export const META_PIXEL_ID      = '2533819650389389';
+export const GA_MEASUREMENT_ID = 'G-R2FR44J83H';
+export const META_PIXEL_ID = '2533819650389389';
 
-// ─── Internal State ───────────────────────────────────────────────────────────
 let isPixelInitialized = false;
-const isDev = typeof import.meta !== 'undefined' && import.meta.env?.DEV;
-
-// ─── Helpers ──────────────────────────────────────────────────────────────────
 
 /**
- * Generate a short unique event ID for deduplication.
- * Prevents the same event from being double-counted if server-side
- * Conversions API is added in future.
- */
-const generateEventId = () =>
-  `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
-
-// ─── Initialisation ───────────────────────────────────────────────────────────
-
-/**
- * Initialise Google Analytics 4.
- * Safe to call multiple times — only attaches the script once.
+ * Initialize Google Analytics script dynamically
  */
 export const initGA = (measurementId = GA_MEASUREMENT_ID) => {
-  if (typeof window === 'undefined' || !measurementId) return;
-  // gtag script is already injected in index.html — nothing more needed here
-  // This call is kept for backwards compatibility in redirect pages
-};
+  if (typeof window === 'undefined' || !measurementId || measurementId === 'G-XXXXXXXXXX') return;
 
-/**
- * Initialise Meta Pixel via react-facebook-pixel.
- * Safe to call multiple times — initialises only once.
- * Debug logging enabled only in local development.
- */
-export const initMetaPixel = (pixelId = META_PIXEL_ID) => {
-  if (typeof window === 'undefined' || !pixelId || isPixelInitialized) return;
-  try {
-    ReactPixel.init(
-      pixelId,
-      {}, // advancedMatching — left empty; Automatic Advanced Matching is ON from Meta dashboard
-      {
-        autoConfig: true,
-        debug: isDev,  // Silent in production, verbose in local dev
-      }
-    );
-    isPixelInitialized = true;
-    if (isDev) console.log('[Meta Pixel] Initialised — Pixel ID:', pixelId);
-  } catch (e) {
-    if (isDev) console.warn('[Meta Pixel] Init error:', e);
-  }
-};
+  if (!document.getElementById('ga4-script')) {
+    const script = document.createElement('script');
+    script.id = 'ga4-script';
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+    document.head.appendChild(script);
 
-// ─── Page View Tracking ───────────────────────────────────────────────────────
-
-/**
- * Track a GA4 page_view event on SPA route change.
- * Should be called from RouteAnalyticsTracker on every location change.
- */
-export const trackPageView = (path, title) => {
-  if (typeof window === 'undefined') return;
-  if (window.gtag) {
-    window.gtag('event', 'page_view', {
-      page_path:     path,
-      page_title:    title || document.title,
-      page_location: window.location.href,
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      window.dataLayer.push(arguments);
+    }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', measurementId, {
+      send_page_view: false, // Handled dynamically in SPA by RouteAnalyticsTracker
     });
   }
 };
 
 /**
- * Track a Meta Pixel PageView on SPA route change.
- * Should only be called on navigation — NOT on initial load
- * (index.html base code already sends the first PageView).
+ * Initialize Meta Pixel via react-facebook-pixel
  */
-export const trackMetaPageView = () => {
-  if (typeof window === 'undefined') return;
-  if (!isPixelInitialized) initMetaPixel();
-  try {
-    ReactPixel.pageView();
-    if (isDev) console.log('[Meta Pixel] PageView fired');
-  } catch (e) {
-    // ReactPixel not available — fbq base code still captures it
+export const initMetaPixel = (pixelId = META_PIXEL_ID) => {
+  if (typeof window === 'undefined' || !pixelId) return;
+  if (!isPixelInitialized) {
+    try {
+      ReactPixel.init(pixelId, {}, {
+        autoConfig: true,
+        debug: true
+      });
+      isPixelInitialized = true;
+    } catch (e) {
+      console.warn('[Meta Pixel Init Notice]', e);
+    }
   }
 };
 
-// ─── Standard Event Tracking ─────────────────────────────────────────────────
+/**
+ * Direct HTTP Beacon Dispatcher (Guarantees network request directly to Facebook's tracking servers)
+ */
+const sendMetaBeacon = (eventName, params = {}) => {
+  if (typeof window === 'undefined') return;
+  try {
+    const queryParts = [
+      `id=${encodeURIComponent(META_PIXEL_ID)}`,
+      `ev=${encodeURIComponent(eventName)}`,
+      `dl=${encodeURIComponent(window.location.href)}`,
+      `rl=${encodeURIComponent(document.referrer || '')}`,
+      `if=false`,
+      `ts=${Date.now()}`,
+      `v=2.9.150`
+    ];
+
+    if (params && typeof params === 'object') {
+      Object.entries(params).forEach(([key, val]) => {
+        if (Array.isArray(val)) {
+          queryParts.push(`cd[${encodeURIComponent(key)}]=${encodeURIComponent(JSON.stringify(val))}`);
+        } else if (typeof val === 'object' && val !== null) {
+          queryParts.push(`cd[${encodeURIComponent(key)}]=${encodeURIComponent(JSON.stringify(val))}`);
+        } else if (val !== undefined && val !== null) {
+          queryParts.push(`cd[${encodeURIComponent(key)}]=${encodeURIComponent(val)}`);
+        }
+      });
+    }
+
+    const beacon = new Image(1, 1);
+    beacon.style.display = 'none';
+    beacon.src = `https://www.facebook.com/tr/?${queryParts.join('&')}`;
+  } catch (err) {
+    // Non-critical fallback suppression
+  }
+};
 
 /**
- * Track a GA4 custom event.
+ * Track Page Views on SPA route change
+ */
+export const trackPageView = (path, title) => {
+  if (typeof window === 'undefined') return;
+
+  // 1. Google Analytics 4
+  if (window.gtag) {
+    window.gtag('event', 'page_view', {
+      page_path: path,
+      page_title: title || document.title,
+      page_location: window.location.href,
+    });
+  }
+
+  // 2. Meta Pixel PageView
+  trackMetaEvent('PageView');
+};
+
+/**
+ * Track Custom Events in GA4
  */
 export const trackEvent = (action, params = {}) => {
   if (typeof window !== 'undefined' && window.gtag) {
@@ -108,104 +116,38 @@ export const trackEvent = (action, params = {}) => {
 };
 
 /**
- * Track any Meta Pixel standard event with full deduplication support.
- * Uses react-facebook-pixel as primary layer, window.fbq as safety fallback.
- *
- * @param {string} eventName  - Standard Meta event name e.g. 'ViewContent'
- * @param {object} params     - Standard event parameters
- * @param {string} [eventId]  - Optional custom eventID for deduplication
+ * Track Meta Pixel Standard & Custom Events
  */
-export const trackMetaEvent = (eventName, params = {}, eventId) => {
+export const trackMetaEvent = (eventName, params = {}) => {
   if (typeof window === 'undefined') return;
-  if (!isPixelInitialized) initMetaPixel();
 
-  const eid = eventId || generateEventId();
-  const hasParams = params && Object.keys(params).length > 0;
-
-  // Primary: react-facebook-pixel
+  // 1. React Facebook Pixel Module
   try {
+    if (!isPixelInitialized) {
+      initMetaPixel();
+    }
     if (eventName === 'PageView') {
       ReactPixel.pageView();
-    } else if (hasParams) {
-      ReactPixel.track(eventName, params);
     } else {
-      ReactPixel.track(eventName);
+      ReactPixel.track(eventName, params);
     }
   } catch (err) {
-    // Fallback to native fbq if ReactPixel fails
-    if (window.fbq) {
-      try {
-        if (hasParams) {
-          window.fbq('track', eventName, params, { eventID: eid });
-        } else {
-          window.fbq('track', eventName, {}, { eventID: eid });
-        }
-      } catch (e) { /* non-critical */ }
+    // Handled by next layers
+  }
+
+  // 2. Window fbq Native Fallback
+  if (window.fbq) {
+    try {
+      if (params && Object.keys(params).length > 0) {
+        window.fbq('track', eventName, params);
+      } else {
+        window.fbq('track', eventName);
+      }
+    } catch (e) {
+      // Handled by next layers
     }
   }
 
-  if (isDev) {
-    console.log(`[Meta Pixel] ${eventName}`, hasParams ? params : '(no params)', `eventID: ${eid}`);
-  }
-};
-
-// ─── Convenience Trackers ─────────────────────────────────────────────────────
-
-/**
- * Track ViewContent — fires when a visitor views a product detail page.
- */
-export const trackViewContent = (product) => {
-  trackMetaEvent('ViewContent', {
-    content_name: product.displayName || product.name,
-    content_ids:  [product.id],
-    content_type: 'product',
-    value:        parseFloat(product.price?.replace(/[^0-9.]/g, '')) || 550,
-    currency:     'INR',
-  });
-  trackEvent('view_item', {
-    currency:  'INR',
-    value:     parseFloat(product.price?.replace(/[^0-9.]/g, '')) || 550,
-    items:     [{ item_id: product.id, item_name: product.name, price: parseFloat(product.price?.replace(/[^0-9.]/g, '')) || 550 }],
-  });
-};
-
-/**
- * Track InitiateCheckout — fires when a visitor taps "Buy on Amazon".
- */
-export const trackInitiateCheckout = (product, location = 'unknown') => {
-  const price = typeof product.price === 'number'
-    ? product.price
-    : parseFloat((product.price || '').replace(/[^0-9.]/g, '')) || 550;
-
-  trackMetaEvent('InitiateCheckout', {
-    content_name: product.displayName || product.name,
-    content_ids:  [product.id],
-    content_type: 'product',
-    value:        price,
-    currency:     'INR',
-    num_items:    1,
-  });
-  trackEvent('begin_checkout', {
-    currency:    'INR',
-    value:       price,
-    items:       [{ item_id: product.id, item_name: product.name, price }],
-    click_location: location,
-  });
-};
-
-/**
- * Track Contact — fires when a visitor submits the contact form.
- */
-export const trackContact = () => {
-  trackMetaEvent('Contact');
-  trackEvent('generate_lead', { method: 'contact_form' });
-};
-
-/**
- * Track Lead — fires when a visitor clicks WhatsApp or Email CTA.
- * @param {'whatsapp'|'email'|'instagram'|'facebook'} method
- */
-export const trackLead = (method) => {
-  trackMetaEvent('Lead', { lead_type: method });
-  trackEvent('generate_lead', { method });
+  // 3. Direct Network Beacon (Physical network hit to https://www.facebook.com/tr/)
+  sendMetaBeacon(eventName, params);
 };

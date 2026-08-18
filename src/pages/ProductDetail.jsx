@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { products } from '../data/products';
 import { useEffect, useState, useRef } from 'react';
-import { trackEvent, trackViewContent, trackInitiateCheckout } from '../utils/analytics';
+import { trackEvent, trackMetaEvent } from '../utils/analytics';
 
 function ProductDetail() {
   const { id } = useParams();
@@ -19,8 +19,14 @@ function ProductDetail() {
       const pageTitle = `${product.displayName || product.name} — ${product.price} | Viyona Designs`;
       document.title = pageTitle;
 
-      // Standard Meta Pixel + GA4 ViewContent Event
-      trackViewContent(product);
+      // Standard Meta Pixel ViewContent Event
+      trackMetaEvent('ViewContent', {
+        content_name: product.displayName || product.name,
+        content_ids: [product.id],
+        content_type: 'product',
+        value: parseFloat(product.price.replace(/[^0-9.]/g, '')) || 550,
+        currency: 'INR'
+      });
 
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) metaDesc.setAttribute('content', product.description.slice(0, 160) + '...');
@@ -369,7 +375,7 @@ function ProductDetail() {
                 rel="noopener noreferrer" 
                 onClick={() => {
                   trackEvent('click_buy_amazon', { product_id: product.id, product_name: product.name, price: product.price, location: 'main_cta' });
-                  trackInitiateCheckout(product, 'main_cta');
+                  trackMetaEvent('InitiateCheckout', { content_name: product.displayName || product.name, content_ids: [product.id], content_type: 'product', value: parseFloat(product.price.replace(/[^0-9.]/g, '')) || 550, currency: 'INR' });
                 }}
                 className="btn btn-amazon"
                 style={{ 
@@ -675,7 +681,7 @@ function ProductDetail() {
           rel="noopener noreferrer" 
           onClick={() => {
             trackEvent('click_buy_amazon', { product_id: product.id, product_name: product.name, price: product.price, location: 'mobile_sticky_bar' });
-            trackInitiateCheckout(product, 'mobile_sticky_bar');
+            trackMetaEvent('InitiateCheckout', { content_name: product.displayName || product.name, content_ids: [product.id], content_type: 'product', value: parseFloat(product.price.replace(/[^0-9.]/g, '')) || 550, currency: 'INR' });
           }}
           className="btn btn-amazon"
           style={{ 

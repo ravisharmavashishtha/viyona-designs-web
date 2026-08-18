@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import footerLogoImg from '../assets/logo-footer.png';
-import { trackLead } from '../utils/analytics';
 
 function Footer() {
   return (
@@ -190,8 +189,7 @@ function Footer() {
                 <span>📘</span> Facebook (/viyonadesigns)
               </a>
               <a 
-                href="mailto:support@viyonadesigns.com"
-                onClick={() => trackLead('email')}
+                href="mailto:support@viyonadesigns.com" 
                 style={{ 
                   display: 'inline-flex', 
                   alignItems: 'center', 
