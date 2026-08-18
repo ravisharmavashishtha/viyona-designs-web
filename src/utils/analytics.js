@@ -1,10 +1,11 @@
 // Comprehensive Analytics Utility for Viyona Designs
-// Supports Google Analytics 4 (GA4) + Meta Pixel (react-facebook-pixel + Direct SDK + Image Beacon Fallback)
+// Supports Google Analytics 4 (GA4) + Meta Pixel (react-facebook-pixel + Direct SDK + Image Beacon + Conversions API CAPI)
 
 import ReactPixel from 'react-facebook-pixel';
 
 export const GA_MEASUREMENT_ID = 'G-R2FR44J83H';
 export const META_PIXEL_ID = '2533819650389389';
+export const META_CAPI_ACCESS_TOKEN = 'EAAaGdKZA1XlgBSRshp7cqawo60cvOmJGSZBnXikNeynvGDLsGdUUXfKdE4JkDTbeF7bFVZALiYBODYZAvP6JV3Uzj5PUcfWqAqIALnzVD04SHir7VTg21cjkz82yOboYXToV4v7BpsgmLXEF4ZAianUPCAyXzsjLBZCZCaGwKD4ZA0YkAq7ZAnioGUZBfX63g4gAZDZD';
 
 let isPixelInitialized = false;
 
@@ -42,7 +43,7 @@ export const initMetaPixel = (pixelId = META_PIXEL_ID) => {
     try {
       ReactPixel.init(pixelId, {}, {
         autoConfig: true,
-        debug: true
+        debug: false
       });
       isPixelInitialized = true;
     } catch (e) {
@@ -54,7 +55,7 @@ export const initMetaPixel = (pixelId = META_PIXEL_ID) => {
 /**
  * Direct HTTP Beacon Dispatcher (Guarantees network request directly to Facebook's tracking servers)
  */
-const sendMetaBeacon = (eventName, params = {}) => {
+const sendMetaBeacon = (eventName, params = {}, eventId) => {
   if (typeof window === 'undefined') return;
   try {
     const queryParts = [
@@ -66,6 +67,10 @@ const sendMetaBeacon = (eventName, params = {}) => {
       `ts=${Date.now()}`,
       `v=2.9.150`
     ];
+
+    if (eventId) {
+      queryParts.push(`eid=${encodeURIComponent(eventId)}`);
+    }
 
     if (params && typeof params === 'object') {
       Object.entries(params).forEach(([key, val]) => {
@@ -84,6 +89,47 @@ const sendMetaBeacon = (eventName, params = {}) => {
     beacon.src = `https://www.facebook.com/tr/?${queryParts.join('&')}`;
   } catch (err) {
     // Non-critical fallback suppression
+  }
+};
+
+/**
+ * Meta Conversions API (CAPI) Direct Graph API POST Dispatcher
+ * Directly reaches Meta servers with event deduplication (event_id)
+ */
+const sendMetaConversionsAPI = (eventName, params = {}, eventId) => {
+  if (typeof window === 'undefined' || !META_CAPI_ACCESS_TOKEN) return;
+
+  try {
+    const payload = {
+      data: [
+        {
+          event_name: eventName,
+          event_time: Math.floor(Date.now() / 1000),
+          event_id: eventId,
+          event_source_url: window.location.href,
+          action_source: 'website',
+          user_data: {
+            client_user_agent: typeof navigator !== 'undefined' ? navigator.userAgent : '',
+          },
+          custom_data: params && Object.keys(params).length > 0 ? params : undefined
+        }
+      ],
+      access_token: META_CAPI_ACCESS_TOKEN
+    };
+
+    fetch(`https://graph.facebook.com/v19.0/${META_PIXEL_ID}/events`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload),
+      mode: 'cors',
+      keepalive: true
+    }).catch(() => {
+      // Non-critical background suppression
+    });
+  } catch (err) {
+    // Non-critical background suppression
   }
 };
 
@@ -117,9 +163,13 @@ export const trackEvent = (action, params = {}) => {
 
 /**
  * Track Meta Pixel Standard & Custom Events
+ * Dispatches synchronously across Browser SDK, Native fbq, Image Beacon, and Conversions API (CAPI)
  */
 export const trackMetaEvent = (eventName, params = {}) => {
   if (typeof window === 'undefined') return;
+
+  // Generate unique eventId for exact Meta Pixel + CAPI deduplication
+  const eventId = `vd-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 
   // 1. React Facebook Pixel Module
   try {
@@ -139,9 +189,9 @@ export const trackMetaEvent = (eventName, params = {}) => {
   if (window.fbq) {
     try {
       if (params && Object.keys(params).length > 0) {
-        window.fbq('track', eventName, params);
+        window.fbq('track', eventName, params, { eventID: eventId });
       } else {
-        window.fbq('track', eventName);
+        window.fbq('track', eventName, {}, { eventID: eventId });
       }
     } catch (e) {
       // Handled by next layers
@@ -149,5 +199,8 @@ export const trackMetaEvent = (eventName, params = {}) => {
   }
 
   // 3. Direct Network Beacon (Physical network hit to https://www.facebook.com/tr/)
-  sendMetaBeacon(eventName, params);
+  sendMetaBeacon(eventName, params, eventId);
+
+  // 4. Meta Conversions API (CAPI) Direct Graph API POST (Bypasses ad-blockers / Safari ITP)
+  sendMetaConversionsAPI(eventName, params, eventId);
 };
