@@ -28,20 +28,34 @@ function ProductDetail() {
         currency: 'INR'
       });
 
+      const setMetaTag = (property, content) => {
+        let el = document.querySelector(`meta[property="${property}"]`);
+        if (!el) {
+          el = document.createElement('meta');
+          el.setAttribute('property', property);
+          document.head.appendChild(el);
+        }
+        el.setAttribute('content', content);
+      };
+
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) metaDesc.setAttribute('content', product.description.slice(0, 160) + '...');
 
-      const ogTitle = document.querySelector('meta[property="og:title"]');
-      if (ogTitle) ogTitle.setAttribute('content', pageTitle);
-
-      const ogDesc = document.querySelector('meta[property="og:description"]');
-      if (ogDesc) ogDesc.setAttribute('content', product.shortDesc);
-
-      const ogImg = document.querySelector('meta[property="og:image"]');
-      if (ogImg) ogImg.setAttribute('content', `${window.location.origin}${product.lifestyleImage || product.images[0]}`);
+      setMetaTag('og:title', pageTitle);
+      setMetaTag('og:description', product.shortDesc);
+      setMetaTag('og:image', `${window.location.origin}${product.lifestyleImage || product.images[0]}`);
+      setMetaTag('og:type', 'product');
+      setMetaTag('product:retailer_item_id', product.id);
+      setMetaTag('product:price:amount', (parseFloat(product.price.replace(/[^0-9.]/g, '')) || 550).toFixed(2));
+      setMetaTag('product:price:currency', 'INR');
+      setMetaTag('product:availability', 'in stock');
+      setMetaTag('product:condition', 'new');
+      setMetaTag('product:brand', 'Viyona Designs');
     }
     return () => {
       document.title = 'Viyona Designs — Thoughtfully Designed. Perfectly Made. | Modern Eco-Friendly Decor & Home Products';
+      const ogType = document.querySelector('meta[property="og:type"]');
+      if (ogType) ogType.setAttribute('content', 'website');
     };
   }, [id, product]);
 
