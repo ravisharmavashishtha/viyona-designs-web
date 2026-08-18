@@ -12,11 +12,12 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import BrandShowcase from './pages/BrandShowcase';
 
-import { initGA, trackPageView, trackEvent, trackMetaEvent } from './utils/analytics';
+import { initGA, initMetaPixel, trackPageView, trackEvent, trackMetaEvent } from './utils/analytics';
 
 function AmazonFastRedirect({ url, product }) {
   useEffect(() => {
     initGA();
+    initMetaPixel();
     const pageTitle = `Redirecting to Amazon — ${product}`;
     document.title = pageTitle;
     trackPageView(window.location.pathname + window.location.search, pageTitle);
@@ -35,7 +36,7 @@ function AmazonFastRedirect({ url, product }) {
       currency: 'INR'
     });
 
-    // 350ms safe delay gives analytics beacons 100% time to dispatch over the network
+    // 350ms safe delay gives analytics beacons time to dispatch over the network
     const timer = setTimeout(() => {
       window.location.replace(url);
     }, 350);
@@ -74,10 +75,10 @@ function AmazonFastRedirect({ url, product }) {
 function RouteAnalyticsTracker() {
   const location = useLocation();
   const navigate = useNavigate();
-  const isInitialRef = useRef(true);
 
   useEffect(() => {
     initGA();
+    initMetaPixel();
     // Catch and redirect legacy hash routes like #/product/ganesha-statue
     if (window.location.hash && window.location.hash.startsWith('#/')) {
       const target = window.location.hash.slice(1);
@@ -88,11 +89,6 @@ function RouteAnalyticsTracker() {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     trackPageView(location.pathname + location.search, document.title);
-    
-    if (!isInitialRef.current) {
-      trackMetaEvent('PageView');
-    }
-    isInitialRef.current = false;
   }, [location]);
 
   return null;
