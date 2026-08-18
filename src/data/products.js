@@ -25,12 +25,14 @@ export const products = [
     amazonLink: 'https://www.amazon.in/dp/B0HF5124YZ',
     images: [
       '/images/ganesha_front.jpg',
-      '/first_post_ganesha_option2.jpg',
+      '/images/ganesha_lifestyle_2k.png',
+      '/images/ganesha_lifestyle_mandir.png',
+      '/images/ganesha_lifestyle_desk.png',
       '/images/ganesha_right.jpg',
       '/images/ganesha_left.jpg',
       '/images/ganesha_back.jpg'
     ],
-    lifestyleImage: '/first_post_ganesha_option2.jpg',
+    lifestyleImage: '/images/ganesha_lifestyle_2k.png',
     price: '₹550.00',
     mrp: '₹1,199.00',
     discount: '54% OFF',
