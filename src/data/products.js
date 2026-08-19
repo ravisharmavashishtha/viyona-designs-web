@@ -20,7 +20,7 @@ export const products = [
       { label: 'Crafted In', value: 'India' },
       { label: 'Material', value: '100% Bio-Plastic' },
       { label: 'Weight', value: '45 Grams' },
-      { label: 'Finish', value: 'Silk Matte' }
+      { label: 'Color', value: 'Pure White' }
     ],
     amazonLink: 'https://www.amazon.in/dp/B0HF5124YZ',
     images: [
@@ -39,7 +39,7 @@ export const products = [
     specs: {
       'Category': 'Spiritual & Religious Decor',
       'Brand': 'Viyona Designs',
-      'Primary Color': 'Silk Warm White',
+      'Primary Color': 'Pure White',
       'Material': 'Plant-based Biodegradable Bio-Plastic',
       'Dimensions': '5.4 cm (L) × 7.3 cm (W) × 10.3 cm (H)',
       'Item Weight': '45 Grams (150g Boxed)',
