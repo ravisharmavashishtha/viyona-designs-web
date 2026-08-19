@@ -32,3 +32,9 @@ Every AI assistant or developer working in this repository MUST follow these rul
 ## 4. Brand Information & Cloud Sync Rule (`H:\My Drive\Website\brandinfo`)
 - All master brand guidelines, product catalogs (Markdown & JSON), Amazon listing copies, and deployment manuals are stored at `H:\My Drive\Website\brandinfo\`.
 - Whenever any change is made to brand identity, product details, pricing, keywords, or images, the files in `H:\My Drive\Website\brandinfo\` MUST be updated concurrently.
+
+## 5. Social Media Publishing Approval Rule
+- **NEVER post or publish any content to social media (Instagram, Facebook, etc.) without explicit user review.**
+- Always draft and present the proposed visual asset, caption, hashtags, and links in the chat first.
+- **ONLY execute the live publishing action when the user explicitly provides approval containing the keyword `"approve"`** (e.g. *"approve"*, *"approved"*, *"I approve"*).
+
