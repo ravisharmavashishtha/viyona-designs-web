@@ -104,24 +104,22 @@ export const products = [
     bullets: [
       'UNMATCHED DAILY PRACTICALITY & DUAL ORIENTATION: Effortless one-handed docking in Portrait (FaceTime, calls) and Landscape (YouTube, movies). Fits all 4.0" to 7.0" smartphones with or without cases.',
       'ELEVATED SPILL-PROOF BASE: Raised ground clearance keeps your valuable smartphone safely elevated above desk surfaces to prevent liquid and coffee spills.',
-      'REINFORCED TOUGHNESS: Made from high-tensile PLA+ polymer for superior durability over standard brittle plastics with zero fragile moving hinges.',
+      'REINFORCED TOUGHNESS: Made from high-tensile bio-polymer for superior durability over standard brittle plastics with zero fragile moving hinges.',
       'ANTI-SCRATCH FINISH: Smooth rounded contours and soft-touch tactile micro-layers protect glass backs, metal edges, and camera bumps.',
       'ROCK-SOLID DESKTOP STABILITY: Low center of gravity delivers wobble-free support when typing, tapping, and scrolling.'
     ],
     highlights: [
       { label: 'Crafted In', value: 'India' },
-      { label: 'Material', value: 'Plant-Based PLA+' },
+      { label: 'Material', value: 'Plant-Based Bio-Plastic' },
       { label: 'Weight', value: '34 Grams' },
-      { label: 'Orientation', value: 'Dual View' }
+      { label: 'Color', value: 'Matte Black' }
     ],
     amazonLink: '/buy-phone-stand',
     images: [
       '/images/phonestand/lifestyle.webp',
       '/images/phonestand/in_use_black_stand.webp',
       '/images/phonestand/balck_side_angle.webp',
-      '/images/phonestand/close_up_white.webp',
-      '/images/phonestand/black_white_background.webp',
-      '/images/phonestand/all_3.webp'
+      '/images/phonestand/black_white_background.webp'
     ],
     lifestyleImage: '/images/phonestand/lifestyle.webp',
     price: '₹349.00',
@@ -131,12 +129,13 @@ export const products = [
       'Category': 'Desk Accessories & Phone Stands',
       'Brand': 'Viyona Designs',
       'Primary Color': 'Matte Black',
-      'Material': '100% Plant-Based Biodegradable Bio-Plastic (PLA+)',
+      'Material': '100% Plant-Based Biodegradable Bio-Plastic',
       'Dimensions': '5.4 cm (W) × 9.0 cm (L) × 6.2 cm (H)',
       'Item Weight': '34 Grams (80g Boxed)',
       'Origin': 'Designed & Manufactured in India',
       'Care': 'Wipe clean with a soft dry or damp cloth'
     }
   }
+
 ];
 
