@@ -114,7 +114,7 @@ export const products = [
       { label: 'Weight', value: '34 Grams' },
       { label: 'Color', value: 'Matte Black' }
     ],
-    amazonLink: '/buy-phone-stand',
+    amazonLink: 'https://www.amazon.in/dp/B0HFX7KCP6',
     images: [
       '/images/phonestand/lifestyle.webp',
       '/images/phonestand/in_use_black_stand.webp',
