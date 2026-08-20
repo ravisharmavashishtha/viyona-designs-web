@@ -111,6 +111,7 @@ function App() {
             {/* Branded Fast Amazon Redirects */}
             <Route path="/buy-ganesha" element={<AmazonFastRedirect url="https://www.amazon.in/dp/B0HF5124YZ" product="ganesha-statue" name="Lord Ganesha Minimalist Murti" price={550} />} />
             <Route path="/buy-puppy" element={<AmazonFastRedirect url="https://www.amazon.in/dp/B0HC36C861" product="sleeping-puppy-organizer" name="Sleeping Puppy Desk Organizer & Catchall Tray" price={499} />} />
+            <Route path="/buy-phone-stand" element={<AmazonFastRedirect url="https://www.amazon.in/s?k=Viyona+Designs+Phone+Stand" product="minimalist-phone-stand" name="Viyona Designs Minimalist Phone Stand" price={349} />} />
             <Route path="/amazon" element={<AmazonFastRedirect url="https://www.amazon.in/dp/B0HF5124YZ" product="ganesha-statue" name="Viyona Designs Amazon Official Store" price={550} />} />
 
             <Route path="/about" element={<About />} />
