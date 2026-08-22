@@ -48,4 +48,9 @@ Every AI assistant or developer working in this repository MUST follow these rul
 - Always draft and present the proposed ASIN changes, price adjustments, bullet points, or inventory counts in the chat first.
 - **ONLY execute live Amazon modifications when the user explicitly provides approval containing the keyword `"approve"`** (e.g. *"approve"*, *"approved"*, *"approve amazon update"*).
 
+## 8. Outbound & Customer Email Approval Rule
+- **NEVER send or dispatch any email (to customers, suppliers, partners, or any recipient) via Gmail/Google Workspace without explicit user review.**
+- Always draft and present the proposed recipient (`To`), subject line, and complete body copy in the chat first.
+- **ONLY execute the live email sending action when the user explicitly provides approval containing the keyword `"approve"`** (e.g. *"approve"*, *"approved"*, *"I approve"*).
+
 
