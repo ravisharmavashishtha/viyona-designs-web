@@ -2,7 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { products } from '../data/products';
 import { useEffect, useState, useRef } from 'react';
 import { trackEvent, trackMetaEvent } from '../utils/analytics';
-import RazorpayCheckoutButton from '../components/RazorpayCheckoutButton';
+import CheckoutModal from '../components/CheckoutModal';
 
 function ProductDetail() {
   const { id } = useParams();
@@ -10,6 +10,7 @@ function ProductDetail() {
   const [activeImgIdx, setActiveImgIdx] = useState(0);
   const [copied, setCopied] = useState(false);
   const [activeTab, setActiveTab] = useState('about');
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const touchStartX = useRef(null);
 
   useEffect(() => {
@@ -385,15 +386,29 @@ function ProductDetail() {
 
               {/* Payment & Ordering CTAs */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.25rem' }}>
-                {/* Instant Razorpay Standard Web Checkout */}
-                <RazorpayCheckoutButton
-                  product={product}
-                  buttonText={`⚡ Pay ${product.price} with Razorpay (Cards / UPI / NetBanking)`}
+                {/* Direct Studio Order Button (Opens Address & Razorpay Checkout) */}
+                <button
+                  onClick={() => setIsCheckoutOpen(true)}
+                  className="btn btn-primary"
                   style={{
-                    padding: '1rem',
-                    fontSize: '1.02rem'
+                    width: '100%',
+                    padding: '1rem 1.25rem',
+                    fontSize: '1.05rem',
+                    fontWeight: '700',
+                    borderRadius: 'var(--radius-md)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.6rem',
+                    background: 'linear-gradient(135deg, #0C2340 0%, #1A365D 100%)',
+                    color: '#FFFFFF',
+                    border: '1px solid rgba(212, 175, 55, 0.4)',
+                    boxShadow: '0 4px 14px rgba(0,0,0,0.15)',
+                    cursor: 'pointer'
                   }}
-                />
+                >
+                  <span>⚡</span> Direct Studio Order ({product.price}) — Pay via Razorpay
+                </button>
 
                 {/* Primary Buy on Amazon India CTA */}
                 <a 
@@ -419,6 +434,13 @@ function ProductDetail() {
                   <span>🛒</span> Buy on Amazon India ↗
                 </a>
               </div>
+
+              {/* Checkout Modal */}
+              <CheckoutModal
+                isOpen={isCheckoutOpen}
+                onClose={() => setIsCheckoutOpen(false)}
+                product={product}
+              />
 
               {/* Guaranteed Trust Badges */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem', textAlign: 'center', marginBottom: '1.5rem' }}>

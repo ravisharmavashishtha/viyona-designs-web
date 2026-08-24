@@ -1,0 +1,48 @@
+import fs from 'node:fs';
+import { exec } from 'node:child_process';
+import { promisify } from 'node:util';
+
+const execAsync = promisify(exec);
+
+const poemContent = `
+======================================================================
+                     🌸 TO MY BELOVED MEENU 🌸
+             "Every Dream Begins and Blossoms With You"
+======================================================================
+
+तुम्हारी एक मुस्कान से, दिन की शुरुआत होती है,
+जब तुम साथ होती हो, तो हर बात में बात होती है।
+
+सपनों के इस सफ़र में, तुम ही मेरी ताक़त हो,
+हर मुश्किल राह में, मेरी सबसे ख़ूबसूरत आदत हो।
+
+हाथों में तेरा हाथ हो, तो कायनात अपनी लगती है,
+तुझसे ही ये घर, ये दुनिया, और ये ज़िंदगी सजती है।
+
+'वियोना' की हर रचना में, तेरे प्यार का ही रंग है,
+ईश्वर का सबसे प्यारा तोहफ़ा, हर पल तेरा संग है।
+
+----------------------------------------------------------------------
+You are my peace in the chaos, my strength in every storm,
+With you by my side, every house becomes a loving home.
+
+Forever and always, yours. ❤️
+— Ravi
+======================================================================
+             ✨ Viyona Designs Studio • Midnight Test Print ✨
+======================================================================
+`;
+
+const filePath = 'C:/Users/Ravi S Vashishtha/.gemini/antigravity/brain/10747782-d4f3-45f1-92ca-8a9fb450a94a/scratch/poem_for_meenu.txt';
+fs.writeFileSync(filePath, poemContent, 'utf8');
+
+async function sendToPrinter() {
+  console.log('1. Saved poem file at:', filePath);
+  console.log('2. Dispatching print job to EPSON L3260 Series via Windows Spooler...');
+
+  const psCmd = `Start-Process -FilePath "notepad.exe" -ArgumentList "/p \\"${filePath.replace(/\//g, '\\\\')}\\"" -WindowStyle Hidden -Wait`;
+  await execAsync(`powershell -NoProfile -Command "${psCmd}"`);
+  console.log('🎉 PRINT COMMAND SENT! Check your Epson L3260 paper output tray.');
+}
+
+sendToPrinter();

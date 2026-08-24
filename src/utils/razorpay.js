@@ -122,7 +122,9 @@ export async function startRazorpayCheckout({
             body: JSON.stringify({
               razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature
+              razorpay_signature: response.razorpay_signature,
+              customer,
+              product_id: params.productId || 'ganesha'
             })
           });
 
@@ -135,6 +137,10 @@ export async function startRazorpayCheckout({
                 order_id: response.razorpay_order_id,
                 payment_id: response.razorpay_payment_id,
                 signature: response.razorpay_signature,
+                shipment_id: verifyData.shipment_id,
+                awb_code: verifyData.awb_code,
+                tracking_url: verifyData.tracking_url,
+                courier_name: verifyData.courier_name,
                 verified: true
               });
             }
