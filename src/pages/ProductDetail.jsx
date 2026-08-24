@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { products } from '../data/products';
 import { useEffect, useState, useRef } from 'react';
 import { trackEvent, trackMetaEvent } from '../utils/analytics';
+import RazorpayCheckoutButton from '../components/RazorpayCheckoutButton';
 
 function ProductDetail() {
   const { id } = useParams();
@@ -382,30 +383,42 @@ function ProductDetail() {
                 </div>
               </div>
 
-              {/* Primary Buy CTA */}
-              <a 
-                href={product.amazonLink} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                onClick={() => {
-                  trackEvent('click_buy_amazon', { product_id: product.id, product_name: product.name, price: product.price, location: 'main_cta' });
-                  trackMetaEvent('InitiateCheckout', { content_name: product.displayName || product.name, content_ids: [product.id], content_type: 'product', value: parseFloat(product.price.replace(/[^0-9.]/g, '')) || 550, currency: 'INR' });
-                }}
-                className="btn btn-amazon"
-                style={{ 
-                  width: '100%', 
-                  padding: '1rem', 
-                  fontSize: '1.05rem', 
-                  borderRadius: 'var(--radius-md)',
-                  marginBottom: '1.25rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '0.6rem'
-                }}
-              >
-                <span>🛒</span> Buy on Amazon India ↗
-              </a>
+              {/* Payment & Ordering CTAs */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                {/* Instant Razorpay Standard Web Checkout */}
+                <RazorpayCheckoutButton
+                  product={product}
+                  buttonText={`⚡ Pay ${product.price} with Razorpay (Cards / UPI / NetBanking)`}
+                  style={{
+                    padding: '1rem',
+                    fontSize: '1.02rem'
+                  }}
+                />
+
+                {/* Primary Buy on Amazon India CTA */}
+                <a 
+                  href={product.amazonLink} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  onClick={() => {
+                    trackEvent('click_buy_amazon', { product_id: product.id, product_name: product.name, price: product.price, location: 'main_cta' });
+                    trackMetaEvent('InitiateCheckout', { content_name: product.displayName || product.name, content_ids: [product.id], content_type: 'product', value: parseFloat(product.price.replace(/[^0-9.]/g, '')) || 550, currency: 'INR' });
+                  }}
+                  className="btn btn-amazon"
+                  style={{ 
+                    width: '100%', 
+                    padding: '0.9rem 1rem', 
+                    fontSize: '1rem', 
+                    borderRadius: 'var(--radius-md)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.6rem'
+                  }}
+                >
+                  <span>🛒</span> Buy on Amazon India ↗
+                </a>
+              </div>
 
               {/* Guaranteed Trust Badges */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem', textAlign: 'center', marginBottom: '1.5rem' }}>
