@@ -8,9 +8,9 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://viyona-commerce-backend.vercel.app',
+        target: 'http://localhost:3001',
         changeOrigin: true,
-        secure: true
+        secure: false
       }
     }
   }
