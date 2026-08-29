@@ -1,6 +1,6 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
-import { X, ShoppingBag, Plus, Minus, Trash2, ShieldCheck, ArrowRight, Truck, Sparkles } from 'lucide-react';
+import { X, ShoppingBag, Plus, Minus, Trash2, ShieldCheck, ArrowRight, Truck } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export default function CartDrawer() {
@@ -20,13 +20,35 @@ export default function CartDrawer() {
   });
   const [errorMessage, setErrorMessage] = useState('');
 
+  // Explicitly manage body scroll lock so background is never permanently frozen
+  useEffect(() => {
+    if (isCartOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isCartOpen]);
+
+  // Handle ESC key to close drawer
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isCartOpen) {
+        closeCart();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isCartOpen, closeCart]);
+
   if (!isCartOpen) return null;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
 
-    // Auto fill city/state on 6 digit pincode
     if (name === 'pincode' && value.length === 6) {
       fetch(`https://api.postalpincode.in/pincode/${value}`)
         .then(res => res.json())
@@ -61,7 +83,6 @@ export default function CartDrawer() {
     setIsCheckingOut(true);
 
     try {
-      // 1. Create Razorpay Order via Serverless API
       const res = await fetch('/api/create-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -179,7 +200,6 @@ export default function CartDrawer() {
           display: 'flex',
           flexDirection: 'column',
           boxShadow: '-8px 0 32px rgba(0,0,0,0.25)',
-          animation: 'slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
           color: '#1A1917',
           fontFamily: 'var(--font-sans, -apple-system, BlinkMacSystemFont, sans-serif)'
         }}
@@ -240,7 +260,7 @@ export default function CartDrawer() {
         </div>
 
         {/* Cart Content Area */}
-        <div style={{ flex: 1, overflowY: 'auto', padding: '1.25rem' }}>
+        <div style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch', padding: '1.25rem' }}>
           {cart.length === 0 ? (
             <div style={{ height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '2rem 1rem', color: '#8C8A82' }}>
               <ShoppingBag style={{ width: '56px', height: '56px', color: '#D9D6CD', marginBottom: '1rem' }} />
@@ -301,11 +321,11 @@ export default function CartDrawer() {
                         </h4>
                         <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.4rem', marginBottom: '0.4rem' }}>
                           <span style={{ fontSize: '0.95rem', fontWeight: '800', color: '#1A1917' }}>
-                            {item.price}
+                            {item.priceFormatted || `₹${item.price}`}
                           </span>
                           {item.mrp && (
                             <span style={{ fontSize: '0.78rem', color: '#8C8A82', textDecoration: 'line-through' }}>
-                              {item.mrp}
+                              {item.mrpFormatted || `₹${item.mrp}`}
                             </span>
                           )}
                         </div>
