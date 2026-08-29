@@ -1,14 +1,13 @@
-﻿import React, { useState, useEffect } from 'react';
-import { ShieldCheck, Package, Tag, ShoppingCart, Users, Download, Plus, Minus, Save, CheckCircle, Lock, RefreshCw } from 'lucide-react';
+﻿import React, { useState } from 'react';
+import { ShieldCheck, Package, Tag, ShoppingCart, Users, Download, Plus, Minus, Save, CheckCircle, Lock } from 'lucide-react';
 import { products as initialProducts } from '../data/products';
 
 export default function FounderAdmin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [pin, setPin] = useState('');
-  const [activeTab, setActiveTab] = useState('inventory'); // 'inventory', 'pricing', 'orders', 'crm'
+  const [activeTab, setActiveTab] = useState('inventory');
   const [saveSuccess, setSaveSuccess] = useState(false);
 
-  // Local state for stock and pricing
   const [stockState, setStockState] = useState(() => {
     try {
       const saved = localStorage.getItem('viyona_admin_stock');
@@ -26,21 +25,20 @@ export default function FounderAdmin() {
     try {
       const saved = localStorage.getItem('viyona_admin_pricing');
       return saved ? JSON.parse(saved) : {
-        'ganesha-statue': { price: '550.00', mrp: '1199.00', inStock: true },
-        'sleeping-puppy-organizer': { price: '499.00', mrp: '999.00', inStock: true },
-        'minimalist-phone-stand': { price: '349.00', mrp: '799.00', inStock: true }
+        'ganesha-statue': { price: '550.00', mrp: '1199.00' },
+        'sleeping-puppy-organizer': { price: '499.00', mrp: '999.00' },
+        'minimalist-phone-stand': { price: '349.00', mrp: '799.00' }
       };
     } catch (e) {
       return {
-        'ganesha-statue': { price: '550.00', mrp: '1199.00', inStock: true },
-        'sleeping-puppy-organizer': { price: '499.00', mrp: '999.00', inStock: true },
-        'minimalist-phone-stand': { price: '349.00', mrp: '799.00', inStock: true }
+        'ganesha-statue': { price: '550.00', mrp: '1199.00' },
+        'sleeping-puppy-organizer': { price: '499.00', mrp: '999.00' },
+        'minimalist-phone-stand': { price: '349.00', mrp: '799.00' }
       };
     }
   });
 
-  // Sample order feed (syncs with live Razorpay / Supabase)
-  const [orders, setOrders] = useState([
+  const orders = [
     {
       id: 'VD-894102',
       customer: 'Ravi S Vashishtha',
@@ -63,7 +61,7 @@ export default function FounderAdmin() {
       awb: 'DELHIVERY-771920',
       date: 'Aug 28, 2026'
     }
-  ]);
+  ];
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -107,28 +105,26 @@ export default function FounderAdmin() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-stone-900 flex items-center justify-center p-4">
-        <div className="bg-stone-800 text-white rounded-3xl p-8 max-w-sm w-full shadow-2xl border border-stone-700 space-y-6 text-center">
-          <div className="w-14 h-14 bg-amber-900/40 text-amber-500 rounded-2xl flex items-center justify-center mx-auto border border-amber-800/50">
-            <Lock className="w-7 h-7" />
+      <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', backgroundColor: '#FAF9F5' }}>
+        <div style={{ backgroundColor: '#1A1917', color: '#FAF9F5', borderRadius: '24px', padding: '2rem', maxWidth: '380px', width: '100%', boxShadow: '0 20px 50px rgba(0,0,0,0.3)', textAlign: 'center' }}>
+          <div style={{ width: '56px', height: '56px', backgroundColor: 'rgba(212,175,55,0.15)', color: '#D4AF37', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.25rem', border: '1px solid rgba(212,175,55,0.3)' }}>
+            <Lock style={{ width: '28px', height: '28px' }} />
           </div>
-          <div>
-            <h1 className="text-xl font-serif font-bold text-white">Founder Admin Portal</h1>
-            <p className="text-xs text-stone-400 mt-1">Viyona Designs Direct Control Center</p>
-          </div>
+          <h1 style={{ fontSize: '1.35rem', fontFamily: 'var(--font-serif, Georgia, serif)', fontWeight: '700', marginBottom: '0.35rem' }}>Founder Admin Portal</h1>
+          <p style={{ fontSize: '0.82rem', color: '#A8A69E', marginBottom: '1.5rem' }}>Viyona Designs Direct Control Center</p>
 
-          <form onSubmit={handleLogin} className="space-y-4">
+          <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
             <input 
               type="password"
               autoFocus
               value={pin}
               onChange={(e) => setPin(e.target.value)}
               placeholder="Enter PIN (e.g. 0101)"
-              className="w-full text-center tracking-widest text-lg font-mono px-4 py-3 bg-stone-900 border border-stone-700 rounded-xl text-white focus:ring-2 focus:ring-amber-500 focus:outline-none"
+              style={{ width: '100%', textAlign: 'center', letterSpacing: '0.2em', fontSize: '1.2rem', fontFamily: 'monospace', padding: '0.75rem', backgroundColor: '#2B2926', border: '1px solid #444', borderRadius: '12px', color: '#FFFFFF', outline: 'none' }}
             />
             <button
               type="submit"
-              className="w-full py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-xl text-xs font-bold transition-colors shadow-lg"
+              style={{ width: '100%', padding: '0.85rem', backgroundColor: '#9E743A', color: '#FFFFFF', border: 'none', borderRadius: '12px', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer' }}
             >
               Unlock Dashboard
             </button>
@@ -139,112 +135,107 @@ export default function FounderAdmin() {
   }
 
   return (
-    <div className="min-h-screen bg-stone-100 py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto space-y-6">
+    <div style={{ minHeight: '90vh', backgroundColor: '#FAF9F5', padding: '2rem 1rem' }}>
+      <div style={{ maxWidth: '850px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         
         {/* Top Bar */}
-        <div className="bg-stone-900 text-white rounded-2xl p-5 flex flex-wrap items-center justify-between gap-4 shadow-lg">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-amber-600/30 text-amber-400 flex items-center justify-center border border-amber-500/40">
-              <ShieldCheck className="w-6 h-6" />
+        <div style={{ backgroundColor: '#1A1917', color: '#FAF9F5', borderRadius: '16px', padding: '1.25rem 1.5rem', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', boxShadow: '0 4px 20px rgba(0,0,0,0.1)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+            <div style={{ width: '42px', height: '42px', borderRadius: '10px', backgroundColor: 'rgba(212,175,55,0.2)', color: '#D4AF37', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(212,175,55,0.4)' }}>
+              <ShieldCheck style={{ width: '24px', height: '24px' }} />
             </div>
             <div>
-              <h1 className="text-base font-bold">Viyona Founder Portal</h1>
-              <span className="text-xs text-stone-400">Founder: Meenu Sharma • Direct Store Management</span>
+              <h1 style={{ fontSize: '1.1rem', fontWeight: '700', margin: 0 }}>Viyona Founder Portal</h1>
+              <span style={{ fontSize: '0.78rem', color: '#A8A69E' }}>Direct Studio Management • Mainpuri, UP</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <button 
-              onClick={() => setIsAuthenticated(false)}
-              className="px-3 py-1.5 bg-stone-800 hover:bg-stone-700 text-stone-300 rounded-lg text-xs font-semibold"
-            >
-              Lock
-            </button>
-          </div>
+          <button 
+            onClick={() => setIsAuthenticated(false)}
+            style={{ padding: '0.45rem 1rem', backgroundColor: '#2B2926', color: '#FAF9F5', border: '1px solid #444', borderRadius: '8px', fontSize: '0.8rem', fontWeight: '600', cursor: 'pointer' }}
+          >
+            Lock Dashboard
+          </button>
         </div>
 
         {/* Navigation Tabs */}
-        <div className="flex bg-white rounded-xl p-1.5 shadow-sm border border-gray-200 gap-1 overflow-x-auto text-xs font-bold">
-          <button
-            onClick={() => setActiveTab('inventory')}
-            className={`flex-1 py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors whitespace-nowrap ${
-              activeTab === 'inventory' ? 'bg-amber-900 text-white shadow-sm' : 'text-gray-600 hover:bg-stone-100'
-            }`}
-          >
-            <Package className="w-4 h-4" />
-            <span>1-Click Stock Adjuster</span>
-          </button>
-          <button
-            onClick={() => setActiveTab('pricing')}
-            className={`flex-1 py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors whitespace-nowrap ${
-              activeTab === 'pricing' ? 'bg-amber-900 text-white shadow-sm' : 'text-gray-600 hover:bg-stone-100'
-            }`}
-          >
-            <Tag className="w-4 h-4" />
-            <span>Pricing & Festive Sales</span>
-          </button>
-          <button
-            onClick={() => setActiveTab('orders')}
-            className={`flex-1 py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors whitespace-nowrap ${
-              activeTab === 'orders' ? 'bg-amber-900 text-white shadow-sm' : 'text-gray-600 hover:bg-stone-100'
-            }`}
-          >
-            <ShoppingCart className="w-4 h-4" />
-            <span>Live Orders Feed</span>
-          </button>
-          <button
-            onClick={() => setActiveTab('crm')}
-            className={`flex-1 py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors whitespace-nowrap ${
-              activeTab === 'crm' ? 'bg-amber-900 text-white shadow-sm' : 'text-gray-600 hover:bg-stone-100'
-            }`}
-          >
-            <Users className="w-4 h-4" />
-            <span>WhatsApp CRM</span>
-          </button>
+        <div style={{ display: 'flex', backgroundColor: '#FFFFFF', borderRadius: '12px', padding: '0.35rem', border: '1px solid #E9E6DC', gap: '0.35rem', overflowX: 'auto' }}>
+          {[
+            { id: 'inventory', label: '1-Click Stock', icon: Package },
+            { id: 'pricing', label: 'Pricing & Sales', icon: Tag },
+            { id: 'orders', label: 'Live Orders Feed', icon: ShoppingCart },
+            { id: 'crm', label: 'WhatsApp CRM', icon: Users }
+          ].map(tab => {
+            const Icon = tab.icon;
+            const active = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                style={{
+                  flex: 1,
+                  padding: '0.65rem 1rem',
+                  borderRadius: '8px',
+                  border: 'none',
+                  backgroundColor: active ? '#1A1917' : 'transparent',
+                  color: active ? '#FFFFFF' : '#585650',
+                  fontSize: '0.85rem',
+                  fontWeight: '700',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.4rem',
+                  whiteSpace: 'nowrap',
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                <Icon style={{ width: '16px', height: '16px' }} />
+                <span>{tab.label}</span>
+              </button>
+            );
+          })}
         </div>
 
         {/* Tab 1: Inventory Adjuster */}
         {activeTab === 'inventory' && (
-          <div className="bg-white rounded-2xl p-6 shadow-md border border-gray-100 space-y-4 animate-fadeIn">
+          <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '1.5rem', border: '1px solid #E9E6DC', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div>
-              <h2 className="text-base font-bold text-gray-900">Live Inventory Counts</h2>
-              <p className="text-xs text-gray-500">Tap + or - to instantly update ready-to-ship physical units in Mainpuri.</p>
+              <h2 style={{ fontSize: '1.1rem', fontWeight: '700', color: '#1A1917', margin: 0 }}>Live Inventory Counts</h2>
+              <p style={{ fontSize: '0.82rem', color: '#585650', margin: '0.2rem 0 0' }}>Tap + or - to instantly adjust ready-to-ship physical units in Mainpuri.</p>
             </div>
 
-            <div className="divide-y divide-gray-100">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               {initialProducts.map(p => {
                 const count = stockState[p.id] || 0;
                 return (
-                  <div key={p.id} className="py-4 flex flex-wrap items-center justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                      <img src={p.images[0]} alt={p.name} className="w-12 h-12 rounded-lg object-cover bg-stone-100" />
+                  <div key={p.id} style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', padding: '1rem', backgroundColor: '#FAF9F5', borderRadius: '12px', border: '1px solid #E9E6DC', gap: '1rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                      <img src={p.images[0]} alt={p.name} style={{ width: '52px', height: '52px', borderRadius: '8px', objectFit: 'cover', backgroundColor: '#FFFFFF', border: '1px solid #E9E6DC' }} />
                       <div>
-                        <h4 className="text-sm font-bold text-gray-900">{p.displayName}</h4>
-                        <span className="text-xs text-gray-400">SKU: {p.specs?.['SKU'] || p.id}</span>
+                        <h4 style={{ fontSize: '0.95rem', fontWeight: '700', color: '#1A1917', margin: 0 }}>{p.displayName}</h4>
+                        <span style={{ fontSize: '0.78rem', color: '#8C8A82' }}>SKU: {p.specs?.['SKU'] || p.id}</span>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3">
-                      <span className={`text-xs px-2.5 py-1 rounded-full font-bold ${
-                        count > 10 ? 'bg-emerald-100 text-emerald-800' : count > 0 ? 'bg-amber-100 text-amber-800' : 'bg-red-100 text-red-800'
-                      }`}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                      <span style={{ fontSize: '0.8rem', fontWeight: '700', padding: '0.25rem 0.65rem', borderRadius: '9999px', backgroundColor: count > 0 ? '#EDF4EE' : '#FEF2F2', color: count > 0 ? '#2E7D32' : '#DC2626' }}>
                         {count > 0 ? `${count} In Stock` : 'Sold Out'}
                       </span>
 
-                      <div className="flex items-center border border-gray-300 rounded-xl bg-stone-50 overflow-hidden">
+                      <div style={{ display: 'flex', alignItems: 'center', border: '1px solid #D9D6CD', borderRadius: '8px', backgroundColor: '#FFFFFF', height: '34px' }}>
                         <button 
                           onClick={() => updateStock(p.id, -1)}
-                          className="p-2 hover:bg-gray-200 text-gray-700 transition-colors"
+                          style={{ padding: '0 10px', background: 'none', border: 'none', cursor: 'pointer', color: '#585650' }}
                         >
-                          <Minus className="w-4 h-4" />
+                          <Minus style={{ width: '14px', height: '14px' }} />
                         </button>
-                        <span className="px-4 text-sm font-mono font-bold text-gray-900">{count}</span>
+                        <span style={{ padding: '0 8px', fontSize: '0.92rem', fontFamily: 'monospace', fontWeight: '700', color: '#1A1917' }}>{count}</span>
                         <button 
                           onClick={() => updateStock(p.id, +1)}
-                          className="p-2 hover:bg-gray-200 text-gray-700 transition-colors"
+                          style={{ padding: '0 10px', background: 'none', border: 'none', cursor: 'pointer', color: '#585650' }}
                         >
-                          <Plus className="w-4 h-4" />
+                          <Plus style={{ width: '14px', height: '14px' }} />
                         </button>
                       </div>
                     </div>
@@ -257,41 +248,41 @@ export default function FounderAdmin() {
 
         {/* Tab 2: Pricing & Discounts */}
         {activeTab === 'pricing' && (
-          <div className="bg-white rounded-2xl p-6 shadow-md border border-gray-100 space-y-4 animate-fadeIn">
-            <div className="flex justify-between items-center">
+          <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '1.5rem', border: '1px solid #E9E6DC', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
               <div>
-                <h2 className="text-base font-bold text-gray-900">Direct Price & Sale Management</h2>
-                <p className="text-xs text-gray-500">Update selling prices or festive launch discounts instantly.</p>
+                <h2 style={{ fontSize: '1.1rem', fontWeight: '700', color: '#1A1917', margin: 0 }}>Direct Price & Sale Management</h2>
+                <p style={{ fontSize: '0.82rem', color: '#585650', margin: '0.2rem 0 0' }}>Update selling prices or festive launch discounts instantly.</p>
               </div>
               <button
                 onClick={handleSavePrices}
-                className="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5 shadow"
+                style={{ padding: '0.55rem 1.15rem', backgroundColor: '#2E7D32', color: '#FFFFFF', border: 'none', borderRadius: '8px', fontSize: '0.85rem', fontWeight: '700', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
               >
-                <Save className="w-4 h-4" />
+                <Save style={{ width: '16px', height: '16px' }} />
                 <span>Save Live Prices</span>
               </button>
             </div>
 
             {saveSuccess && (
-              <div className="p-3 bg-emerald-50 text-emerald-800 text-xs rounded-xl border border-emerald-200 flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-emerald-600" />
+              <div style={{ padding: '0.75rem', backgroundColor: '#EDF4EE', border: '1px solid #D1E5D4', borderRadius: '8px', fontSize: '0.82rem', color: '#285233', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <CheckCircle style={{ width: '16px', height: '16px', color: '#2E7D32' }} />
                 <span>Live pricing changes saved and applied across storefront!</span>
               </div>
             )}
 
-            <div className="space-y-4">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               {initialProducts.map(p => {
                 const currentP = priceState[p.id] || { price: '550.00', mrp: '1199.00' };
                 return (
-                  <div key={p.id} className="p-4 bg-stone-50 rounded-xl border border-gray-200 flex flex-wrap items-center justify-between gap-4">
+                  <div key={p.id} style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', padding: '1rem', backgroundColor: '#FAF9F5', borderRadius: '12px', border: '1px solid #E9E6DC', gap: '1rem' }}>
                     <div>
-                      <h4 className="text-sm font-bold text-gray-900">{p.displayName}</h4>
-                      <span className="text-xs text-gray-500">Default Catalog Price: {p.price}</span>
+                      <h4 style={{ fontSize: '0.95rem', fontWeight: '700', color: '#1A1917', margin: 0 }}>{p.displayName}</h4>
+                      <span style={{ fontSize: '0.78rem', color: '#8C8A82' }}>Default: {p.price}</span>
                     </div>
 
-                    <div className="flex items-center gap-3">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
                       <div>
-                        <label className="text-[10px] uppercase font-bold text-gray-500 block">Selling Price (₹)</label>
+                        <label style={{ display: 'block', fontSize: '0.68rem', fontWeight: '700', textTransform: 'uppercase', color: '#585650', marginBottom: '2px' }}>Selling Price (₹)</label>
                         <input 
                           type="text"
                           value={currentP.price}
@@ -299,11 +290,11 @@ export default function FounderAdmin() {
                             const val = e.target.value;
                             setPriceState(prev => ({ ...prev, [p.id]: { ...prev[p.id], price: val } }));
                           }}
-                          className="w-24 px-2.5 py-1.5 text-sm font-mono font-bold bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-700 focus:outline-none"
+                          style={{ width: '100px', padding: '0.45rem 0.65rem', fontSize: '0.9rem', fontFamily: 'monospace', fontWeight: '700', backgroundColor: '#FFFFFF', border: '1px solid #D9D6CD', borderRadius: '6px', outline: 'none' }}
                         />
                       </div>
                       <div>
-                        <label className="text-[10px] uppercase font-bold text-gray-500 block">M.R.P. (₹)</label>
+                        <label style={{ display: 'block', fontSize: '0.68rem', fontWeight: '700', textTransform: 'uppercase', color: '#585650', marginBottom: '2px' }}>M.R.P. (₹)</label>
                         <input 
                           type="text"
                           value={currentP.mrp}
@@ -311,7 +302,7 @@ export default function FounderAdmin() {
                             const val = e.target.value;
                             setPriceState(prev => ({ ...prev, [p.id]: { ...prev[p.id], mrp: val } }));
                           }}
-                          className="w-24 px-2.5 py-1.5 text-sm font-mono font-bold bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-700 focus:outline-none"
+                          style={{ width: '100px', padding: '0.45rem 0.65rem', fontSize: '0.9rem', fontFamily: 'monospace', fontWeight: '700', backgroundColor: '#FFFFFF', border: '1px solid #D9D6CD', borderRadius: '6px', outline: 'none' }}
                         />
                       </div>
                     </div>
@@ -324,27 +315,27 @@ export default function FounderAdmin() {
 
         {/* Tab 3: Orders Feed */}
         {activeTab === 'orders' && (
-          <div className="bg-white rounded-2xl p-6 shadow-md border border-gray-100 space-y-4 animate-fadeIn">
+          <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '1.5rem', border: '1px solid #E9E6DC', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div>
-              <h2 className="text-base font-bold text-gray-900">Recent Customer Orders</h2>
-              <p className="text-xs text-gray-500">Live stream of verified Razorpay prepaid transactions.</p>
+              <h2 style={{ fontSize: '1.1rem', fontWeight: '700', color: '#1A1917', margin: 0 }}>Recent Customer Orders</h2>
+              <p style={{ fontSize: '0.82rem', color: '#585650', margin: '0.2rem 0 0' }}>Live stream of verified Razorpay prepaid transactions.</p>
             </div>
 
-            <div className="divide-y divide-gray-100">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {orders.map(o => (
-                <div key={o.id} className="py-4 space-y-2">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
+                <div key={o.id} style={{ padding: '1rem', backgroundColor: '#FAF9F5', borderRadius: '12px', border: '1px solid #E9E6DC', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
                     <div>
-                      <span className="font-mono font-bold text-sm text-gray-900">{o.id}</span>
-                      <span className="ml-2 text-xs font-semibold text-gray-700">• {o.customer} ({o.phone})</span>
+                      <span style={{ fontFamily: 'monospace', fontWeight: '700', fontSize: '0.92rem', color: '#1A1917' }}>{o.id}</span>
+                      <span style={{ fontSize: '0.82rem', fontWeight: '600', color: '#585650', marginLeft: '0.5rem' }}>• {o.customer} ({o.phone})</span>
                     </div>
-                    <span className="text-xs font-bold px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-full">
+                    <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '0.2rem 0.6rem', backgroundColor: '#EDF4EE', color: '#2E7D32', borderRadius: '9999px' }}>
                       {o.status}
                     </span>
                   </div>
-                  <div className="text-xs text-gray-600 flex flex-wrap justify-between items-center gap-2">
+                  <div style={{ fontSize: '0.82rem', color: '#585650', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
                     <span>📦 {o.items} • <strong>{o.amount}</strong></span>
-                    <span className="font-mono text-gray-500">AWB: {o.awb}</span>
+                    <span style={{ fontFamily: 'monospace', color: '#8C8A82' }}>AWB: {o.awb}</span>
                   </div>
                 </div>
               ))}
@@ -354,22 +345,22 @@ export default function FounderAdmin() {
 
         {/* Tab 4: WhatsApp CRM */}
         {activeTab === 'crm' && (
-          <div className="bg-white rounded-2xl p-6 shadow-md border border-gray-100 space-y-6 animate-fadeIn">
+          <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '1.5rem', border: '1px solid #E9E6DC', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
             <div>
-              <h2 className="text-base font-bold text-gray-900">Customer Contacts & Marketing Hub</h2>
-              <p className="text-xs text-gray-500">Export your verified customer database for festive WhatsApp broadcasts.</p>
+              <h2 style={{ fontSize: '1.1rem', fontWeight: '700', color: '#1A1917', margin: 0 }}>Customer Contacts & Marketing Hub</h2>
+              <p style={{ fontSize: '0.82rem', color: '#585650', margin: '0.2rem 0 0' }}>Export your verified customer database for festive WhatsApp broadcasts.</p>
             </div>
 
-            <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 flex items-center justify-between gap-4">
+            <div style={{ padding: '1.25rem', backgroundColor: '#EDF4EE', borderRadius: '12px', border: '1px solid #D1E5D4', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1rem' }}>
               <div>
-                <h4 className="text-sm font-bold text-emerald-950">WhatsApp Broadcast Ready</h4>
-                <p className="text-xs text-emerald-800 mt-0.5">Directly import into WhatsApp Business or Google Contacts.</p>
+                <h4 style={{ fontSize: '0.95rem', fontWeight: '700', color: '#285233', margin: 0 }}>WhatsApp Broadcast Ready</h4>
+                <p style={{ fontSize: '0.82rem', color: '#2E7D32', margin: '0.2rem 0 0' }}>Directly import into WhatsApp Business or Google Contacts.</p>
               </div>
               <button
                 onClick={exportCrmCsv}
-                className="px-4 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold transition-colors flex items-center gap-2 shadow-md"
+                style={{ padding: '0.65rem 1.25rem', backgroundColor: '#2E7D32', color: '#FFFFFF', border: 'none', borderRadius: '8px', fontSize: '0.85rem', fontWeight: '700', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
               >
-                <Download className="w-4 h-4" />
+                <Download style={{ width: '16px', height: '16px' }} />
                 <span>Export Contacts (.CSV)</span>
               </button>
             </div>
