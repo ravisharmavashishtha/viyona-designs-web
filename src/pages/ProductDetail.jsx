@@ -3,6 +3,9 @@ import { products } from '../data/products';
 import { useEffect, useState, useRef } from 'react';
 import { trackEvent, trackMetaEvent } from '../utils/analytics';
 import CheckoutModal from '../components/CheckoutModal';
+import { useCart } from '../context/CartContext';
+import PincodeChecker from '../components/PincodeChecker';
+import { ShoppingBag, Plus, Minus } from 'lucide-react';
 
 function ProductDetail() {
   const { id } = useParams();
@@ -11,6 +14,8 @@ function ProductDetail() {
   const [copied, setCopied] = useState(false);
   const [activeTab, setActiveTab] = useState('about');
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCart();
   const touchStartX = useRef(null);
 
   useEffect(() => {
@@ -385,29 +390,87 @@ function ProductDetail() {
               </div>
 
               {/* Payment & Ordering CTAs */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.25rem' }}>
-                {/* Direct Studio Order Button (Opens Address & Razorpay Checkout) */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '1.25rem' }}>
+                
+                {/* Quantity Stepper & Add to Selection Row */}
+                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    border: '1px solid var(--border-subtle)', 
+                    borderRadius: 'var(--radius-md)', 
+                    backgroundColor: '#FFFFFF',
+                    height: '52px',
+                    padding: '0 0.5rem'
+                  }}>
+                    <button
+                      onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
+                      style={{ background: 'none', border: 'none', padding: '0.5rem', cursor: 'pointer', color: 'var(--text-secondary)' }}
+                      aria-label="Decrease quantity"
+                    >
+                      <Minus style={{ width: '16px', height: '16px' }} />
+                    </button>
+                    <span style={{ padding: '0 0.75rem', fontWeight: 'bold', fontSize: '1rem', color: 'var(--text-primary)', minWidth: '32px', textAlign: 'center' }}>
+                      {quantity}
+                    </span>
+                    <button
+                      onClick={() => setQuantity(prev => prev + 1)}
+                      style={{ background: 'none', border: 'none', padding: '0.5rem', cursor: 'pointer', color: 'var(--text-secondary)' }}
+                      aria-label="Increase quantity"
+                    >
+                      <Plus style={{ width: '16px', height: '16px' }} />
+                    </button>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      addToCart(product, quantity);
+                      trackEvent('add_to_cart', { product_id: product.id, product_name: product.name, price: product.price, quantity });
+                    }}
+                    className="btn btn-primary"
+                    style={{
+                      flex: 1,
+                      height: '52px',
+                      fontSize: '1rem',
+                      fontWeight: '700',
+                      borderRadius: 'var(--radius-md)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.6rem',
+                      background: 'linear-gradient(135deg, #0C2340 0%, #1A365D 100%)',
+                      color: '#FFFFFF',
+                      border: '1px solid rgba(212, 175, 55, 0.4)',
+                      boxShadow: '0 4px 14px rgba(0,0,0,0.15)',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    <ShoppingBag style={{ width: '18px', height: '18px' }} />
+                    <span>Add to Cart (₹{(parseFloat(product.price.replace(/[^0-9.]/g, '')) * quantity).toFixed(2)})</span>
+                  </button>
+                </div>
+
+                {/* Direct 1-Click Studio Order Button */}
                 <button
                   onClick={() => setIsCheckoutOpen(true)}
-                  className="btn btn-primary"
                   style={{
                     width: '100%',
-                    padding: '1rem 1.25rem',
-                    fontSize: '1.05rem',
-                    fontWeight: '700',
+                    padding: '0.85rem 1.25rem',
+                    fontSize: '0.94rem',
+                    fontWeight: '600',
                     borderRadius: 'var(--radius-md)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    gap: '0.6rem',
-                    background: 'linear-gradient(135deg, #0C2340 0%, #1A365D 100%)',
-                    color: '#FFFFFF',
-                    border: '1px solid rgba(212, 175, 55, 0.4)',
-                    boxShadow: '0 4px 14px rgba(0,0,0,0.15)',
+                    gap: '0.5rem',
+                    backgroundColor: '#FFFFFF',
+                    color: 'var(--text-primary)',
+                    border: '1.5px solid var(--accent-gold)',
+                    boxShadow: 'var(--shadow-sm)',
                     cursor: 'pointer'
                   }}
                 >
-                  <span>⚡</span> Direct Studio Order ({product.price}) — Pay via Razorpay
+                  <span>⚡</span> Buy 1-Click Express ({product.price})
                 </button>
 
                 {/* Primary Buy on Amazon India CTA */}
@@ -422,8 +485,8 @@ function ProductDetail() {
                   className="btn btn-amazon"
                   style={{ 
                     width: '100%', 
-                    padding: '0.9rem 1rem', 
-                    fontSize: '1rem', 
+                    padding: '0.85rem 1rem', 
+                    fontSize: '0.92rem', 
                     borderRadius: 'var(--radius-md)',
                     display: 'flex',
                     alignItems: 'center',
@@ -441,6 +504,11 @@ function ProductDetail() {
                 onClose={() => setIsCheckoutOpen(false)}
                 product={product}
               />
+
+              {/* Live Shiprocket Pincode ETA Checker */}
+              <div style={{ marginBottom: '1.25rem' }}>
+                <PincodeChecker />
+              </div>
 
               {/* Guaranteed Trust Badges */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem', textAlign: 'center', marginBottom: '1.5rem' }}>
