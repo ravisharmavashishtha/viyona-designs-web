@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
 import { X, ShoppingBag, Plus, Minus, Trash2, ShieldCheck, ArrowRight, Truck } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -107,6 +107,33 @@ export default function CartDrawer() {
         description: `Order: ${cart.map(i => `${i.displayName} (x${i.quantity})`).join(', ')}`,
         image: 'https://viyonadesigns.com/logo.png',
         order_id: orderData.id,
+        send_sms_hash: true,
+        retry: {
+          enabled: true,
+          max_count: 3
+        },
+        config: {
+          display: {
+            blocks: {
+              upi: {
+                name: '⚡ Fast 1-Click UPI (GPay / PhonePe / Paytm)',
+                instruments: [{ method: 'upi' }]
+              },
+              other: {
+                name: 'Credit / Debit Cards & NetBanking',
+                instruments: [
+                  { method: 'card' },
+                  { method: 'netbanking' },
+                  { method: 'wallet' }
+                ]
+              }
+            },
+            sequence: ['block.upi', 'block.other'],
+            preferences: {
+              show_default_blocks: true
+            }
+          }
+        },
         handler: async function (response) {
           try {
             await fetch('/api/verify-payment', {
@@ -138,7 +165,8 @@ export default function CartDrawer() {
           source: 'react-www.viyonadesigns.com'
         },
         theme: {
-          color: '#0C2340'
+          color: '#0C2340',
+          backdrop_color: 'rgba(12, 35, 64, 0.6)'
         }
       };
 
