@@ -66,27 +66,38 @@ This document serves as an exhaustive reference manual for developers, brand man
 
 ## 💻 3. Technical Architecture & Stack
 
-* **Framework:** React 18 + Vite
-* **Router:** `react-router-dom` (HashRouter strategy for GitHub Pages compatibility)
-* **Styling:** Vanilla CSS design system (`index.css` variables, clean responsive layout)
-* **Hosting / Deployment:** GitHub Pages (`gh-pages` branch)
-* **Build Script:** `npm run build && node -e "require('fs').copyFileSync('dist/index.html', 'dist/404.html')"`
-* **Deploy Command:** `npm run deploy`
+* **Live WooCommerce Store:** [https://viyonadesigns.com](https://viyonadesigns.com) (Hostinger WordPress / WooCommerce)
+* **Staging Store:** `https://mintcream-antelope-246402.hostingersite.com`
+* **Static Frontend / Catalogue:** React 18 + Vite (GitHub Pages `gh-pages` branch)
+* **Testing & QA Engine:** Playwright Headless Automation (Desktop & Mobile Viewport Matrix)
+* **Backend Commerce Microservice:** Node.js Serverless on Vercel (`d:\DevSpace\viyona-commerce-backend`)
 
 ---
 
-## 🤖 4. Handoff Instructions for AI Assistants & Development Rules
+## 🧪 4. WooCommerce Development & Testing Workflow
+
+### 🚀 On-Demand Testing Commands
+* `npm run test:staging` — Executes full Playwright regression suite against Staging URL on demand.
+* `npm run test:prod` — Runs safe, non-destructive health checks against Live Production on demand.
+* `npm run test:report` — Opens the Playwright HTML test report.
+* `npm run deploy:staging` — Deploys theme templates, CSS suites, and page components to Staging.
+* `npm run deploy:prod` — Deploys approved changes to Live Production (gated by `ALLOW_PROD_MUTATION=true` / `--confirm-prod`).
 
 ### 🛡️ Core Git & Deployment Protocol (MANDATORY FOR ALL AI AGENTS)
 1. **Feature Branch Isolation**: 
    - NEVER make direct changes or commit directly onto `master` for feature work.
    - Always create a new branch with a descriptive name before writing code: `git checkout -b feat/<feature-name>`.
-2. **Pull Request Workflow**:
-   - All changes made in feature branches must be committed with clear messages.
+2. **Staging Verification**:
+   - Deploy and test changes on Staging environment first.
+   - Trigger regression tests on demand: `npm run test:staging` or ask in chat.
+3. **Pull Request Workflow**:
+   - All changes made in feature branches must be committed with clean messages.
    - Push the branch and create a Pull Request (PR) targeted at `master`.
    - Merge into `master` only after verification and user review.
-3. **Production Deployment Standard**:
-   - **Deployments ONLY from `master`**: Never run `npm run deploy` from a feature branch or with uncommitted/dirty working files.
-   - Switch to `master`, ensure working tree is 100% clean (`git status`), pull latest (`git pull origin master`), and only then run `npm run deploy`.
-4. **Cloud Brandinfo Sync**:
+4. **Production Deployment Standard**:
+   - **Deployments ONLY from `master`**: Never run `npm run deploy` or `npm run deploy:prod` from a feature branch.
+   - Production deployment requires explicit user review and approval containing the `"approve"` keyword.
+   - Run post-deploy live verification: `npm run test:prod`.
+5. **Cloud Brandinfo Sync**:
    - Always synchronize changes with `H:\My Drive\Website\brandinfo\`.
+

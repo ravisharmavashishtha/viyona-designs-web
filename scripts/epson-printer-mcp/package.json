@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "ipp": "^1.1.0",
+    "pdf-to-printer": "^5.8.0",
+    "pdfkit": "^0.19.1",
+    "pureimage": "^0.4.20"
+  }
+}

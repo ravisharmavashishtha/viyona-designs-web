@@ -1,9 +1,12 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import logoImg from '../assets/logo.png';
+import { useCart } from '../context/CartContext';
+import { ShoppingBag, Truck } from 'lucide-react';
 
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { totalItems, openCart } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -33,19 +36,6 @@ function Navbar() {
       navigate('/');
       setTimeout(() => {
         document.getElementById('collection')?.scrollIntoView({ behavior: 'smooth' });
-      }, 150);
-    }
-  };
-
-  const handleStoryClick = (e) => {
-    e.preventDefault();
-    setMobileMenuOpen(false);
-    if (location.pathname === '/') {
-      document.getElementById('craft')?.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      navigate('/');
-      setTimeout(() => {
-        document.getElementById('craft')?.scrollIntoView({ behavior: 'smooth' });
       }, 150);
     }
   };
@@ -143,69 +133,122 @@ function Navbar() {
               About Us
             </Link>
             <Link 
-              to="/contact" 
+              to="/track" 
               style={{ 
                 fontSize: '0.94rem',
-                fontWeight: location.pathname === '/contact' ? '700' : '500', 
-                color: location.pathname === '/contact' ? 'var(--text-primary)' : 'var(--text-secondary)',
+                fontWeight: location.pathname === '/track' ? '700' : '500', 
+                color: location.pathname === '/track' ? 'var(--text-primary)' : 'var(--text-secondary)',
                 letterSpacing: '0.01em',
                 padding: '0.35rem 0',
-                borderBottom: location.pathname === '/contact' ? '2px solid var(--accent-gold)' : '2px solid transparent'
+                borderBottom: location.pathname === '/track' ? '2px solid var(--accent-gold)' : '2px solid transparent',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.35rem'
               }}
             >
-              Contact
+              <Truck style={{ width: '15px', height: '15px', color: 'var(--accent-gold)' }} />
+              <span>Track Order</span>
             </Link>
           </nav>
 
-          {/* Desktop Right CTA Button */}
-          <div className="desktop-only" style={{ alignItems: 'center' }}>
-            <a 
-              href="#collection" 
-              onClick={handleShopClick}
-              className="btn btn-primary"
-              style={{ 
-                padding: '0.65rem 1.6rem', 
-                fontSize: '0.88rem',
-                minHeight: '42px',
-                width: 'auto'
+          {/* Desktop Right CTA Button + Cart Icon */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            
+            {/* Cart Icon Trigger */}
+            <button
+              onClick={openCart}
+              aria-label="Open Shopping Cart"
+              style={{
+                background: 'var(--bg-surface)',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: '50%',
+                width: '44px',
+                height: '44px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                color: 'var(--text-primary)',
+                position: 'relative',
+                transition: 'transform 0.15s ease, background 0.15s ease'
+              }}
+              onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+              onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+            >
+              <ShoppingBag style={{ width: '20px', height: '20px', color: 'var(--text-primary)' }} />
+              {totalItems > 0 && (
+                <span style={{
+                  position: 'absolute',
+                  top: '-4px',
+                  right: '-4px',
+                  background: 'var(--accent-gold)',
+                  color: '#FFFFFF',
+                  fontSize: '0.7rem',
+                  fontWeight: 'bold',
+                  width: '20px',
+                  height: '20px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
+                }}>
+                  {totalItems}
+                </span>
+              )}
+            </button>
+
+            {/* Desktop Shop Button */}
+            <div className="desktop-only">
+              <a 
+                href="#collection" 
+                onClick={handleShopClick}
+                className="btn btn-primary"
+                style={{ 
+                  padding: '0.65rem 1.6rem', 
+                  fontSize: '0.88rem',
+                  minHeight: '42px',
+                  width: 'auto'
+                }}
+              >
+                Shop Collection
+              </a>
+            </div>
+
+            {/* Mobile Hamburger Toggle Button */}
+            <button
+              className="mobile-only"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
+              style={{
+                background: 'var(--bg-surface)',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: 'var(--radius-sm)',
+                width: '44px',
+                height: '44px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                color: 'var(--text-primary)',
+                boxShadow: 'var(--shadow-sm)',
+                padding: 0
               }}
             >
-              Shop Collection
-            </a>
+              {mobileMenuOpen ? (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              ) : (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="3" y1="12" x2="21" y2="12"></line>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+              )}
+            </button>
           </div>
-
-          {/* Mobile Hamburger Toggle Button */}
-          <button
-            className="mobile-only"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
-            style={{
-              background: 'var(--bg-surface)',
-              border: '1px solid var(--border-subtle)',
-              borderRadius: 'var(--radius-sm)',
-              width: '44px',
-              height: '44px',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              color: 'var(--text-primary)',
-              boxShadow: 'var(--shadow-sm)',
-              padding: 0
-            }}
-          >
-            {mobileMenuOpen ? (
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-            ) : (
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-              </svg>
-            )}
-          </button>
         </div>
       </header>
 
@@ -249,170 +292,122 @@ function Navbar() {
               </button>
             </div>
 
-            {/* Nav Items */}
-            <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginBottom: 'auto' }}>
+            {/* Drawer Links */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
               <Link 
                 to="/" 
                 onClick={() => setMobileMenuOpen(false)}
-                style={{ 
-                  padding: '0.85rem 1rem', 
+                style={{
+                  padding: '0.85rem 1rem',
                   borderRadius: 'var(--radius-sm)',
-                  backgroundColor: location.pathname === '/' ? 'var(--bg-subtle)' : 'transparent',
-                  color: 'var(--text-primary)',
+                  background: location.pathname === '/' ? 'var(--bg-subtle)' : 'transparent',
+                  color: location.pathname === '/' ? 'var(--text-primary)' : 'var(--text-secondary)',
                   fontWeight: location.pathname === '/' ? '700' : '500',
+                  textDecoration: 'none',
                   fontSize: '1.05rem',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
-                  minHeight: '48px'
+                  justifyContent: 'space-between'
                 }}
               >
-                <span>🏠 Home</span>
-                {location.pathname === '/' && <span style={{ color: 'var(--accent-gold)' }}>●</span>}
+                <span>Home</span>
+                <span>→</span>
               </Link>
-
               <Link 
                 to="/collection" 
-                onClick={() => setMobileMenuOpen(false)}
-                style={{ 
-                  padding: '0.85rem 1rem', 
+                onClick={handleShopClick}
+                style={{
+                  padding: '0.85rem 1rem',
                   borderRadius: 'var(--radius-sm)',
-                  backgroundColor: (location.pathname === '/collection' || location.pathname === '/products') ? 'var(--bg-subtle)' : 'transparent',
-                  color: 'var(--text-primary)',
-                  fontWeight: (location.pathname === '/collection' || location.pathname === '/products') ? '700' : '500',
+                  background: location.pathname === '/collection' ? 'var(--bg-subtle)' : 'transparent',
+                  color: location.pathname === '/collection' ? 'var(--text-primary)' : 'var(--text-secondary)',
+                  fontWeight: location.pathname === '/collection' ? '700' : '500',
+                  textDecoration: 'none',
                   fontSize: '1.05rem',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
-                  minHeight: '48px'
+                  justifyContent: 'space-between'
                 }}
               >
-                <span>🏺 The Collection</span>
-                {(location.pathname === '/collection' || location.pathname === '/products') ? <span style={{ color: 'var(--accent-gold)' }}>●</span> : <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>→</span>}
+                <span>All Creations</span>
+                <span>→</span>
               </Link>
-
               <Link 
                 to="/craft" 
                 onClick={() => setMobileMenuOpen(false)}
-                style={{ 
-                  padding: '0.85rem 1rem', 
+                style={{
+                  padding: '0.85rem 1rem',
                   borderRadius: 'var(--radius-sm)',
-                  backgroundColor: location.pathname === '/craft' ? 'var(--bg-subtle)' : 'transparent',
-                  color: 'var(--text-primary)',
+                  background: location.pathname === '/craft' ? 'var(--bg-subtle)' : 'transparent',
+                  color: location.pathname === '/craft' ? 'var(--text-primary)' : 'var(--text-secondary)',
                   fontWeight: location.pathname === '/craft' ? '700' : '500',
+                  textDecoration: 'none',
                   fontSize: '1.05rem',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
-                  minHeight: '48px'
+                  justifyContent: 'space-between'
                 }}
               >
-                <span>🌿 Our Craft & Values</span>
-                {location.pathname === '/craft' ? <span style={{ color: 'var(--accent-gold)' }}>●</span> : <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>→</span>}
+                <span>Our Craft & Materials</span>
+                <span>→</span>
               </Link>
-
+              <Link 
+                to="/track" 
+                onClick={() => setMobileMenuOpen(false)}
+                style={{
+                  padding: '0.85rem 1rem',
+                  borderRadius: 'var(--radius-sm)',
+                  background: location.pathname === '/track' ? 'var(--bg-subtle)' : 'transparent',
+                  color: location.pathname === '/track' ? 'var(--text-primary)' : 'var(--text-secondary)',
+                  fontWeight: location.pathname === '/track' ? '700' : '500',
+                  textDecoration: 'none',
+                  fontSize: '1.05rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between'
+                }}
+              >
+                <span>Track Order</span>
+                <span>🚚</span>
+              </Link>
               <Link 
                 to="/about" 
                 onClick={() => setMobileMenuOpen(false)}
-                style={{ 
-                  padding: '0.85rem 1rem', 
+                style={{
+                  padding: '0.85rem 1rem',
                   borderRadius: 'var(--radius-sm)',
-                  backgroundColor: location.pathname === '/about' ? 'var(--bg-subtle)' : 'transparent',
-                  color: 'var(--text-primary)',
+                  background: location.pathname === '/about' ? 'var(--bg-subtle)' : 'transparent',
+                  color: location.pathname === '/about' ? 'var(--text-primary)' : 'var(--text-secondary)',
                   fontWeight: location.pathname === '/about' ? '700' : '500',
+                  textDecoration: 'none',
                   fontSize: '1.05rem',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
-                  minHeight: '48px'
+                  justifyContent: 'space-between'
                 }}
               >
-                <span>📖 About Us & Story</span>
-                {location.pathname === '/about' && <span style={{ color: 'var(--accent-gold)' }}>●</span>}
+                <span>About Us</span>
+                <span>→</span>
               </Link>
-
               <Link 
                 to="/contact" 
                 onClick={() => setMobileMenuOpen(false)}
-                style={{ 
-                  padding: '0.85rem 1rem', 
+                style={{
+                  padding: '0.85rem 1rem',
                   borderRadius: 'var(--radius-sm)',
-                  backgroundColor: location.pathname === '/contact' ? 'var(--bg-subtle)' : 'transparent',
-                  color: 'var(--text-primary)',
+                  background: location.pathname === '/contact' ? 'var(--bg-subtle)' : 'transparent',
+                  color: location.pathname === '/contact' ? 'var(--text-primary)' : 'var(--text-secondary)',
                   fontWeight: location.pathname === '/contact' ? '700' : '500',
+                  textDecoration: 'none',
                   fontSize: '1.05rem',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
-                  minHeight: '48px'
+                  justifyContent: 'space-between'
                 }}
               >
-                <span>✉️ Contact & Support</span>
-                {location.pathname === '/contact' && <span style={{ color: 'var(--accent-gold)' }}>●</span>}
+                <span>Contact & Studio</span>
+                <span>→</span>
               </Link>
-            </nav>
-
-            {/* Quick Policies Strip in Drawer */}
-            <div style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '0.6rem 1rem',
-              padding: '1rem 0.5rem',
-              marginTop: '1.25rem',
-              borderTop: '1px solid var(--border-subtle)',
-              fontSize: '0.82rem'
-            }}>
-              <Link to="/shipping-policy" onClick={() => setMobileMenuOpen(false)} style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>
-                Shipping Policy
-              </Link>
-              <span style={{ color: 'var(--text-muted)' }}>•</span>
-              <Link to="/refund-policy" onClick={() => setMobileMenuOpen(false)} style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>
-                Return Policy
-              </Link>
-              <span style={{ color: 'var(--text-muted)' }}>•</span>
-              <Link to="/privacy-policy" onClick={() => setMobileMenuOpen(false)} style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>
-                Privacy
-              </Link>
-              <span style={{ color: 'var(--text-muted)' }}>•</span>
-              <Link to="/terms" onClick={() => setMobileMenuOpen(false)} style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>
-                Terms
-              </Link>
-            </div>
-
-            {/* Drawer Bottom Actions */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingTop: '0.75rem' }}>
-              <div style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                fontSize: '0.8rem',
-                color: 'var(--accent-sage)',
-                backgroundColor: 'var(--accent-sage-light)',
-                padding: '0.4rem 0.75rem',
-                borderRadius: 'var(--radius-full)',
-                width: 'fit-content'
-              }}>
-                <span>🌱</span> 100% Plant-Based Bio-Plastic
-              </div>
-
-              <a 
-                href="#collection" 
-                onClick={handleShopClick}
-                className="btn btn-primary"
-                style={{ width: '100%', padding: '0.85rem', fontSize: '0.95rem' }}
-              >
-                Shop Collection
-              </a>
-
-              <a 
-                href="https://www.amazon.in/dp/B0HF5124YZ" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="btn btn-amazon"
-                style={{ width: '100%', padding: '0.85rem', fontSize: '0.95rem' }}
-              >
-                Amazon India Storefront ↗
-              </a>
             </div>
           </div>
         </div>

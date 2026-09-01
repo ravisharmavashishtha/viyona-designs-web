@@ -1,7 +1,10 @@
-import { useEffect, useRef } from 'react';
+﻿import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import CartDrawer from './components/CartDrawer';
+import { CartProvider } from './context/CartContext';
+
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
 import About from './pages/About';
@@ -11,6 +14,9 @@ import RefundPolicy from './pages/RefundPolicy';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import BrandShowcase from './pages/BrandShowcase';
+import OrderSuccess from './pages/OrderSuccess';
+import TrackOrder from './pages/TrackOrder';
+import FounderAdmin from './pages/FounderAdmin';
 
 import { initGA, initMetaPixel, trackPageView, trackEvent, trackMetaEvent } from './utils/analytics';
 
@@ -36,7 +42,6 @@ function AmazonFastRedirect({ url, product, name = 'Lord Ganesha Minimalist Murt
       currency: 'INR'
     });
 
-    // 350ms safe delay gives analytics beacons time to dispatch over the network
     const timer = setTimeout(() => {
       window.location.replace(url);
     }, 350);
@@ -79,7 +84,6 @@ function RouteAnalyticsTracker() {
   useEffect(() => {
     initGA();
     initMetaPixel();
-    // Catch and redirect legacy hash routes like #/product/ganesha-statue
     if (window.location.hash && window.location.hash.startsWith('#/')) {
       const target = window.location.hash.slice(1);
       navigate(target, { replace: true });
@@ -96,38 +100,47 @@ function RouteAnalyticsTracker() {
 
 function App() {
   return (
-    <Router>
-      <RouteAnalyticsTracker />
-      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        <Navbar />
-        <main style={{ flex: 1 }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/collection" element={<Home />} />
-            <Route path="/products" element={<Home />} />
-            <Route path="/craft" element={<Home />} />
-            <Route path="/product/:id" element={<ProductDetail />} />
-            
-            {/* Branded Fast Amazon Redirects */}
-            <Route path="/buy-ganesha" element={<AmazonFastRedirect url="https://www.amazon.in/dp/B0HF5124YZ" product="ganesha-statue" name="Lord Ganesha Minimalist Murti" price={550} />} />
-            <Route path="/buy-puppy" element={<AmazonFastRedirect url="https://www.amazon.in/dp/B0HC36C861" product="sleeping-puppy-organizer" name="Sleeping Puppy Desk Organizer & Catchall Tray" price={499} />} />
-            <Route path="/buy-phone-stand" element={<AmazonFastRedirect url="https://www.amazon.in/dp/B0HFX7KCP6" product="minimalist-phone-stand" name="Viyona Designs Minimalist Phone Stand" price={349} />} />
-            <Route path="/amazon" element={<AmazonFastRedirect url="https://www.amazon.in/dp/B0HF5124YZ" product="ganesha-statue" name="Viyona Designs Amazon Official Store" price={550} />} />
+    <CartProvider>
+      <Router>
+        <RouteAnalyticsTracker />
+        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+          <Navbar />
+          <CartDrawer />
+          <main style={{ flex: 1 }}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/collection" element={<Home />} />
+              <Route path="/products" element={<Home />} />
+              <Route path="/craft" element={<Home />} />
+              <Route path="/product/:id" element={<ProductDetail />} />
+              
+              {/* Checkout, Tracking & Founder Portal */}
+              <Route path="/order-success" element={<OrderSuccess />} />
+              <Route path="/track" element={<TrackOrder />} />
+              <Route path="/admin" element={<FounderAdmin />} />
 
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/shipping-policy" element={<ShippingPolicy />} />
-            <Route path="/refund-policy" element={<RefundPolicy />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms" element={<TermsOfService />} />
-            <Route path="/brand-assets" element={<BrandShowcase />} />
-            {/* Catch-all fallback route */}
-            <Route path="*" element={<Home />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+              {/* Branded Fast Amazon Redirects */}
+              <Route path="/buy-ganesha" element={<AmazonFastRedirect url="https://www.amazon.in/dp/B0HF5124YZ" product="ganesha-statue" name="Lord Ganesha Minimalist Murti" price={550} />} />
+              <Route path="/buy-puppy" element={<AmazonFastRedirect url="https://www.amazon.in/dp/B0HC36C861" product="sleeping-puppy-organizer" name="Sleeping Puppy Desk Organizer & Catchall Tray" price={499} />} />
+              <Route path="/buy-phone-stand" element={<AmazonFastRedirect url="https://www.amazon.in/dp/B0HFX7KCP6" product="minimalist-phone-stand" name="Viyona Designs Minimalist Phone Stand" price={349} />} />
+              <Route path="/amazon" element={<AmazonFastRedirect url="https://www.amazon.in/dp/B0HF5124YZ" product="ganesha-statue" name="Viyona Designs Amazon Official Store" price={550} />} />
+
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/shipping-policy" element={<ShippingPolicy />} />
+              <Route path="/refund-policy" element={<RefundPolicy />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<TermsOfService />} />
+              <Route path="/brand-assets" element={<BrandShowcase />} />
+              
+              {/* Catch-all fallback route */}
+              <Route path="*" element={<Home />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </CartProvider>
   );
 }
 
