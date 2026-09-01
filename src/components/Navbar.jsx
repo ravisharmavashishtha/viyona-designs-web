@@ -1,12 +1,14 @@
-﻿import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import logoImg from '../assets/logo.png';
 import { useCart } from '../context/CartContext';
-import { ShoppingBag, Truck } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+import { ShoppingBag, Truck, User } from 'lucide-react';
 
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { totalItems, openCart } = useCart();
+  const { user, isAuthenticated, openAuthModal, openAccountDrawer } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -151,9 +153,40 @@ function Navbar() {
             </Link>
           </nav>
 
-          {/* Desktop Right CTA Button + Cart Icon */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          {/* Desktop Right CTA Button + Cart Icon + Account Icon */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
             
+            {/* Account Icon Trigger */}
+            <button
+              onClick={isAuthenticated ? openAccountDrawer : openAuthModal}
+              aria-label={isAuthenticated ? "Open My Account" : "Sign In to Viyona"}
+              title={isAuthenticated ? `Collector Account (${user?.name || user?.phone})` : "Sign In / Register"}
+              style={{
+                background: isAuthenticated ? 'rgba(158, 116, 58, 0.08)' : 'var(--bg-surface)',
+                border: isAuthenticated ? '1.5px solid var(--accent-gold)' : '1px solid var(--border-subtle)',
+                borderRadius: '50%',
+                width: '44px',
+                height: '44px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                color: isAuthenticated ? 'var(--accent-gold-dark)' : 'var(--text-primary)',
+                position: 'relative',
+                transition: 'transform 0.15s ease, background 0.15s ease'
+              }}
+              onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+              onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+            >
+              {isAuthenticated ? (
+                <span style={{ fontSize: '0.92rem', fontWeight: '800', color: 'var(--accent-gold-dark)' }}>
+                  {(user?.name || user?.phone || 'V')[0].toUpperCase()}
+                </span>
+              ) : (
+                <User style={{ width: '20px', height: '20px', color: 'var(--text-primary)' }} />
+              )}
+            </button>
+
             {/* Cart Icon Trigger */}
             <button
               onClick={openCart}
@@ -294,6 +327,38 @@ function Navbar() {
 
             {/* Drawer Links */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+              {/* Account / Sign In Action in Drawer */}
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  if (isAuthenticated) {
+                    openAccountDrawer();
+                  } else {
+                    openAuthModal();
+                  }
+                }}
+                style={{
+                  padding: '0.85rem 1rem',
+                  borderRadius: 'var(--radius-sm)',
+                  background: isAuthenticated ? 'rgba(158, 116, 58, 0.12)' : 'linear-gradient(135deg, #0C2340 0%, #1A365D 100%)',
+                  color: isAuthenticated ? 'var(--text-primary)' : '#FFFFFF',
+                  border: isAuthenticated ? '1px solid var(--accent-gold)' : 'none',
+                  fontSize: '1rem',
+                  fontWeight: '700',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  cursor: 'pointer',
+                  textAlign: 'left'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <User style={{ width: '18px', height: '18px', color: isAuthenticated ? 'var(--accent-gold)' : '#F3E5AB' }} />
+                  <span>{isAuthenticated ? `${user?.name || 'My Account'} (+91 ${user?.phone})` : 'Sign In / Register'}</span>
+                </div>
+                <span>{isAuthenticated ? '⚙️' : '→'}</span>
+              </button>
+
               <Link 
                 to="/" 
                 onClick={() => setMobileMenuOpen(false)}

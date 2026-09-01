@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
-import { X, ShoppingBag, Plus, Minus, Trash2, ShieldCheck, ArrowRight, Truck } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+import { X, ShoppingBag, Plus, Minus, Trash2, ShieldCheck, ArrowRight, Truck, User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export default function CartDrawer() {
   const { cart, isCartOpen, closeCart, removeFromCart, updateQuantity, subtotal, totalMrp, totalSavings, totalItems } = useCart();
+  const { user, isAuthenticated, openAuthModal } = useAuth();
   const navigate = useNavigate();
 
   const [isCheckingOut, setIsCheckingOut] = useState(false);
@@ -19,6 +21,23 @@ export default function CartDrawer() {
     state: ''
   });
   const [errorMessage, setErrorMessage] = useState('');
+
+  // Auto-populate saved customer address if logged in
+  useEffect(() => {
+    if (user) {
+      const defAddr = user.savedAddresses?.find(a => a.isDefault) || user.savedAddresses?.[0];
+      setFormData(prev => ({
+        ...prev,
+        name: prev.name || user.name || defAddr?.name || '',
+        phone: prev.phone || user.phone || defAddr?.phone || '',
+        email: prev.email || user.email || '',
+        address: prev.address || defAddr?.address || '',
+        city: prev.city || defAddr?.city || '',
+        state: prev.state || defAddr?.state || '',
+        pincode: prev.pincode || defAddr?.pincode || ''
+      }));
+    }
+  }, [user]);
 
   // Explicitly manage body scroll lock so background is never permanently frozen
   useEffect(() => {
@@ -412,6 +431,48 @@ export default function CartDrawer() {
                       ← Back to Items
                     </button>
                   </div>
+
+                  {/* Collector Account Banner */}
+                  {isAuthenticated ? (
+                    <div
+                      style={{
+                        padding: '6px 10px',
+                        background: 'rgba(158, 116, 58, 0.08)',
+                        border: '1px solid rgba(158, 116, 58, 0.25)',
+                        borderRadius: '6px',
+                        fontSize: '0.75rem',
+                        color: 'var(--accent-gold-dark)',
+                        fontWeight: '600',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between'
+                      }}
+                    >
+                      <span>✦ Collector Profile Active (+91 {user?.phone})</span>
+                      <span style={{ color: '#16A34A', fontWeight: '700' }}>✓ Autofilled</span>
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={openAuthModal}
+                      style={{
+                        padding: '6px 10px',
+                        background: '#FAF9F5',
+                        border: '1px dashed #D9D6CD',
+                        borderRadius: '6px',
+                        fontSize: '0.75rem',
+                        color: 'var(--text-secondary)',
+                        textAlign: 'left',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between'
+                      }}
+                    >
+                      <span>Already a collector? <strong>Sign in with WhatsApp</strong></span>
+                      <span style={{ color: 'var(--accent-gold-dark)', fontWeight: '700' }}>Sign In ↗</span>
+                    </button>
+                  )}
 
                   {errorMessage && (
                     <div style={{ padding: '0.5rem 0.75rem', backgroundColor: '#FEF2F2', border: '1px solid #FECACA', borderRadius: '6px', fontSize: '0.78rem', color: '#DC2626' }}>

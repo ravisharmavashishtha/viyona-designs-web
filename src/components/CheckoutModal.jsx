@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { startRazorpayCheckout } from '../utils/razorpay';
 import { trackEvent, trackMetaEvent } from '../utils/analytics';
+import { useAuth } from '../context/AuthContext';
 
 /**
  * CheckoutModal Component
@@ -13,6 +14,8 @@ export default function CheckoutModal({
   product,
   customAmount
 }) {
+  const { user, isAuthenticated, openAuthModal } = useAuth();
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -22,6 +25,23 @@ export default function CheckoutModal({
     state: '',
     pincode: ''
   });
+
+  // Auto-prefill customer saved details if authenticated
+  useEffect(() => {
+    if (user && isOpen) {
+      const defAddr = user.savedAddresses?.find(a => a.isDefault) || user.savedAddresses?.[0];
+      setFormData(prev => ({
+        ...prev,
+        name: prev.name || user.name || defAddr?.name || '',
+        phone: prev.phone || user.phone || defAddr?.phone || '',
+        email: prev.email || user.email || '',
+        address: prev.address || defAddr?.address || '',
+        city: prev.city || defAddr?.city || '',
+        state: prev.state || defAddr?.state || '',
+        pincode: prev.pincode || defAddr?.pincode || ''
+      }));
+    }
+  }, [user, isOpen]);
 
   const [loading, setLoading] = useState(false);
   const [etaText, setEtaText] = useState('');
@@ -233,6 +253,61 @@ export default function CheckoutModal({
                 <div style={{ fontSize: '1.1rem', fontWeight: '800', color: '#F3E5AB' }}>
                   {product.price}
                 </div>
+              </div>
+            )}
+
+            {/* Collector Authentication Pill */}
+            {isAuthenticated ? (
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '8px 12px',
+                  background: 'rgba(212, 175, 55, 0.1)',
+                  border: '1px solid rgba(212, 175, 55, 0.3)',
+                  borderRadius: '10px',
+                  marginBottom: '14px',
+                  fontSize: '0.78rem',
+                  color: '#F3E5AB'
+                }}
+              >
+                <span>✦ Collector Profile Active (+91 {user?.phone})</span>
+                <span style={{ color: '#6EE7B7', fontWeight: '700' }}>✓ Autofilled</span>
+              </div>
+            ) : (
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '8px 12px',
+                  background: 'rgba(255, 255, 255, 0.03)',
+                  border: '1px dashed rgba(255, 255, 255, 0.15)',
+                  borderRadius: '10px',
+                  marginBottom: '14px',
+                  fontSize: '0.78rem',
+                  color: '#9CA3AF'
+                }}
+              >
+                <span>Already a collector?</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    onClose();
+                    openAuthModal();
+                  }}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: '#F3E5AB',
+                    fontWeight: '700',
+                    cursor: 'pointer',
+                    padding: 0
+                  }}
+                >
+                  Sign In with WhatsApp ↗
+                </button>
               </div>
             )}
 

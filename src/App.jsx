@@ -1,9 +1,12 @@
-﻿import { useEffect } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import CartDrawer from './components/CartDrawer';
+import AccountDrawer from './components/AccountDrawer';
+import AuthModal from './components/AuthModal';
 import { CartProvider } from './context/CartContext';
+import { AuthProvider } from './context/AuthContext';
 
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
@@ -100,13 +103,16 @@ function RouteAnalyticsTracker() {
 
 function App() {
   return (
-    <CartProvider>
-      <Router>
-        <RouteAnalyticsTracker />
-        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-          <Navbar />
-          <CartDrawer />
-          <main style={{ flex: 1 }}>
+    <AuthProvider>
+      <CartProvider>
+        <Router>
+          <RouteAnalyticsTracker />
+          <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+            <Navbar />
+            <CartDrawer />
+            <AccountDrawer />
+            <AuthModal />
+            <main style={{ flex: 1 }}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/collection" element={<Home />} />
@@ -141,7 +147,8 @@ function App() {
         </div>
       </Router>
     </CartProvider>
-  );
+  </AuthProvider>
+);
 }
 
 export default App;
